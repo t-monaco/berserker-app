@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+// Variables
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+  --primary-color: #adfe19;
+  --secondary-color: #ed4c5e;
+  --primary-background-color: #000;
+  --secondary-background-color: #222;
+  --primary-font-color: #fff;
+  --secondary-font-color: #000;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: var(--primary-background-color);
+  color: var(--primary-font-color);
+  padding: 3rem 1rem 1rem 1rem;
+}

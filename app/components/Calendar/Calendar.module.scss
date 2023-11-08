@@ -1,0 +1,16 @@
+.calendarContainer {
+  background-color: var(--primary-background-color);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+
+  .month {
+    text-align: center;
+    font-size: 10px;
+  }
+  .datesWrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+}
