@@ -1,11 +1,8 @@
 'use client';
 import styled from 'styled-components';
+import { BasicBtn } from './../Generics/Generics.styled';
 
-export const ProgramSelectWrapper = styled.div<object>`
-  background-color: var(--primary-color);
-  color: var(--secondary-font-color);
-  padding: 36px 30px 36px 16px;
-  border-radius: 7px 50px 50px 7px;
+export const ProgramSelectWrapper = styled(BasicBtn)`
   align-items: stretch;
   display: flex;
   flex-direction: column;
@@ -44,6 +41,8 @@ export const ProgramsList = styled.ul<object>`
 `;
 
 export const ProgramItem = styled.li<{ selected: boolean }>`
+  display: flex;
+  align-items: center;
   padding: 0.5rem 1rem;
   background-color: ${({ selected }) =>
     selected ? 'var(--primary-background-color)' : ''};

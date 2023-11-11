@@ -18,7 +18,7 @@ const ProgramSelector: React.FC<ProgramSelectorProps> = () => {
   };
 
   return (
-    <Styled.ProgramSelectWrapper>
+    <Styled.ProgramSelectWrapper position="left">
       <Styled.SelectedProgramWrapper>
         <h1 className="selected-program">{selectedProgram}</h1>
         <FiChevronDown
