@@ -2,7 +2,7 @@
   background-color: var(--primary-background-color);
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 1rem;
   width: 100%;
 
   .month {
@@ -10,7 +10,9 @@
     font-size: 10px;
   }
   .datesWrapper {
-    display: flex;
+    display: grid;
     justify-content: space-between;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.7rem;
   }
 }
