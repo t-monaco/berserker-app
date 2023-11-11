@@ -8,6 +8,7 @@ export const CalendarWrapper = styled.div<object>`
   flex-direction: column;
   gap: 1rem;
   width: 100%;
+  flex-shrink: 0;
 
   .month-year {
     text-align: center;
