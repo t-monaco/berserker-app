@@ -6,7 +6,9 @@ export const ProgramSelectWrapper = styled.div<object>`
   color: var(--secondary-font-color);
   padding: 36px 30px 36px 16px;
   border-radius: 7px 50px 50px 7px;
-  align-items: center;
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const SelectedProgramWrapper = styled.div<object>`
@@ -21,19 +23,29 @@ export const SelectedProgramWrapper = styled.div<object>`
 
   .select-arrow {
     font-size: 2.5rem;
+
+    &.open {
+      transform: rotate(180deg);
+    }
   }
 `;
 
 export const ProgramsList = styled.ul<object>`
-  display: flex;
-  flex-direction: column;
+  display: none;
+  transform: scaleY(0);
+  transition: all 0.5s ease;
+  transform-origin: top;
 
-  li {
-    padding: 0.5rem 1rem;
+  &.open {
+    flex-direction: column;
+    transform: scaleY(1);
+    display: flex;
   }
+`;
 
-  .selected {
-    background-color: var(--primary-background-color);
-    color: var(--primary-color);
-  }
+export const ProgramItem = styled.li<{ selected: boolean }>`
+  padding: 0.5rem 1rem;
+  background-color: ${({ selected }) =>
+    selected ? 'var(--primary-background-color)' : ''};
+  color: ${({ selected }) => (selected ? 'var(--primary-color)' : '')};
 `;
