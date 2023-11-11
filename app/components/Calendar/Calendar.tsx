@@ -1,8 +1,9 @@
 'use client';
+
 import moment from 'moment';
 import DateBox from '../DateBox/DateBox';
-import styles from './Calendar.module.scss';
 import { useState } from 'react';
+import * as Styled from './Calendar.styled';
 
 type CalendarProps = object;
 
@@ -26,11 +27,11 @@ const Calendar: React.FC<CalendarProps> = () => {
   }
 
   return (
-    <div className={styles.calendarContainer}>
-      <div className={styles.month}>
+    <Styled.CalendarWrapper>
+      <div className="month-year">
         {moment().format('MMMM YYYY').toUpperCase()}
       </div>
-      <div className={styles.datesWrapper}>
+      <Styled.DatesWrapper>
         {calDays.map((calDate, key) => (
           <DateBox
             key={key}
@@ -39,8 +40,8 @@ const Calendar: React.FC<CalendarProps> = () => {
             setSelectedDate={setSelectedDayOfYear}
           />
         ))}
-      </div>
-    </div>
+      </Styled.DatesWrapper>
+    </Styled.CalendarWrapper>
   );
 };
 

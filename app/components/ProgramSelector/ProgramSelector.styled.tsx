@@ -1,7 +1,7 @@
 'use client';
 import styled from 'styled-components';
 
-export const ProgramSelectContainer = styled.div<object>`
+export const ProgramSelectWrapper = styled.div<object>`
   background-color: var(--primary-color);
   color: var(--secondary-font-color);
   padding: 36px 30px 36px 16px;
@@ -9,7 +9,7 @@ export const ProgramSelectContainer = styled.div<object>`
   align-items: center;
 `;
 
-export const SelectedProgramContainer = styled.div<object>`
+export const SelectedProgramWrapper = styled.div<object>`
   display: flex;
   justify-content: space-between;
 
