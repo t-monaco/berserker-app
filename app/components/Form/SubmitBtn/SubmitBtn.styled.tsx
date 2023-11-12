@@ -18,6 +18,7 @@ export const SubmitBtnWrapper = styled.button<{
       : 'var(--primary-color)'};
   display: flex;
   justify-content: center;
+  font-size: 16px;
   outline: none;
   padding: 1rem 4rem;
   width: 100%;

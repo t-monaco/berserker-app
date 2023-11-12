@@ -5,6 +5,7 @@ import styled from 'styled-components';
 export const DatePickerWrapper = styled.div<object>`
   display: flex;
   flex-direction: column;
+  flex-shrink: 0;
   width: 100%;
   gap: 0.5rem;
 

@@ -2,6 +2,7 @@ import { drukFont } from '@/app/fonts/fonts';
 import * as Styled from './DatePicker.styled';
 import { DatePicker as DatePickerAntd } from 'antd';
 import moment from 'moment';
+import dayjs from 'dayjs';
 
 type DatePickerProps = { label: string; name: string };
 
@@ -12,8 +13,8 @@ const DatePicker: React.FC<DatePickerProps> = ({ label, name }) => {
       <DatePickerAntd
         className={drukFont.className}
         allowClear={false}
-        // TODO: need to use DayJS format
-        // defaultValue={() => moment().format('YYYY-MM-DD')}
+        // defaultValue={dayjs().format('YYYY-MM-DD')}
+        placeholder={dayjs().format('YYYY-MM-DD')}
       />
     </Styled.DatePickerWrapper>
   );
