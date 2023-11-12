@@ -1,7 +1,8 @@
 'use client';
 
-import { messinaFont } from '@/app/fonts/fonts';
 import styled from 'styled-components';
+import { AiOutlineFullscreen } from 'react-icons/ai';
+import { Modal } from 'antd';
 
 export const WorkoutBlock = styled.div<object>`
   background-color: var(--secondary-background-color);
@@ -41,6 +42,7 @@ export const WorkoutHeader = styled.div<object>`
   display: flex;
   flex-wrap: wrap;
   flex-shrink: 0;
+  color: var(--primary-font-color);
 
   .title {
     font-size: 1.5rem;
@@ -58,6 +60,7 @@ export const WorkoutHeader = styled.div<object>`
 `;
 
 export const WorkoutCategory = styled.div<object>`
+  color: var(--primary-font-color);
   font-size: 0.7rem;
   border-radius: 4px;
   padding: 0.1rem 0.6rem;
@@ -71,4 +74,33 @@ export const WorkoutCategory = styled.div<object>`
 
 export const WorkoutDescription = styled.div<object>`
   white-space: pre-line;
+  color: var(--primary-font-color);
+  font-size: 16px;
+`;
+
+export const ExpandIcon = styled(AiOutlineFullscreen)`
+  position: absolute;
+  display: block;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 1;
+  font-size: 1.5rem;
+`;
+
+export const WorkoutModal = styled(Modal)`
+  overflow: visible;
+
+  .ant-modal-content {
+    overflow: visible;
+    background-color: var(--secondary-background-color);
+    border-radius: 7px;
+    padding: 1.25rem 1rem;
+    position: relative;
+  }
+
+  .ant-modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
 `;
