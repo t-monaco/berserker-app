@@ -2,6 +2,7 @@ import localFont from 'next/font/local';
 
 export const drukFont = localFont({
   src: './FontsFree-Net-Druk-Wide-Medium.ttf',
+  variable: '--font-druk',
 });
 
 export const messinaFont = localFont({
@@ -13,4 +14,5 @@ export const messinaFont = localFont({
     { path: './MessinaSans-Bold.ttf', weight: '600' },
     { path: './MessinaSans-Black.ttf', weight: '800' },
   ],
+  variable: '--font-messina-sans',
 });
