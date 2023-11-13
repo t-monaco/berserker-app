@@ -1,10 +1,9 @@
 'use client';
 
 import styled from 'styled-components';
+import { SubmitBtnProps } from './SubmitBtn';
 
-export const SubmitBtnWrapper = styled.button<{
-  priority: 'primary' | 'secondary';
-}>`
+export const SubmitBtnWrapper = styled.button<SubmitBtnProps>`
   align-items: center;
   background-color: ${({ priority }) =>
     priority === 'primary'
@@ -18,6 +17,7 @@ export const SubmitBtnWrapper = styled.button<{
       : 'var(--primary-color)'};
   display: flex;
   justify-content: center;
+  flex-shrink: 0;
   font-size: 16px;
   outline: none;
   padding: 1rem 4rem;

@@ -14,5 +14,6 @@ export const WorkoutCreateWrapper = styled.div<object>`
     height: 3px;
     border-radius: 2px;
     background-color: var(--primary-color);
+    flex-shrink: 0;
   }
 `;

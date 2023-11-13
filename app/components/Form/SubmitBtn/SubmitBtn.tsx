@@ -1,6 +1,7 @@
+import { ButtonHTMLAttributes } from 'react';
 import * as Styled from './SubmitBtn.styled';
 
-type SubmitBtnProps = Partial<HTMLButtonElement> & {
+export type SubmitBtnProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   text: string;
   priority?: 'primary' | 'secondary';
 };
@@ -8,9 +9,10 @@ type SubmitBtnProps = Partial<HTMLButtonElement> & {
 const SubmitBtn: React.FC<SubmitBtnProps> = ({
   text,
   priority = 'primary',
+  ...props
 }) => {
   return (
-    <Styled.SubmitBtnWrapper priority={priority}>
+    <Styled.SubmitBtnWrapper priority={priority} {...props}>
       {text}
     </Styled.SubmitBtnWrapper>
   );

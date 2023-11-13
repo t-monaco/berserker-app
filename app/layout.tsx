@@ -1,13 +1,8 @@
 import type { Metadata } from 'next';
 
-import localFont from 'next/font/local';
 import './styles/globals.scss';
 import StyledComponentsRegistry from './lib/registry';
 import { drukFont } from './fonts/fonts';
-
-// const drukFont = localFont({
-//   src: './fonts/FontsFree-Net-Druk-Wide-Medium.ttf',
-// });
 
 export const metadata: Metadata = {
   title: 'Berserker Program',
@@ -16,9 +11,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
     <html lang="en">
       <body className={drukFont.className}>
