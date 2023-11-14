@@ -2,7 +2,7 @@
 
 import styled from 'styled-components';
 
-export const WorkoutCreateWrapper = styled.div<object>`
+export const WorkoutCreateWrapper = styled.form<object>`
   display: flex;
   flex-direction: column;
   align-items: center;

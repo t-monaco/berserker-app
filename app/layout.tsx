@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 import './styles/globals.scss';
-import StyledComponentsRegistry from './lib/registry';
+import StyledComponentsRegistry from '@/lib/registry';
 import { drukFont } from './fonts/fonts';
 
 export const metadata: Metadata = {
