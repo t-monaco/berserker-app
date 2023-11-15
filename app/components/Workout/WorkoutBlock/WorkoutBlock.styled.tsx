@@ -75,6 +75,7 @@ export const WorkoutCategory = styled.div<object>`
 export const WorkoutDescription = styled.div<object>`
   white-space: pre-line;
   color: var(--primary-font-color);
+  overflow-y: hidden;
   font-size: 16px;
 `;
 
