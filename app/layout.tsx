@@ -8,7 +8,6 @@ export const metadata: Metadata = {
   title: 'Berserker Program',
   description: 'Berserker Program',
   manifest: '/manifest.json',
-  icons: { apple: 'icon.png' },
 };
 
 export default function RootLayout({

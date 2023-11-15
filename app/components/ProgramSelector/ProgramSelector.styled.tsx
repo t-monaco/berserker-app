@@ -6,11 +6,13 @@ export const ProgramSelectWrapper = styled(BasicBtn)`
   align-items: stretch;
   display: flex;
   flex-direction: column;
+  flex-shrink: 0;
 `;
 
 export const SelectedProgramWrapper = styled.div<object>`
   display: flex;
   justify-content: space-between;
+  flex-shrink: 0;
 
   .selected-program {
     display: flex;

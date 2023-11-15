@@ -22,11 +22,19 @@ const data = {
         'Front Flies\nLateral Flies\nFront Flies\nLateral Flies\nFront Flies\nLateral Flies\nFront Flies\nLateral Flies\nFront Flies\nLateral Flies\nFront Flies\nLateral Flies\nFront Flies\nLateral Flies\nFront Flies\nLateral Flies',
     },
     {
-      id: 2,
-      title: 'upper body',
-      type: 'to finish',
-      category: 'structure',
-      description: 'Front Flies\nLateral Flies',
+      id: 3,
+      title: 'strictify',
+      type: "FOR time - TC 14'",
+      category: 'metcon',
+      description:
+        '10 rounds:\n- 3 Strict MU\n- 5 Strict HSPU\n- 8 KBx2 Snatch (24/26)',
+    },
+    {
+      id: 3,
+      title: 'SABADO AHI AHI',
+      type: 'TO FINISH',
+      category: 'strength',
+      description: 'After\nAfter del after\nAfter del after del after',
     },
   ],
 };
