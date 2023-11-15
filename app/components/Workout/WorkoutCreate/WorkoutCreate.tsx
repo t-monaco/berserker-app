@@ -1,17 +1,10 @@
 'use client';
-import { useState } from 'react';
 import { SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
 import BasicSelect from '../../Form/BasicSelect/BasicSelect';
 import DatePicker from '../../Form/DatePicker/DatePicker';
 import BasicBtn from '../../Form/SubmitBtn/SubmitBtn';
 import * as Styled from './WorkoutCreate.styled';
 import WorkoutCreateBlock from './WorkoutCreateBlock/WorkoutCreateBlock';
-
-import { FormDataSchema } from '@/lib/schema';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
-
-type Inputs = z.infer<typeof FormDataSchema>;
 
 const programOpt = [
   { value: 'berserker lp', label: 'BERSERKER LP' },
@@ -25,6 +18,8 @@ type WorkoutCreateProps = object;
 type WorkoutBlock = {
   title: string;
   type: string;
+  category: string;
+  description: string;
 };
 
 export interface IFormInput {
@@ -34,7 +29,13 @@ export interface IFormInput {
 }
 
 const WorkoutCreate: React.FC<WorkoutCreateProps> = () => {
-  const { register, control, handleSubmit, watch } = useForm<IFormInput>();
+  const { register, control, handleSubmit, watch } = useForm<IFormInput>({
+    defaultValues: {
+      date: '',
+      program: '',
+      workouts: [{ title: '', type: '', category: '', description: '' }],
+    },
+  });
   const { fields, append, remove } = useFieldArray({
     control,
     name: 'workouts',
@@ -48,23 +49,21 @@ const WorkoutCreate: React.FC<WorkoutCreateProps> = () => {
     };
   });
 
-  const removeBlock = (i: number) => {
-    remove(i);
+  const removeBlock = (blockIdx: number) => {
+    remove(blockIdx);
   };
 
   const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data);
 
-  type Inputs = z.infer<typeof FormDataSchema>;
-
   return (
     <Styled.WorkoutCreateWrapper onSubmit={handleSubmit(onSubmit)}>
-      {/* <form onSubmit={handleSubmit(processForm)}> */}
       <div className="w-full flex flex-col flex-shrink-0 gap-7">
-        <DatePicker name="date" label="SELECT DATE" />
+        <DatePicker name="date" label="SELECT DATE" control={control} />
         <BasicSelect
           name="program"
           label="SELECT PROGRAM"
           options={programOpt}
+          control={control}
         />
       </div>
       <span className="divider" />
@@ -73,6 +72,7 @@ const WorkoutCreate: React.FC<WorkoutCreateProps> = () => {
           return (
             <WorkoutCreateBlock
               register={register}
+              control={control}
               key={index}
               id={index}
               removeAction={removeBlock}
@@ -86,6 +86,8 @@ const WorkoutCreate: React.FC<WorkoutCreateProps> = () => {
             append({
               title: '',
               type: '',
+              category: '',
+              description: '',
             })
           }
         >
@@ -93,7 +95,6 @@ const WorkoutCreate: React.FC<WorkoutCreateProps> = () => {
         </BasicBtn>
       </div>
       <BasicBtn type="submit">SAVE WORKOUT</BasicBtn>
-      {/* </form> */}
     </Styled.WorkoutCreateWrapper>
   );
 };

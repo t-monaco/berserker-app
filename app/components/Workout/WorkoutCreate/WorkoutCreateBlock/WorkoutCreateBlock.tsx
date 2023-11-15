@@ -1,14 +1,15 @@
 import BasicInput from '@/app/components/Form/BasicInput/BasicInput';
-import * as Styled from './WorkoutCreateBlock.styled';
-import BasicTextArea from '@/app/components/Form/BasicTextArea/BasicTextArea';
 import BasicSelect from '@/app/components/Form/BasicSelect/BasicSelect';
-import { UseFormRegister } from 'react-hook-form';
+import BasicTextArea from '@/app/components/Form/BasicTextArea/BasicTextArea';
+import { Control, UseFormRegister } from 'react-hook-form';
 import { IFormInput } from '../WorkoutCreate';
+import * as Styled from './WorkoutCreateBlock.styled';
 
 type WorkoutCreateBlockProps = {
   id: number;
   removeAction: (id: number) => void;
   register: UseFormRegister<IFormInput>;
+  control: Control<IFormInput, any>;
 };
 
 const categoriesOpt = [
@@ -21,6 +22,7 @@ const WorkoutCreateBlock: React.FC<WorkoutCreateBlockProps> = ({
   id,
   removeAction,
   register,
+  control,
 }) => {
   return (
     <Styled.WorkoutCreateBlockWrapper>
@@ -28,23 +30,28 @@ const WorkoutCreateBlock: React.FC<WorkoutCreateBlockProps> = ({
         <button onClick={() => removeAction(id)}>REMOVE BLOCK</button>
       </Styled.DeleteBlockWrapper>
       <BasicInput
-        name="title"
+        name={`workouts.${id}.title`}
         label="WORKOUT TITLE"
         register={register}
         id={id}
       />
       <BasicInput
-        name="type"
+        name={`workouts.${id}.type`}
         label="WORKOUT TYPE"
         register={register}
         id={id}
       />
       <BasicSelect
-        name="category"
+        name={`workouts.${id}.category`}
         label="SELECT CATEGORY"
         options={categoriesOpt}
+        control={control}
       />
-      <BasicTextArea name="description" label="WORKOUT DESCRIPTION" />
+      <BasicTextArea
+        register={register}
+        name={`workouts.${id}.description`}
+        label="WORKOUT DESCRIPTION"
+      />
     </Styled.WorkoutCreateBlockWrapper>
   );
 };

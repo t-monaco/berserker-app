@@ -13,10 +13,8 @@ export const SelectWrapper = styled.div<object>`
   > label {
     font-size: 12px;
   }
-`;
 
-export const SelectInput = styled(Select)`
-  &.ant-select {
+  .ant-select {
     height: 2.8rem;
 
     .ant-select-selector {
@@ -38,6 +36,6 @@ export const SelectInput = styled(Select)`
   }
 
   /* .ant-select-dropdown {
-    background-color: blue !important;
-  } */
+      background-color: blue !important;
+    } */
 `;

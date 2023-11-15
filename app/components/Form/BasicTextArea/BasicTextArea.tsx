@@ -1,19 +1,29 @@
 import { messinaFont } from '@/app/fonts/fonts';
 import * as Styled from './BasicTextArea.styled';
+import { Path, UseFormRegister } from 'react-hook-form';
+import { IFormInput } from '../../Workout/WorkoutCreate/WorkoutCreate';
 
-type BasicTextAreaProps = { label: string; name: string };
+type BasicTextAreaProps = {
+  label: string;
+  name: Path<IFormInput>;
+  register: UseFormRegister<IFormInput>;
+};
 
-const BasicTextArea: React.FC<BasicTextAreaProps> = ({ label, name }) => {
+const BasicTextArea: React.FC<BasicTextAreaProps> = ({
+  label,
+  name,
+  register,
+}) => {
   return (
     <Styled.TextAreaWrapper>
       <label htmlFor={name}>{label}</label>
       <textarea
         placeholder="Write workout..."
         className={messinaFont.className}
-        name={name}
         cols={30}
         rows={10}
-      ></textarea>
+        {...register(name)}
+      />
     </Styled.TextAreaWrapper>
   );
 };
