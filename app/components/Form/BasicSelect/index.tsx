@@ -26,7 +26,12 @@ const BasicSelect: React.FC<BasicSelectProps> = ({
         name={name}
         control={control}
         render={({ field }) => (
-          <Select className={drukFont.className} options={options} {...field} />
+          <Select
+            className={drukFont.className}
+            options={options}
+            autoFocus={false}
+            {...field}
+          />
         )}
       />
     </Styled.SelectWrapper>

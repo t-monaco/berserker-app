@@ -54,7 +54,10 @@ const WorkoutCreate: React.FC<WorkoutCreateProps> = () => {
   const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data);
 
   return (
-    <Styled.WorkoutCreateWrapper onSubmit={handleSubmit(onSubmit)}>
+    <Styled.WorkoutCreateWrapper
+      onSubmit={handleSubmit(onSubmit)}
+      autoComplete="off"
+    >
       <div className="w-full flex flex-col flex-shrink-0 gap-7">
         <DatePicker name="date" label="SELECT DATE" control={control} />
         <BasicSelect
