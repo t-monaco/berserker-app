@@ -1,0 +1,46 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+type WorkoutsBlocks {
+  categoryId  String @db.ObjectId
+  description String
+  duration    String
+  title       String
+}
+
+model Category {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("categories")
+}
+
+model Program {
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  workouts  Workout[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@map("programs")
+}
+
+model Workout {
+  id        String           @id @default(auto()) @map("_id") @db.ObjectId
+  blocks    WorkoutsBlocks[]
+  date      BigInt
+  programId String           @db.ObjectId
+  program   Program          @relation(fields: [programId], references: [id])
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+
+  @@map("workouts")
+}
