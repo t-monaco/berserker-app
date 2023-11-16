@@ -1,17 +1,14 @@
 'use client';
 import { BasicBtn, BasicSelect, DatePicker } from '@/app/components';
 import { SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
+import { SelectOption } from '../Form/BasicSelect';
 import * as Styled from './WorkoutCreate.styled';
 import WorkoutCreateBlock from './WorkoutCreateBlock';
 
-const programOpt = [
-  { value: 'berserker lp', label: 'BERSERKER LP' },
-  { value: 'odin', label: 'ODIN' },
-  { value: 'valkyrie', label: 'VALKYRIE' },
-  { value: 'fenrir', label: 'FENRIR' },
-];
-
-type WorkoutCreateProps = object;
+type WorkoutCreateProps = {
+  programs: SelectOption[];
+  categories: SelectOption[];
+};
 
 type WorkoutBlock = {
   title: string;
@@ -21,16 +18,19 @@ type WorkoutBlock = {
 };
 
 export interface IFormInput {
-  date: string;
-  program: string;
+  date: number;
+  programId: string;
   workouts: WorkoutBlock[];
 }
 
-const WorkoutCreate: React.FC<WorkoutCreateProps> = () => {
+const WorkoutCreate: React.FC<WorkoutCreateProps> = ({
+  categories,
+  programs,
+}) => {
   const { register, control, handleSubmit, watch } = useForm<IFormInput>({
     defaultValues: {
-      date: '',
-      program: '',
+      date: 0,
+      programId: '',
       workouts: [{ title: '', duration: '', category: '', description: '' }],
     },
   });
@@ -61,9 +61,9 @@ const WorkoutCreate: React.FC<WorkoutCreateProps> = () => {
       <div className="w-full flex flex-col flex-shrink-0 gap-7">
         <DatePicker name="date" label="SELECT DATE" control={control} />
         <BasicSelect
-          name="program"
+          name="programId"
           label="SELECT PROGRAM"
-          options={programOpt}
+          options={programs}
           control={control}
         />
       </div>
@@ -77,6 +77,7 @@ const WorkoutCreate: React.FC<WorkoutCreateProps> = () => {
               key={index}
               id={index}
               removeAction={removeBlock}
+              categories={categories}
             />
           );
         })}

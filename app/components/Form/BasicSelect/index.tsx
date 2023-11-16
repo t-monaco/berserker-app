@@ -4,7 +4,7 @@ import { Control, Controller, Path } from 'react-hook-form';
 import { IFormInput } from '../../WorkoutCreate';
 import * as Styled from './BasicSelect.styled';
 
-type SelectOption = { label: string; value: string };
+export type SelectOption = { label: string; value: string };
 
 type BasicSelectProps = {
   label: string;

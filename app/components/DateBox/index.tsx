@@ -1,11 +1,11 @@
 import { Dispatch, SetStateAction } from 'react';
 import * as Styled from './DateBox.styled';
 
-interface CalDate {
+type CalDate = {
   dateNum: string;
   dateName: string;
   dateOfYear: number;
-}
+};
 
 type DateProps = {
   selected: boolean;

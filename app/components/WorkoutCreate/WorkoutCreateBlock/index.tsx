@@ -2,12 +2,15 @@ import { BasicInput, BasicSelect, BasicTextArea } from '@/app/components';
 import { Control, UseFormRegister } from 'react-hook-form';
 import { IFormInput } from '..';
 import * as Styled from './WorkoutCreateBlock.styled';
+import prisma from '@/lib/prisma';
+import { SelectOption } from '../../Form/BasicSelect';
 
 type WorkoutCreateBlockProps = {
   id: number;
   removeAction: (id: number) => void;
   register: UseFormRegister<IFormInput>;
   control: Control<IFormInput, any>;
+  categories: SelectOption[];
 };
 
 const categoriesOpt = [

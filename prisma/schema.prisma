@@ -36,7 +36,7 @@ model Program {
 model Workout {
   id        String           @id @default(auto()) @map("_id") @db.ObjectId
   blocks    WorkoutsBlocks[]
-  date      BigInt
+  date      String
   programId String           @db.ObjectId
   program   Program          @relation(fields: [programId], references: [id])
   createdAt DateTime         @default(now())
