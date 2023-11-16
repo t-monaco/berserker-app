@@ -1,18 +1,20 @@
 'use client';
 
 import { DateBox } from '@/app/components';
-import moment from 'moment';
+import dayjs from 'dayjs';
+import dayOfYear from 'dayjs/plugin/dayOfYear';
+import Link from 'next/link';
 import { useState } from 'react';
 import * as Styled from './Calendar.styled';
-import Link from 'next/link';
 
 type CalendarProps = object;
 
 const Calendar: React.FC<CalendarProps> = () => {
-  const startOfWeek = moment().startOf('isoWeek');
-  const endOfWeek = moment().endOf('isoWeek');
+  dayjs.extend(dayOfYear);
+  const startOfWeek = dayjs().startOf('week');
+  const endOfWeek = dayjs().endOf('week');
   const [selectedDayOfYear, setSelectedDayOfYear] = useState(
-    moment().dayOfYear(),
+    dayjs().dayOfYear(),
   );
 
   let calDays = [];
@@ -20,9 +22,9 @@ const Calendar: React.FC<CalendarProps> = () => {
 
   while (day <= endOfWeek) {
     calDays.push({
-      dateName: moment(day).format('ddd'),
-      dateNum: moment(day).format('DD'),
-      dateOfYear: moment(day).dayOfYear(),
+      dateName: day.format('ddd'),
+      dateNum: day.format('DD'),
+      dateOfYear: day.dayOfYear(),
     });
     day = day.clone().add(1, 'd');
   }
@@ -30,7 +32,7 @@ const Calendar: React.FC<CalendarProps> = () => {
   return (
     <Styled.CalendarWrapper>
       <div className="month-year">
-        {moment().format('MMMM YYYY').toUpperCase()}
+        {dayjs().format('MMMM YYYY').toUpperCase()}
         <Link href="/admin">ADMIN</Link>
       </div>
       <Styled.DatesWrapper>
