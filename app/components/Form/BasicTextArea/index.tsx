@@ -1,7 +1,7 @@
 import { messinaFont } from '@/app/fonts/fonts';
 import * as Styled from './BasicTextArea.styled';
 import { Path, UseFormRegister } from 'react-hook-form';
-import { IFormInput } from '../../Workout/WorkoutCreate';
+import { IFormInput } from '../../WorkoutCreate';
 
 type BasicTextAreaProps = {
   label: string;

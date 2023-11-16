@@ -15,7 +15,7 @@ type WorkoutCreateProps = object;
 
 type WorkoutBlock = {
   title: string;
-  type: string;
+  duration: string;
   category: string;
   description: string;
 };
@@ -31,7 +31,7 @@ const WorkoutCreate: React.FC<WorkoutCreateProps> = () => {
     defaultValues: {
       date: '',
       program: '',
-      workouts: [{ title: '', type: '', category: '', description: '' }],
+      workouts: [{ title: '', duration: '', category: '', description: '' }],
     },
   });
   const { fields, append, remove } = useFieldArray({
@@ -86,7 +86,7 @@ const WorkoutCreate: React.FC<WorkoutCreateProps> = () => {
           onClick={() =>
             append({
               title: '',
-              type: '',
+              duration: '',
               category: '',
               description: '',
             })

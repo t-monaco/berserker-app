@@ -1,4 +1,4 @@
-import WorkoutCreate from '@/app/components/Workout/WorkoutCreate';
+import WorkoutCreate from '@/app/components/WorkoutCreate';
 
 export default function Admin() {
   return (

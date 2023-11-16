@@ -1,5 +1,5 @@
-import WorkoutBlock from '../WorkoutBlock';
-import * as Styled from './WorkoutWrapper.styled';
+import BlockItem from './BlockItem';
+import * as Styled from './Block.styled';
 
 const data = {
   date: '',
@@ -8,14 +8,14 @@ const data = {
     {
       id: 1,
       title: 'CORE',
-      type: 'TABATA 30"ON 15"OFF',
+      duration: 'TABATA 30"ON 15"OFF',
       category: 'structure',
       description: 'Weighted Planks (80/50)',
     },
     {
       id: 2,
       title: 'upper body',
-      type: 'to finish',
+      duration: 'to finish',
       category: 'structure',
       description:
         'Front Flies\nLateral Flies\nFront Flies\nLateral Flies\nFront Flies\nLateral Flies\nFront Flies\nLateral Flies\nFront Flies\nLateral Flies\nFront Flies\nLateral Flies\nFront Flies\nLateral Flies\nFront Flies\nLateral Flies',
@@ -23,7 +23,7 @@ const data = {
     {
       id: 3,
       title: 'strictify',
-      type: "FOR time - TC 14'",
+      duration: "FOR time - TC 14'",
       category: 'metcon',
       description:
         '10 rounds:\n- 3 Strict MU\n- 5 Strict HSPU\n- 8 KBx2 Snatch (24/26)',
@@ -31,23 +31,23 @@ const data = {
     {
       id: 3,
       title: 'SABADO AHI AHI',
-      type: 'TO FINISH',
+      duration: 'TO FINISH',
       category: 'strength',
       description: 'After\nAfter del after\nAfter del after del after',
     },
   ],
 };
 
-type WorkoutWrapperProps = object;
+type BlockWrapperProps = object;
 
-const WorkoutWrapper: React.FC<WorkoutWrapperProps> = () => {
+const BlockWrapper: React.FC<BlockWrapperProps> = () => {
   return (
-    <Styled.WorkoutWrapper>
+    <Styled.BlockWrapper>
       {data.workouts.map((workoutData, idx) => (
-        <WorkoutBlock key={idx} {...workoutData} />
+        <BlockItem key={idx} {...workoutData} />
       ))}
-    </Styled.WorkoutWrapper>
+    </Styled.BlockWrapper>
   );
 };
 
-export default WorkoutWrapper;
+export default BlockWrapper;

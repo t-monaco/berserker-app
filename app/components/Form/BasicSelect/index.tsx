@@ -1,7 +1,7 @@
 import { drukFont } from '@/app/fonts/fonts';
 import { Select } from 'antd';
 import { Control, Controller, Path } from 'react-hook-form';
-import { IFormInput } from '../../Workout/WorkoutCreate';
+import { IFormInput } from '../../WorkoutCreate';
 import * as Styled from './BasicSelect.styled';
 
 type SelectOption = { label: string; value: string };

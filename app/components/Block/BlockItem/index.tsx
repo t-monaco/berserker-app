@@ -1,13 +1,13 @@
 'use client';
 
 import { drukFont, messinaFont } from '@/app/fonts/fonts';
-import * as Styled from './WorkoutBlock.styled';
+import * as Styled from './BlockItem.styled';
 import { useState } from 'react';
 
 type WorkoutBlockProps = {
   id: number;
   title: string;
-  type: string;
+  duration: string;
   category: string;
   description: string;
 };
@@ -18,9 +18,9 @@ const contentOverflow = (text: string) => {
   return text.split('\n').length > MAX_LINES;
 };
 
-const WorkoutBlock: React.FC<WorkoutBlockProps> = ({
+const BlockItem: React.FC<WorkoutBlockProps> = ({
   title,
-  type,
+  duration,
   category,
   description,
 }) => {
@@ -36,42 +36,40 @@ const WorkoutBlock: React.FC<WorkoutBlockProps> = ({
 
   return (
     <>
-      <Styled.WorkoutBlock
+      <Styled.BlockItemWrapper
         onClick={showModal}
         className={contentOverflow(description) ? 'overflow' : ''}
       >
-        <Styled.WorkoutHeader>
+        <Styled.BlockHeader>
           <h2 className="title">{title.toUpperCase()}</h2>
-          <h3 className="type">{type.toUpperCase()}</h3>
-        </Styled.WorkoutHeader>
-        <Styled.WorkoutDescription className={messinaFont.className}>
+          <h3 className="duration">{duration.toUpperCase()}</h3>
+        </Styled.BlockHeader>
+        <Styled.BlockDescription className={messinaFont.className}>
           {description}
-        </Styled.WorkoutDescription>
-        <Styled.WorkoutCategory>
-          {category.toUpperCase()}
-        </Styled.WorkoutCategory>
+        </Styled.BlockDescription>
+        <Styled.BlockCategory>{category.toUpperCase()}</Styled.BlockCategory>
         <Styled.ExpandIcon />
-      </Styled.WorkoutBlock>
-      <Styled.WorkoutModal
+      </Styled.BlockItemWrapper>
+
+      {/* //TODO: Move modal to different folder */}
+      <Styled.BlockModal
         open={isModalOpen}
         footer={null}
         onCancel={handleCancel}
         closeIcon={null}
         className={drukFont.className}
       >
-        <Styled.WorkoutHeader>
+        <Styled.BlockHeader>
           <h2 className="title">{title.toUpperCase()}</h2>
-          <h3 className="type">{type.toUpperCase()}</h3>
-        </Styled.WorkoutHeader>
-        <Styled.WorkoutDescription className={messinaFont.className}>
+          <h3 className="duration">{duration.toUpperCase()}</h3>
+        </Styled.BlockHeader>
+        <Styled.BlockDescription className={messinaFont.className}>
           {description}
-        </Styled.WorkoutDescription>
-        <Styled.WorkoutCategory>
-          {category.toUpperCase()}
-        </Styled.WorkoutCategory>
-      </Styled.WorkoutModal>
+        </Styled.BlockDescription>
+        <Styled.BlockCategory>{category.toUpperCase()}</Styled.BlockCategory>
+      </Styled.BlockModal>
     </>
   );
 };
 
-export default WorkoutBlock;
+export default BlockItem;

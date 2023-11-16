@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { AiOutlineFullscreen } from 'react-icons/ai';
 import { Modal } from 'antd';
 
-export const WorkoutBlock = styled.div<object>`
+export const BlockItemWrapper = styled.div<object>`
   background-color: var(--secondary-background-color);
   border-radius: 7px;
   padding: 1.25rem 1rem;
@@ -38,7 +38,7 @@ export const WorkoutBlock = styled.div<object>`
   }
 `;
 
-export const WorkoutHeader = styled.div<object>`
+export const BlockHeader = styled.div<object>`
   display: flex;
   flex-wrap: wrap;
   flex-shrink: 0;
@@ -49,7 +49,7 @@ export const WorkoutHeader = styled.div<object>`
     flex-basis: 100%;
   }
 
-  .type {
+  .duration {
     background-color: var(--primary-background-color);
     color: var(--primary-color);
     border-radius: 4px;
@@ -59,7 +59,7 @@ export const WorkoutHeader = styled.div<object>`
   }
 `;
 
-export const WorkoutCategory = styled.div<object>`
+export const BlockCategory = styled.div<object>`
   color: var(--primary-font-color);
   font-size: 0.7rem;
   border-radius: 4px;
@@ -72,7 +72,7 @@ export const WorkoutCategory = styled.div<object>`
   display: block;
 `;
 
-export const WorkoutDescription = styled.div<object>`
+export const BlockDescription = styled.div<object>`
   white-space: pre-line;
   color: var(--primary-font-color);
   overflow-y: hidden;
@@ -88,7 +88,7 @@ export const ExpandIcon = styled(AiOutlineFullscreen)`
   font-size: 1.5rem;
 `;
 
-export const WorkoutModal = styled(Modal)`
+export const BlockModal = styled(Modal)`
   overflow: visible;
 
   .ant-modal-content {
