@@ -1,7 +1,7 @@
 'use client';
 
 import styled from 'styled-components';
-import { BasicBtnProps } from './SubmitBtn';
+import { BasicBtnProps } from '.';
 
 export const BasicBtnWrapper = styled.button<BasicBtnProps>`
   align-items: center;

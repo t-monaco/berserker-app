@@ -1,5 +1,5 @@
 import { Path, UseFormRegister } from 'react-hook-form';
-import { IFormInput } from '../../Workout/WorkoutCreate/WorkoutCreate';
+import { IFormInput } from '../../Workout/WorkoutCreate';
 import * as Styled from './BasicInput.styled';
 
 type BasicInputProps = {

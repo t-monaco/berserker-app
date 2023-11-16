@@ -1,5 +1,4 @@
-type WorkoutWrapperProps = object;
-import WorkoutBlock from '../WorkoutBlock/WorkoutBlock';
+import WorkoutBlock from '../WorkoutBlock';
 import * as Styled from './WorkoutWrapper.styled';
 
 const data = {
@@ -38,6 +37,9 @@ const data = {
     },
   ],
 };
+
+type WorkoutWrapperProps = object;
+
 const WorkoutWrapper: React.FC<WorkoutWrapperProps> = () => {
   return (
     <Styled.WorkoutWrapper>

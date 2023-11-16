@@ -2,7 +2,7 @@ import { drukFont } from '@/app/fonts/fonts';
 import { DatePicker as DatePickerAntd } from 'antd';
 import dayjs from 'dayjs';
 import { Control, Controller, Path } from 'react-hook-form';
-import { IFormInput } from '../../Workout/WorkoutCreate/WorkoutCreate';
+import { IFormInput } from '../../Workout/WorkoutCreate';
 import * as Styled from './DatePicker.styled';
 
 type DatePickerProps = {

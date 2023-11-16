@@ -1,10 +1,8 @@
 'use client';
+import { BasicBtn, BasicSelect, DatePicker } from '@/app/components';
 import { SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
-import BasicSelect from '../../Form/BasicSelect/BasicSelect';
-import DatePicker from '../../Form/DatePicker/DatePicker';
-import BasicBtn from '../../Form/SubmitBtn/SubmitBtn';
 import * as Styled from './WorkoutCreate.styled';
-import WorkoutCreateBlock from './WorkoutCreateBlock/WorkoutCreateBlock';
+import WorkoutCreateBlock from './WorkoutCreateBlock';
 
 const programOpt = [
   { value: 'berserker lp', label: 'BERSERKER LP' },

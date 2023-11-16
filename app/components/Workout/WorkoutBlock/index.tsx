@@ -3,7 +3,6 @@
 import { drukFont, messinaFont } from '@/app/fonts/fonts';
 import * as Styled from './WorkoutBlock.styled';
 import { useState } from 'react';
-import { IoClose } from 'react-icons/io5';
 
 type WorkoutBlockProps = {
   id: number;

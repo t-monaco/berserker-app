@@ -1,7 +1,7 @@
 'use client';
 
+import { DateBox } from '@/app/components';
 import moment from 'moment';
-import DateBox from '../DateBox/DateBox';
 import { useState } from 'react';
 import * as Styled from './Calendar.styled';
 

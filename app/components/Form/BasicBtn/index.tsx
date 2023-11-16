@@ -1,12 +1,14 @@
-import { ButtonHTMLAttributes } from 'react';
-import * as Styled from './SubmitBtn.styled';
+import { ButtonHTMLAttributes, ComponentProps } from 'react';
+import * as Styled from './BasicBtn.styled';
 
-export type BasicBtnProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+export type BasicBtnProps = {
   priority?: 'primary' | 'secondary';
-};
+  position?: 'left' | 'right';
+} & ComponentProps<'button'>;
 
 const BasicBtn: React.FC<BasicBtnProps> = ({
   priority = 'primary',
+  position,
   children,
   ...props
 }) => {

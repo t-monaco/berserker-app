@@ -1,8 +1,6 @@
-import BasicInput from '@/app/components/Form/BasicInput/BasicInput';
-import BasicSelect from '@/app/components/Form/BasicSelect/BasicSelect';
-import BasicTextArea from '@/app/components/Form/BasicTextArea/BasicTextArea';
+import { BasicInput, BasicSelect, BasicTextArea } from '@/app/components';
 import { Control, UseFormRegister } from 'react-hook-form';
-import { IFormInput } from '../WorkoutCreate';
+import { IFormInput } from '..';
 import * as Styled from './WorkoutCreateBlock.styled';
 
 type WorkoutCreateBlockProps = {

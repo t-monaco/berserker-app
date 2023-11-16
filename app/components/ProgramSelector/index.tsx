@@ -1,8 +1,8 @@
 'use client';
 
+import { useState } from 'react';
 import { FiChevronDown } from 'react-icons/fi';
 import * as Styled from './ProgramSelector.styled';
-import { useState } from 'react';
 
 type ProgramSelectorProps = object;
 

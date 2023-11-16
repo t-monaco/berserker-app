@@ -1,5 +1,7 @@
+'use client';
+
 import Link from 'next/link';
-import { AdminBtn } from './Admin.styled';
+import { BasicHero } from '@/app/components/Generics/Generics.styled';
 
 export default function Admin() {
   return (
@@ -7,15 +9,15 @@ export default function Admin() {
       <div className="flex flex-col gap-[5rem]">
         <h1 className="text-center text-[20px]">ADMIN PANEL</h1>
         <div className="flex flex-col gap-[1.3rem] text-[18px]">
-          <AdminBtn position="left">
+          <BasicHero position="left">
             <Link href="/admin/create">CREATE WORKOUT</Link>
-          </AdminBtn>
-          <AdminBtn position="right">
+          </BasicHero>
+          <BasicHero position="right">
             <Link href="/admin/create"> EDIT WORKOUT</Link>
-          </AdminBtn>
-          <AdminBtn position="left">
+          </BasicHero>
+          <BasicHero position="left">
             <Link href="/admin/create">COPY FROM WORKOUT</Link>
-          </AdminBtn>
+          </BasicHero>
         </div>
       </div>
     </main>
