@@ -4,6 +4,7 @@ import { DateBox } from '@/app/components';
 import moment from 'moment';
 import { useState } from 'react';
 import * as Styled from './Calendar.styled';
+import Link from 'next/link';
 
 type CalendarProps = object;
 
@@ -30,6 +31,7 @@ const Calendar: React.FC<CalendarProps> = () => {
     <Styled.CalendarWrapper>
       <div className="month-year">
         {moment().format('MMMM YYYY').toUpperCase()}
+        <Link href="/admin">ADMIN</Link>
       </div>
       <Styled.DatesWrapper>
         {calDays.map((calDate, key) => (
