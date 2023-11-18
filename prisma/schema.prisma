@@ -7,8 +7,9 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-type WorkoutsBlocks {
-  categoryId  String @db.ObjectId
+type WorkoutBlock {
+  // categoryId    String @db.ObjectId
+  category    String
   description String
   duration    String
   title       String
@@ -34,13 +35,13 @@ model Program {
 }
 
 model Workout {
-  id        String           @id @default(auto()) @map("_id") @db.ObjectId
-  blocks    WorkoutsBlocks[]
+  id        String         @id @default(auto()) @map("_id") @db.ObjectId
+  blocks    WorkoutBlock[]
   date      String
-  programId String           @db.ObjectId
-  program   Program          @relation(fields: [programId], references: [id])
-  createdAt DateTime         @default(now())
-  updatedAt DateTime         @updatedAt
+  programId String         @db.ObjectId
+  program   Program        @relation(fields: [programId], references: [id])
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
 
   @@map("workouts")
 }

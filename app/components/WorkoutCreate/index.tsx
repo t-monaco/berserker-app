@@ -4,13 +4,16 @@ import { SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
 import { SelectOption } from '../Form/BasicSelect';
 import * as Styled from './WorkoutCreate.styled';
 import WorkoutCreateBlock from './WorkoutCreateBlock';
+import { addWorkout } from '@/actions/addWorkout';
+import toast from 'react-hot-toast';
+import { redirect } from 'next/navigation';
 
 type WorkoutCreateProps = {
   programs: SelectOption[];
   categories: SelectOption[];
 };
 
-type WorkoutBlock = {
+type Block = {
   title: string;
   duration: string;
   category: string;
@@ -20,26 +23,28 @@ type WorkoutBlock = {
 export interface IFormInput {
   date: number;
   programId: string;
-  workouts: WorkoutBlock[];
+  blocks: Block[];
 }
 
 const WorkoutCreate: React.FC<WorkoutCreateProps> = ({
   categories,
   programs,
 }) => {
-  const { register, control, handleSubmit, watch } = useForm<IFormInput>({
-    defaultValues: {
-      date: 0,
-      programId: '',
-      workouts: [{ title: '', duration: '', category: '', description: '' }],
+  const { register, control, handleSubmit, watch, reset } = useForm<IFormInput>(
+    {
+      defaultValues: {
+        date: 0,
+        programId: '',
+        blocks: [{ title: '', duration: '', category: '', description: '' }],
+      },
     },
-  });
+  );
   const { fields, append, remove } = useFieldArray({
     control,
-    name: 'workouts',
+    name: 'blocks',
   });
 
-  const watchFieldArray = watch('workouts');
+  const watchFieldArray = watch('blocks');
   const controlledFields = fields.map((field, index) => {
     return {
       ...field,
@@ -51,11 +56,19 @@ const WorkoutCreate: React.FC<WorkoutCreateProps> = ({
     remove(blockIdx);
   };
 
-  const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data);
+  const processForm: SubmitHandler<IFormInput> = async (data) => {
+    // console.log('BOOOO', data);
+    const result = await addWorkout(data);
 
+    if (result.success) {
+      toast.success(result.message as string);
+      reset();
+      // redirect('/admin');
+    }
+  };
   return (
     <Styled.WorkoutCreateWrapper
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit(processForm)}
       autoComplete="off"
     >
       <div className="w-full flex flex-col flex-shrink-0 gap-7">
@@ -84,6 +97,7 @@ const WorkoutCreate: React.FC<WorkoutCreateProps> = ({
 
         <BasicBtn
           priority="secondary"
+          type="button"
           onClick={() =>
             append({
               title: '',

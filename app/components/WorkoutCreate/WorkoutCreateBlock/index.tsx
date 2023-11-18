@@ -31,26 +31,26 @@ const WorkoutCreateBlock: React.FC<WorkoutCreateBlockProps> = ({
         <button onClick={() => removeAction(id)}>REMOVE BLOCK</button>
       </Styled.DeleteBlockWrapper>
       <BasicInput
-        name={`workouts.${id}.title`}
+        name={`blocks.${id}.title`}
         label="WORKOUT TITLE"
         register={register}
         id={id}
       />
       <BasicInput
-        name={`workouts.${id}.duration`}
+        name={`blocks.${id}.duration`}
         label="WORKOUT DURATION"
         register={register}
         id={id}
       />
       <BasicSelect
-        name={`workouts.${id}.category`}
+        name={`blocks.${id}.category`}
         label="SELECT CATEGORY"
         options={categoriesOpt}
         control={control}
       />
       <BasicTextArea
         register={register}
-        name={`workouts.${id}.description`}
+        name={`blocks.${id}.description`}
         label="WORKOUT DESCRIPTION"
       />
     </Styled.WorkoutCreateBlockWrapper>
