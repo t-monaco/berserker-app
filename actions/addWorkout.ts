@@ -5,6 +5,7 @@ import prisma from '@/lib/prisma';
 import { Prisma } from '@prisma/client';
 import dayjs from 'dayjs';
 import dayOfYear from 'dayjs/plugin/dayOfYear';
+import { revalidatePath } from 'next/cache';
 
 export const addWorkout = async (data: IFormInput) => {
   dayjs.extend(dayOfYear);
@@ -20,6 +21,7 @@ export const addWorkout = async (data: IFormInput) => {
         blocks,
       },
     });
+    revalidatePath('/');
   } catch (e) {
     if (e instanceof Prisma.PrismaClientKnownRequestError) {
       // Prisma error-codes
