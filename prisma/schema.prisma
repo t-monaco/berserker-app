@@ -43,5 +43,6 @@ model Workout {
   createdAt DateTime       @default(now())
   updatedAt DateTime       @updatedAt
 
+  @@unique([date, programId], name: "workoutIdentifier")
   @@map("workouts")
 }

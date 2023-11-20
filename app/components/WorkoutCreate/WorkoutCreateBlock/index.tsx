@@ -2,7 +2,6 @@ import { BasicInput, BasicSelect, BasicTextArea } from '@/app/components';
 import { Control, UseFormRegister } from 'react-hook-form';
 import { IFormInput } from '..';
 import * as Styled from './WorkoutCreateBlock.styled';
-import prisma from '@/lib/prisma';
 import { SelectOption } from '../../Form/BasicSelect';
 
 type WorkoutCreateBlockProps = {
@@ -13,17 +12,12 @@ type WorkoutCreateBlockProps = {
   categories: SelectOption[];
 };
 
-const categoriesOpt = [
-  { value: 'structure', label: 'STRUCTURE' },
-  { value: 'strength', label: 'STRENGTH' },
-  { value: 'metcon', label: 'METCON' },
-];
-
 const WorkoutCreateBlock: React.FC<WorkoutCreateBlockProps> = ({
   id,
   removeAction,
   register,
   control,
+  categories,
 }) => {
   return (
     <Styled.WorkoutCreateBlockWrapper>
@@ -45,7 +39,7 @@ const WorkoutCreateBlock: React.FC<WorkoutCreateBlockProps> = ({
       <BasicSelect
         name={`blocks.${id}.category`}
         label="SELECT CATEGORY"
-        options={categoriesOpt}
+        options={categories}
         control={control}
       />
       <BasicTextArea

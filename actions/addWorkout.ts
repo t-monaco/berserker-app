@@ -2,6 +2,7 @@
 
 import { IFormInput } from '@/app/components/WorkoutCreate';
 import prisma from '@/lib/prisma';
+import { Prisma } from '@prisma/client';
 import dayjs from 'dayjs';
 import dayOfYear from 'dayjs/plugin/dayOfYear';
 
@@ -11,18 +12,6 @@ export const addWorkout = async (data: IFormInput) => {
 
   const dateDB = `${dayjs(date).year()}-${dayjs(date).dayOfYear()}`;
 
-  // code to check that date and program do not exist.
-  //
-  //
-  //
-  //
-
-  console.log('BOOOO', {
-    date: dateDB,
-    programId,
-    blocks,
-  });
-
   try {
     await prisma.workout.create({
       data: {
@@ -31,9 +20,20 @@ export const addWorkout = async (data: IFormInput) => {
         blocks,
       },
     });
-
-    return { success: true, message: 'Workout added successfully.' };
-  } catch (error) {
-    return { success: false, message: error };
+  } catch (e) {
+    if (e instanceof Prisma.PrismaClientKnownRequestError) {
+      // Prisma error-codes
+      // https://www.prisma.io/docs/reference/api-reference/error-reference#error-codes
+      // https://www.prisma.io/docs/reference/api-reference/error-reference
+      if (e.code === 'P2002') {
+        return {
+          success: false,
+          message:
+            'Workout already exist. Please select a different day or program.',
+        };
+      }
+    }
   }
+
+  return { success: true, message: 'Workout added successfully.' };
 };

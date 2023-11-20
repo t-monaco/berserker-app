@@ -6,7 +6,7 @@ import * as Styled from './WorkoutCreate.styled';
 import WorkoutCreateBlock from './WorkoutCreateBlock';
 import { addWorkout } from '@/actions/addWorkout';
 import toast from 'react-hot-toast';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 type WorkoutCreateProps = {
   programs: SelectOption[];
@@ -44,6 +44,8 @@ const WorkoutCreate: React.FC<WorkoutCreateProps> = ({
     name: 'blocks',
   });
 
+  const router = useRouter();
+
   const watchFieldArray = watch('blocks');
   const controlledFields = fields.map((field, index) => {
     return {
@@ -57,13 +59,15 @@ const WorkoutCreate: React.FC<WorkoutCreateProps> = ({
   };
 
   const processForm: SubmitHandler<IFormInput> = async (data) => {
-    // console.log('BOOOO', data);
     const result = await addWorkout(data);
 
     if (result.success) {
       toast.success(result.message as string);
       reset();
-      // redirect('/admin');
+      // redirect from next not working inside trycatch of server actions.
+      router.push('/admin');
+    } else {
+      toast.error(result.message);
     }
   };
   return (
