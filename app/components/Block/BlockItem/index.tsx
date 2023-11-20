@@ -4,8 +4,7 @@ import { drukFont, messinaFont } from '@/app/fonts/fonts';
 import * as Styled from './BlockItem.styled';
 import { useState } from 'react';
 
-type WorkoutBlockProps = {
-  id: number;
+export type BlockItemProps = {
   title: string;
   duration: string;
   category: string;
@@ -18,7 +17,7 @@ const contentOverflow = (text: string) => {
   return text.split('\n').length > MAX_LINES;
 };
 
-const BlockItem: React.FC<WorkoutBlockProps> = ({
+const BlockItem: React.FC<BlockItemProps> = ({
   title,
   duration,
   category,

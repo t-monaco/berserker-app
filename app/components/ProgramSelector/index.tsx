@@ -1,20 +1,25 @@
 'use client';
 
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import { FiChevronDown } from 'react-icons/fi';
 import * as Styled from './ProgramSelector.styled';
 import { SelectOption } from '../Form/BasicSelect';
 
 type ProgramSelectorProps = {
   programs: SelectOption[];
+  selectedProgram: SelectOption;
+  setSelectedProgram: Dispatch<SetStateAction<SelectOption>>;
 };
 
-const ProgramSelector: React.FC<ProgramSelectorProps> = ({ programs }) => {
+const ProgramSelector: React.FC<ProgramSelectorProps> = ({
+  programs,
+  selectedProgram,
+  setSelectedProgram,
+}) => {
   const [showList, setShowList] = useState(false);
-  const [selectedProgram, SetSelectedProgram] = useState(programs[0]);
 
   const handleOnClick = (program: SelectOption) => {
-    SetSelectedProgram(program);
+    setSelectedProgram(program);
     setShowList(false);
   };
 

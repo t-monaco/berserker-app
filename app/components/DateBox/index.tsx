@@ -1,28 +1,29 @@
 import { Dispatch, SetStateAction } from 'react';
 import * as Styled from './DateBox.styled';
 
-type CalDate = {
+export type CalDate = {
   dateNum: string;
   dateName: string;
   dateOfYear: number;
+  dateId: string;
 };
 
 type DateProps = {
   selected: boolean;
   calDate: CalDate;
-  setSelectedDate: Dispatch<SetStateAction<number>>;
+  setSelectedDateId: Dispatch<SetStateAction<string>>;
 };
 
 const DateBox: React.FC<DateProps> = ({
   selected,
   calDate,
-  setSelectedDate,
+  setSelectedDateId,
 }) => {
   return (
     <Styled.DateBoxWrapper
       // className={`${selected ? 'selected' : ''}`}
       selected={selected}
-      onClick={() => setSelectedDate(calDate.dateOfYear)}
+      onClick={() => setSelectedDateId(calDate.dateId)}
     >
       <span className="dateName">{calDate.dateName.toUpperCase()}</span>
       <span className="dateNum">{calDate.dateNum}</span>

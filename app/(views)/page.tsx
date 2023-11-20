@@ -1,10 +1,14 @@
-import Calendar from '../components/Calendar';
-import ProgramSelector from '../components/ProgramSelector';
-import BlockWrapper from '../components/Block';
 import prisma from '@/lib/prisma';
 import { SelectOption } from '../components/Form/BasicSelect';
+import HomeWrapper from '../components/HomeWrapper';
 
 export default async function Home() {
+  const workouts = await prisma.workout.findMany({
+    where: {
+      date: { in: ['2023-324', '2023-325', '2023-326', '2023-327'] },
+    },
+  });
+
   const programs = await prisma.program.findMany();
 
   const programOptions = programs.reduce(
@@ -15,11 +19,5 @@ export default async function Home() {
     [],
   );
 
-  return (
-    <main className="flex flex-col gap-6 flex-1">
-      <Calendar />
-      <ProgramSelector programs={programOptions} />
-      <BlockWrapper />
-    </main>
-  );
+  return <HomeWrapper programs={programOptions} workouts={workouts} />;
 }

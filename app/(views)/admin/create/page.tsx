@@ -17,7 +17,7 @@ export default async function Admin() {
   const categoriesOptions = categories.reduce(
     (acc: SelectOption[], { name, id }) => [
       ...acc,
-      { label: name.toUpperCase(), value: id },
+      { label: name.toUpperCase(), value: name },
     ],
     [],
   );

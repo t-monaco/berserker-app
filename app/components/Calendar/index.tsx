@@ -4,20 +4,24 @@ import { DateBox } from '@/app/components';
 import dayjs from 'dayjs';
 import dayOfYear from 'dayjs/plugin/dayOfYear';
 import Link from 'next/link';
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import * as Styled from './Calendar.styled';
+import { CalDate } from '../DateBox';
 
-type CalendarProps = object;
+type CalendarProps = {
+  selectedDateId: string;
+  setSelectedDateId: Dispatch<SetStateAction<string>>;
+};
 
-const Calendar: React.FC<CalendarProps> = () => {
+const Calendar: React.FC<CalendarProps> = ({
+  selectedDateId,
+  setSelectedDateId,
+}) => {
   dayjs.extend(dayOfYear);
   const startOfWeek = dayjs().startOf('week');
   const endOfWeek = dayjs().endOf('week');
-  const [selectedDayOfYear, setSelectedDayOfYear] = useState(
-    dayjs().dayOfYear(),
-  );
 
-  let calDays = [];
+  let calDays: CalDate[] = [];
   let day = startOfWeek;
 
   while (day <= endOfWeek) {
@@ -25,6 +29,7 @@ const Calendar: React.FC<CalendarProps> = () => {
       dateName: day.format('ddd'),
       dateNum: day.format('DD'),
       dateOfYear: day.dayOfYear(),
+      dateId: `${day.year()}-${day.dayOfYear()}`,
     });
     day = day.clone().add(1, 'd');
   }
@@ -39,9 +44,9 @@ const Calendar: React.FC<CalendarProps> = () => {
         {calDays.map((calDate, key) => (
           <DateBox
             key={key}
-            selected={selectedDayOfYear === calDate.dateOfYear ? true : false}
+            selected={selectedDateId === calDate.dateId ? true : false}
             calDate={calDate}
-            setSelectedDate={setSelectedDayOfYear}
+            setSelectedDateId={setSelectedDateId}
           />
         ))}
       </Styled.DatesWrapper>
