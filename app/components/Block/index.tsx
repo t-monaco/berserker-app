@@ -1,8 +1,14 @@
 import BlockItem, { BlockItemProps } from './BlockItem';
 import * as Styled from './Block.styled';
+import { sortBlockByCategory } from '@/app/utils/utils';
 
 type BlockWrapperProps = {
-  blocks: BlockItemProps[];
+  blocks: {
+    title: string;
+    duration: string;
+    category: string;
+    description: string;
+  }[];
 };
 
 const EmptyBlocks = () => {
@@ -19,7 +25,7 @@ const BlockWrapper: React.FC<BlockWrapperProps> = ({ blocks }) => {
   return (
     <Styled.BlockWrapper>
       {blocks.length ? (
-        blocks.map((workoutData, idx) => (
+        sortBlockByCategory(blocks).map((workoutData, idx) => (
           <BlockItem key={idx} {...workoutData} />
         ))
       ) : (
