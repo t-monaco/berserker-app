@@ -12,13 +12,7 @@ type BlockWrapperProps = {
 };
 
 const EmptyBlocks = () => {
-  return (
-    <h1 className="text-center">
-      There are no workouts for Today.
-      <br />
-      Enjoy your day.
-    </h1>
-  );
+  return <h1 className="text-center">REST DAY, BITCH.</h1>;
 };
 
 const BlockWrapper: React.FC<BlockWrapperProps> = ({ blocks }) => {
