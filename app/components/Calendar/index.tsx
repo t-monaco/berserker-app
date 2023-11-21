@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { Dispatch, SetStateAction, useState } from 'react';
 import * as Styled from './Calendar.styled';
 import { CalDate } from '../DateBox';
+import { signOut } from 'next-auth/react';
 
 type CalendarProps = {
   selectedDateId: string;
@@ -38,7 +39,10 @@ const Calendar: React.FC<CalendarProps> = ({
     <Styled.CalendarWrapper>
       <div className="month-year">
         {dayjs().format('MMMM YYYY').toUpperCase()}
-        <Link href="/admin">ADMIN</Link>
+        <div className="flex gap-4">
+          <Link href="/admin">ADMIN</Link>
+          <a onClick={() => signOut({ callbackUrl: '/' })}>LOGOUT</a>
+        </div>
       </div>
       <Styled.DatesWrapper>
         {calDays.map((calDate, key) => (

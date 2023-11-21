@@ -23,7 +23,10 @@ const LoginWrapper: React.FC<LoginWrapperProps> = () => {
 
   const processForm: SubmitHandler<LoginForm> = async (data) => {
     setLoading(true);
-    const logged = await signIn('credentials', { ...data, redirect: false });
+    const logged = await signIn('credentials', {
+      ...data,
+      redirect: false,
+    });
 
     if (!logged?.ok) {
       setLoading(false);
@@ -42,7 +45,12 @@ const LoginWrapper: React.FC<LoginWrapperProps> = () => {
         className="flex flex-col gap-[1.3rem] text-[18px]"
         onSubmit={handleSubmit(processForm)}
       >
-        <BasicInput name="username" label="USERNAME" register={register} />
+        <BasicInput
+          autoComplete="off"
+          name="username"
+          label="USERNAME"
+          register={register}
+        />
         <BasicInput
           type="password"
           name="password"

@@ -37,11 +37,19 @@ const handler = NextAuth({
       },
     }),
   ],
+  callbacks: {
+    async signIn({ user, account, profile, email, credentials }) {
+      return true;
+    },
+  },
   session: {
     strategy: 'jwt',
   },
   secret: process.env.NEXTAUTH_SECRET,
   debug: process.env.NODE_ENV === 'development',
+  pages: {
+    signIn: '/login',
+  },
 });
 
 export { handler as GET, handler as POST };
