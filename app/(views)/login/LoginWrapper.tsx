@@ -57,7 +57,7 @@ const LoginWrapper: React.FC<LoginWrapperProps> = () => {
           label="PASSWORD"
           register={register}
         />
-        <BasicBtn type="submit">
+        <BasicBtn type="submit" disabled={loading}>
           {loading ? <BeatLoader speedMultiplier={0.7} /> : 'LOGIN'}
         </BasicBtn>
       </form>

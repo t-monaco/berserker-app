@@ -4,6 +4,9 @@ import { PrismaAdapter } from '@auth/prisma-adapter';
 import prisma from '@/lib/prisma';
 import bcrypt from 'bcrypt';
 
+const MINUTE = 60;
+const HOUR = 60 * MINUTE;
+
 const handler = NextAuth({
   adapter: PrismaAdapter(prisma),
   providers: [
@@ -33,17 +36,29 @@ const handler = NextAuth({
 
         if (!passwordsMatch) return null;
 
-        return user;
+        return { id: user.id, username: user.username, role: user.role };
       },
     }),
   ],
-  callbacks: {
-    async signIn({ user, account, profile, email, credentials }) {
-      return true;
-    },
-  },
   session: {
     strategy: 'jwt',
+    maxAge: 4 * HOUR,
+  },
+  jwt: {
+    secret: process.env.NEXTAUTH_SECRET,
+  },
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.user = user;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      // TODO: Need to augment JWT token type. Not is typing to unknown
+      // @ts-ignore
+      return { ...session, user: { ...token.user } };
+    },
   },
   secret: process.env.NEXTAUTH_SECRET,
   debug: process.env.NODE_ENV === 'development',
