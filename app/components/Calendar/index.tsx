@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { Dispatch, SetStateAction, useState } from 'react';
 import * as Styled from './Calendar.styled';
 import { CalDate } from '../DateBox';
-import { signOut } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 
 type CalendarProps = {
   selectedDateId: string;
@@ -21,6 +21,7 @@ const Calendar: React.FC<CalendarProps> = ({
   dayjs.extend(dayOfYear);
   const startOfWeek = dayjs().startOf('week');
   const endOfWeek = dayjs().endOf('week');
+  const { data: session } = useSession();
 
   let calDays: CalDate[] = [];
   let day = startOfWeek;
@@ -40,7 +41,7 @@ const Calendar: React.FC<CalendarProps> = ({
       <div className="month-year">
         {dayjs().format('MMMM YYYY').toUpperCase()}
         <div className="flex gap-4">
-          <Link href="/admin">ADMIN</Link>
+          {session?.user?.role === 'ADMIN' && <Link href="/admin">ADMIN</Link>}
           <a onClick={() => signOut({ callbackUrl: '/' })}>LOGOUT</a>
         </div>
       </div>
