@@ -28,13 +28,11 @@ const WorkoutCreateBlock: React.FC<WorkoutCreateBlockProps> = ({
         name={`blocks.${id}.title`}
         label="WORKOUT TITLE"
         register={register}
-        id={id}
       />
       <BasicInput
         name={`blocks.${id}.duration`}
         label="WORKOUT DURATION"
         register={register}
-        id={id}
       />
       <BasicSelect
         name={`blocks.${id}.category`}
