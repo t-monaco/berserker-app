@@ -3,6 +3,8 @@ import { SelectOption } from '../components/Form/BasicSelect';
 import HomeWrapper from '../components/HomeWrapper';
 import { getDatesIdentifierArr } from '../utils/utils';
 
+export const dynamic = 'force-dynamic';
+
 export default async function Home() {
   const workouts = await prisma.workout.findMany({
     where: {
