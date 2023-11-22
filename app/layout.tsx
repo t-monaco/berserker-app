@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   title: 'Berserker Program',
   description: 'Berserker Program',
   manifest: '/manifest.json',
+  icons: {
+    icon: '/favicon.ico',
+  },
 };
 
 export default function RootLayout({
