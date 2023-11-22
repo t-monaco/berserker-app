@@ -14,6 +14,11 @@ export const SelectWrapper = styled.div<object>`
     font-size: 12px;
   }
 
+  span.error-msg {
+    font-size: 12px;
+    color: var(--secondary-color);
+  }
+
   .ant-select {
     height: 2.8rem;
 

@@ -13,6 +13,16 @@ export const CalendarWrapper = styled.div<object>`
   .month-year {
     text-align: center;
     font-size: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    a {
+      border-radius: 7px;
+      background-color: var(--primary-color);
+      padding: 0.2rem 0.4rem;
+      color: var(--secondary-font-color);
+    }
   }
 `;
 

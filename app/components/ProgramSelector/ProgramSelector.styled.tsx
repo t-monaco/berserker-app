@@ -1,8 +1,8 @@
 'use client';
 import styled from 'styled-components';
-import { BasicBtn } from './../Generics/Generics.styled';
+import { BasicHero } from './../Generics/Generics.styled';
 
-export const ProgramSelectWrapper = styled(BasicBtn)`
+export const ProgramSelectWrapper = styled(BasicHero)`
   align-items: stretch;
   display: flex;
   flex-direction: column;
