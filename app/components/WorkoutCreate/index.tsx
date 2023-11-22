@@ -1,4 +1,5 @@
 'use client';
+
 import { BasicBtn, BasicSelect, DatePicker } from '@/app/components';
 import { SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
 import { SelectOption } from '../Form/BasicSelect';
@@ -7,13 +8,15 @@ import WorkoutCreateBlock from './WorkoutCreateBlock';
 import { addWorkout } from '@/actions/addWorkout';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
+import { useState, useTransition } from 'react';
+import { BeatLoader } from 'react-spinners';
 
 type WorkoutCreateProps = {
   programs: SelectOption[];
   categories: SelectOption[];
 };
 
-type Block = {
+export type Block = {
   title: string;
   duration: string;
   category: string;
@@ -30,15 +33,22 @@ const WorkoutCreate: React.FC<WorkoutCreateProps> = ({
   categories,
   programs,
 }) => {
-  const { register, control, handleSubmit, watch, reset } = useForm<IFormInput>(
-    {
-      defaultValues: {
-        date: 0,
-        programId: '',
-        blocks: [{ title: '', duration: '', category: '', description: '' }],
-      },
+  const [loading, setLoading] = useState(false);
+
+  const {
+    register,
+    control,
+    handleSubmit,
+    watch,
+    reset,
+    formState: { errors },
+  } = useForm<IFormInput>({
+    defaultValues: {
+      date: 0,
+      programId: '',
+      blocks: [{ title: '', duration: '', category: '', description: '' }],
     },
-  );
+  });
   const { fields, append, remove } = useFieldArray({
     control,
     name: 'blocks',
@@ -54,11 +64,8 @@ const WorkoutCreate: React.FC<WorkoutCreateProps> = ({
     };
   });
 
-  const removeBlock = (blockIdx: number) => {
-    remove(blockIdx);
-  };
-
   const processForm: SubmitHandler<IFormInput> = async (data) => {
+    setLoading(true);
     const result = await addWorkout(data);
 
     if (result.success) {
@@ -67,9 +74,11 @@ const WorkoutCreate: React.FC<WorkoutCreateProps> = ({
       // redirect from next not working inside trycatch of server actions.
       router.push('/admin');
     } else {
+      setLoading(false);
       toast.error(result.message);
     }
   };
+
   return (
     <Styled.WorkoutCreateWrapper
       onSubmit={handleSubmit(processForm)}
@@ -82,6 +91,7 @@ const WorkoutCreate: React.FC<WorkoutCreateProps> = ({
           label="SELECT PROGRAM"
           options={programs}
           control={control}
+          error={errors.programId?.message}
         />
       </div>
       <span className="divider" />
@@ -93,8 +103,9 @@ const WorkoutCreate: React.FC<WorkoutCreateProps> = ({
               control={control}
               key={index}
               id={index}
-              removeAction={removeBlock}
+              removeAction={remove}
               categories={categories}
+              errors={errors}
             />
           );
         })}
@@ -114,7 +125,9 @@ const WorkoutCreate: React.FC<WorkoutCreateProps> = ({
           ADD BLOCK
         </BasicBtn>
       </div>
-      <BasicBtn type="submit">SAVE WORKOUT</BasicBtn>
+      <BasicBtn type="submit" disabled={loading}>
+        {loading ? <BeatLoader speedMultiplier={0.7} /> : 'SAVE WORKOUT'}
+      </BasicBtn>
     </Styled.WorkoutCreateWrapper>
   );
 };

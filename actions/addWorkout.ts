@@ -1,6 +1,7 @@
 'use server';
 
-import { IFormInput } from '@/app/components/WorkoutCreate';
+import { Block, IFormInput } from '@/app/components/WorkoutCreate';
+import { covertToUpperCaseArrObj } from '@/app/utils/utils';
 import prisma from '@/lib/prisma';
 import { Prisma } from '@prisma/client';
 import dayjs from 'dayjs';
@@ -11,6 +12,10 @@ export const addWorkout = async (data: IFormInput) => {
   dayjs.extend(dayOfYear);
   const { date, programId, blocks } = data;
 
+  const keysToConvert = ['title', 'duration', 'category'];
+
+  const convertedBlocks = covertToUpperCaseArrObj(blocks, keysToConvert);
+
   const dateDB = `${dayjs(date).year()}-${dayjs(date).dayOfYear()}`;
 
   try {
@@ -18,7 +23,7 @@ export const addWorkout = async (data: IFormInput) => {
       data: {
         date: dateDB,
         programId,
-        blocks,
+        blocks: convertedBlocks as Block[],
       },
     });
     revalidatePath('/');

@@ -10,7 +10,9 @@ type BasicSelectProps = {
   label: string;
   name: Path<IFormInput>;
   options: SelectOption[];
+  // TODO: Use generics, same as BasicInput
   control: Control<IFormInput, any>;
+  error?: string;
 };
 
 const BasicSelect: React.FC<BasicSelectProps> = ({
@@ -18,6 +20,7 @@ const BasicSelect: React.FC<BasicSelectProps> = ({
   name,
   options,
   control,
+  error,
 }) => {
   return (
     <Styled.SelectWrapper>
@@ -25,10 +28,12 @@ const BasicSelect: React.FC<BasicSelectProps> = ({
       <Controller
         name={name}
         control={control}
+        rules={{ required: 'Field required.' }}
         render={({ field }) => (
           <Select className={drukFont.className} options={options} {...field} />
         )}
       />
+      {error && <span className="error-msg">{error}</span>}
     </Styled.SelectWrapper>
   );
 };

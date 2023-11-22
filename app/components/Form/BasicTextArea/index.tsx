@@ -7,12 +7,14 @@ type BasicTextAreaProps = {
   label: string;
   name: Path<IFormInput>;
   register: UseFormRegister<IFormInput>;
+  error?: string;
 };
 
 const BasicTextArea: React.FC<BasicTextAreaProps> = ({
   label,
   name,
   register,
+  error,
 }) => {
   return (
     <Styled.TextAreaWrapper>
@@ -22,8 +24,9 @@ const BasicTextArea: React.FC<BasicTextAreaProps> = ({
         className={messinaFont.className}
         cols={30}
         rows={10}
-        {...register(name)}
+        {...register(name, { required: 'Field required.' })}
       />
+      {error && <span className="error-msg">{error}</span>}
     </Styled.TextAreaWrapper>
   );
 };

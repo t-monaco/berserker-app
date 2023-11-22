@@ -27,4 +27,9 @@ export const TextAreaWrapper = styled.div<object>`
       border-color: var(--primary-color);
     }
   }
+
+  span.error-msg {
+    font-size: 12px;
+    color: var(--secondary-color);
+  }
 `;

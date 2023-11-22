@@ -40,13 +40,13 @@ const BlockItem: React.FC<BlockItemProps> = ({
         className={contentOverflow(description) ? 'overflow' : ''}
       >
         <Styled.BlockHeader>
-          <h2 className="title">{title.toUpperCase()}</h2>
-          <h3 className="duration">{duration.toUpperCase()}</h3>
+          <h2 className="title">{title}</h2>
+          <h3 className="duration">{duration}</h3>
         </Styled.BlockHeader>
         <Styled.BlockDescription className={messinaFont.className}>
           {description}
         </Styled.BlockDescription>
-        <Styled.BlockCategory>{category.toUpperCase()}</Styled.BlockCategory>
+        <Styled.BlockCategory>{category}</Styled.BlockCategory>
         <Styled.ExpandIcon />
       </Styled.BlockItemWrapper>
 
@@ -59,13 +59,13 @@ const BlockItem: React.FC<BlockItemProps> = ({
         className={drukFont.className}
       >
         <Styled.BlockHeader>
-          <h2 className="title">{title.toUpperCase()}</h2>
-          <h3 className="duration">{duration.toUpperCase()}</h3>
+          <h2 className="title">{title}</h2>
+          <h3 className="duration">{duration}</h3>
         </Styled.BlockHeader>
         <Styled.BlockDescription className={messinaFont.className}>
           {description}
         </Styled.BlockDescription>
-        <Styled.BlockCategory>{category.toUpperCase()}</Styled.BlockCategory>
+        <Styled.BlockCategory>{category}</Styled.BlockCategory>
       </Styled.BlockModal>
     </>
   );

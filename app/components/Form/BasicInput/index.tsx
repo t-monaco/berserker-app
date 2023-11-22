@@ -8,18 +8,26 @@ type BasicInputProps<T extends FieldValues> =
     id?: number;
     name: Path<T>;
     register: UseFormRegister<T>;
+    error?: string;
   };
 
 const BasicInput = <T extends FieldValues>({
   name,
   register,
   label,
+  error,
   ...props
 }: BasicInputProps<T>) => {
   return (
     <Styled.InputWrapper>
       <label htmlFor={name}>{label}</label>
-      <input type="text" {...register(name)} {...props} />
+      <input
+        autoComplete="off"
+        type="text"
+        {...register(name, { required: 'Field required.' })}
+        {...props}
+      />
+      {error && <span className="error-msg">{error}</span>}
     </Styled.InputWrapper>
   );
 };

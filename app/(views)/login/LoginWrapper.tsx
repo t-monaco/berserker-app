@@ -35,7 +35,7 @@ const LoginWrapper: React.FC<LoginWrapperProps> = () => {
     }
 
     // reset()
-    router.replace('/');
+    router.push('/');
   };
 
   return (
@@ -50,11 +50,13 @@ const LoginWrapper: React.FC<LoginWrapperProps> = () => {
           name="username"
           label="USERNAME"
           register={register}
+          required
         />
         <BasicInput
           type="password"
           name="password"
           label="PASSWORD"
+          required
           register={register}
         />
         <BasicBtn type="submit" disabled={loading}>

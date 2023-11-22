@@ -16,6 +16,7 @@ const DatePicker: React.FC<DatePickerProps> = ({ label, name, control }) => {
     <Controller
       name={name}
       control={control}
+      rules={{ required: 'Field required.' }}
       render={({ field }) => (
         <Styled.DatePickerWrapper>
           <label htmlFor={name}>{label}</label>
