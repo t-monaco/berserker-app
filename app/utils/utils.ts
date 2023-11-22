@@ -1,3 +1,6 @@
+import dayjs from 'dayjs';
+import dayOfYear from 'dayjs/plugin/dayOfYear';
+
 const categoryOrder = ['structure', 'strength', 'metcon'];
 
 export const sortBlockByCategory = (
@@ -35,3 +38,18 @@ export const covertToUpperCaseArrObj = (
       {},
     ),
   );
+
+export const getDatesIdentifierArr = () => {
+  dayjs.extend(dayOfYear);
+  const startOfWeek = dayjs().startOf('week');
+  const endOfWeek = dayjs().endOf('week');
+
+  let datesIdentifier = [];
+  let day = startOfWeek;
+  while (day <= endOfWeek) {
+    datesIdentifier.push(`${day.year()}-${day.dayOfYear()}`);
+    day = day.clone().add(1, 'd');
+  }
+
+  return datesIdentifier;
+};
