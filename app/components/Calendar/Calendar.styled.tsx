@@ -26,6 +26,18 @@ export const CalendarWrapper = styled.div<object>`
       font-size: 1.2rem;
       padding: 0.2rem 0.4rem;
       place-items: center;
+
+      svg.rotate {
+        animation: rotate-animation 1s infinite linear;
+      }
+      @keyframes rotate-animation {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(-360deg);
+        }
+      }
     }
 
     a {
