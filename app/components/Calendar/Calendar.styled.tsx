@@ -17,8 +17,32 @@ export const CalendarWrapper = styled.div<object>`
     justify-content: space-between;
     align-items: center;
 
+    .icon-wrapper {
+      background-color: var(--primary-color);
+      border-radius: 7px;
+      color: var(--secondary-font-color);
+      cursor: pointer;
+      display: grid;
+      font-size: 1.2rem;
+      padding: 0.2rem 0.4rem;
+      place-items: center;
+
+      svg.rotate {
+        animation: rotate-animation 1s infinite linear;
+      }
+      @keyframes rotate-animation {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(-360deg);
+        }
+      }
+    }
+
     a {
       border-radius: 7px;
+      cursor: pointer;
       background-color: var(--primary-color);
       padding: 0.2rem 0.4rem;
       color: var(--secondary-font-color);

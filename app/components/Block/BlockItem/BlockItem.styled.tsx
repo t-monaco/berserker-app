@@ -7,6 +7,7 @@ import { Modal } from 'antd';
 export const BlockItemWrapper = styled.div<object>`
   background-color: var(--secondary-background-color);
   border-radius: 7px;
+  cursor: pointer;
   padding: 1.25rem 1rem;
   max-height: 12rem;
   display: flex;
@@ -81,11 +82,19 @@ export const BlockDescription = styled.div<object>`
   overflow-y: hidden;
   white-space: pre-line;
 
+  > * {
+    flex-shrink: 0;
+  }
+
   ul,
   ol {
     display: flex;
     flex-direction: column;
     list-style: inside;
+
+    /* li {
+      overflow-y: hidden;
+    } */
   }
 
   a {

@@ -25,12 +25,9 @@ const ProgramSelector: React.FC<ProgramSelectorProps> = ({
 
   return (
     <Styled.ProgramSelectWrapper position="left">
-      <Styled.SelectedProgramWrapper>
+      <Styled.SelectedProgramWrapper onClick={() => setShowList(!showList)}>
         <h1 className="selected-program">{selectedProgram.label}</h1>
-        <FiChevronDown
-          className={`select-arrow ${showList ? 'open' : ''}`}
-          onClick={() => setShowList(!showList)}
-        />
+        <FiChevronDown className={`select-arrow ${showList ? 'open' : ''}`} />
       </Styled.SelectedProgramWrapper>
       <Styled.ProgramsList className={showList ? 'open' : ''}>
         {programs.map((program) => (
