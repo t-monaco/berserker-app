@@ -3,11 +3,13 @@
 import { DateBox } from '@/app/components';
 import dayjs from 'dayjs';
 import dayOfYear from 'dayjs/plugin/dayOfYear';
+import { useSession } from 'next-auth/react';
 import Link from 'next/link';
-import { Dispatch, SetStateAction, useState } from 'react';
-import * as Styled from './Calendar.styled';
+import { useRouter } from 'next/navigation';
+import { Dispatch, SetStateAction } from 'react';
+import { HiRefresh } from 'react-icons/hi';
 import { CalDate } from '../DateBox';
-import { signOut, useSession } from 'next-auth/react';
+import * as Styled from './Calendar.styled';
 
 type CalendarProps = {
   selectedDateId: string;
@@ -18,6 +20,8 @@ const Calendar: React.FC<CalendarProps> = ({
   selectedDateId,
   setSelectedDateId,
 }) => {
+  const router = useRouter();
+
   dayjs.extend(dayOfYear);
   const startOfWeek = dayjs().startOf('week');
   const endOfWeek = dayjs().endOf('week');
@@ -42,7 +46,14 @@ const Calendar: React.FC<CalendarProps> = ({
         {dayjs().format('MMMM YYYY').toUpperCase()}
         <div className="flex gap-4">
           {session?.user?.role === 'ADMIN' && <Link href="/admin">ADMIN</Link>}
-          <a onClick={() => signOut({ callbackUrl: '/' })}>LOGOUT</a>
+          <span
+            className="icon-wrapper"
+            onClick={() => {
+              router.refresh();
+            }}
+          >
+            <HiRefresh className="icon" />
+          </span>
         </div>
       </div>
       <Styled.DatesWrapper>

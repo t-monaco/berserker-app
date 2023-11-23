@@ -17,8 +17,20 @@ export const CalendarWrapper = styled.div<object>`
     justify-content: space-between;
     align-items: center;
 
+    .icon-wrapper {
+      background-color: var(--primary-color);
+      border-radius: 7px;
+      color: var(--secondary-font-color);
+      cursor: pointer;
+      display: grid;
+      font-size: 1.2rem;
+      padding: 0.2rem 0.4rem;
+      place-items: center;
+    }
+
     a {
       border-radius: 7px;
+      cursor: pointer;
       background-color: var(--primary-color);
       padding: 0.2rem 0.4rem;
       color: var(--secondary-font-color);
