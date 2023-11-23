@@ -73,10 +73,24 @@ export const BlockCategory = styled.div<object>`
 `;
 
 export const BlockDescription = styled.div<object>`
-  white-space: pre-line;
   color: var(--primary-font-color);
-  overflow-y: hidden;
+  display: flex;
+  flex-direction: column;
   font-size: 16px;
+  gap: 0.5rem;
+  overflow-y: hidden;
+  white-space: pre-line;
+
+  ul,
+  ol {
+    display: flex;
+    flex-direction: column;
+    list-style: inside;
+  }
+
+  a {
+    color: var(--primary-color);
+  }
 `;
 
 export const ExpandIcon = styled(AiOutlineFullscreen)`
