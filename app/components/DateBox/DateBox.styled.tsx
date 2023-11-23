@@ -6,6 +6,7 @@ export const DateBoxWrapper = styled.div<{ selected: boolean }>`
   align-items: center;
   border-radius: 7px;
   border: 2px solid;
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   font-size: 10px;
