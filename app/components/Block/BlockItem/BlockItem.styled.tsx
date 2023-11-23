@@ -81,6 +81,7 @@ export const BlockDescription = styled.div<object>`
   gap: 0.5rem;
   overflow-y: hidden;
   white-space: pre-line;
+  word-break: break-all;
 
   > * {
     flex-shrink: 0;
@@ -91,10 +92,6 @@ export const BlockDescription = styled.div<object>`
     display: flex;
     flex-direction: column;
     list-style: inside;
-
-    /* li {
-      overflow-y: hidden;
-    } */
   }
 
   a {
