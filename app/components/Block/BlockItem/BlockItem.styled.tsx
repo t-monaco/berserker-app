@@ -90,6 +90,7 @@ export const BlockDescription = styled.div<object>`
 
   a {
     color: var(--primary-color);
+    font-weight: 600;
   }
 `;
 
