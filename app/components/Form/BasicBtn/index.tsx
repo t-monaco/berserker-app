@@ -13,7 +13,7 @@ const BasicBtn: React.FC<BasicBtnProps> = ({
   ...props
 }) => {
   return (
-    <Styled.BasicBtnWrapper priority={priority} {...props}>
+    <Styled.BasicBtnWrapper $priority={priority} {...props}>
       {children}
     </Styled.BasicBtnWrapper>
   );

@@ -3,16 +3,18 @@
 import styled from 'styled-components';
 import { BasicBtnProps } from '.';
 
-export const BasicBtnWrapper = styled.button<BasicBtnProps>`
+export const BasicBtnWrapper = styled.button<{
+  $priority: 'primary' | 'secondary';
+}>`
   align-items: center;
-  background-color: ${({ priority }) =>
-    priority === 'primary'
+  background-color: ${({ $priority }) =>
+    $priority === 'primary'
       ? 'var(--primary-color)'
       : 'var(--primary-background-color)'};
   border-radius: 7px;
   border: 3px solid var(--primary-color);
-  color: ${({ priority }) =>
-    priority === 'primary'
+  color: ${({ $priority }) =>
+    $priority === 'primary'
       ? 'var(--secondary-font-color)'
       : 'var(--primary-color)'};
   display: flex;

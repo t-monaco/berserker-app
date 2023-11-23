@@ -22,6 +22,12 @@ export const CalendarWrapper = styled.div<object>`
       background-color: var(--primary-color);
       padding: 0.2rem 0.4rem;
       color: var(--secondary-font-color);
+      border: 2px solid var(--primary-color);
+
+      &:active {
+        color: var(--primary-color);
+        background-color: var(--primary-background-color);
+      }
     }
   }
 `;

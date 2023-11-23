@@ -3,6 +3,7 @@
 import { drukFont, messinaFont } from '@/app/fonts/fonts';
 import * as Styled from './BlockItem.styled';
 import { useState } from 'react';
+import Markdown from 'react-markdown';
 
 export type BlockItemProps = {
   title: string;
@@ -44,7 +45,7 @@ const BlockItem: React.FC<BlockItemProps> = ({
           <h3 className="duration">{duration}</h3>
         </Styled.BlockHeader>
         <Styled.BlockDescription className={messinaFont.className}>
-          {description}
+          <Markdown>{description}</Markdown>
         </Styled.BlockDescription>
         <Styled.BlockCategory>{category}</Styled.BlockCategory>
         <Styled.ExpandIcon />
@@ -63,7 +64,7 @@ const BlockItem: React.FC<BlockItemProps> = ({
           <h3 className="duration">{duration}</h3>
         </Styled.BlockHeader>
         <Styled.BlockDescription className={messinaFont.className}>
-          {description}
+          <Markdown>{description}</Markdown>
         </Styled.BlockDescription>
         <Styled.BlockCategory>{category}</Styled.BlockCategory>
       </Styled.BlockModal>
