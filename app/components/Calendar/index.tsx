@@ -3,22 +3,24 @@
 import { DateBox } from '@/app/components';
 import dayjs from 'dayjs';
 import dayOfYear from 'dayjs/plugin/dayOfYear';
-import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { HiRefresh } from 'react-icons/hi';
 import { CalDate } from '../DateBox';
 import * as Styled from './Calendar.styled';
+import { UserButton, useUser } from '@clerk/nextjs';
 
 type CalendarProps = {
   selectedDateId: string;
   setSelectedDateId: Dispatch<SetStateAction<string>>;
+  userRole?: string;
 };
 
 const Calendar: React.FC<CalendarProps> = ({
   selectedDateId,
   setSelectedDateId,
+  userRole,
 }) => {
   const router = useRouter();
   // TODO: this should be updated, using pending status from next/navigation or the fetched query.
@@ -35,7 +37,6 @@ const Calendar: React.FC<CalendarProps> = ({
   dayjs.extend(dayOfYear);
   const startOfWeek = dayjs().startOf('week');
   const endOfWeek = dayjs().endOf('week');
-  const { data: session } = useSession();
 
   let calDays: CalDate[] = [];
   let day = startOfWeek;
@@ -55,7 +56,9 @@ const Calendar: React.FC<CalendarProps> = ({
       <div className="month-year">
         {dayjs().format('MMMM YYYY').toUpperCase()}
         <div className="flex gap-4">
-          {session?.user?.role === 'ADMIN' && <Link href="/admin">ADMIN</Link>}
+          {userRole === 'ADMIN' && <Link href="/admin">ADMIN</Link>}
+          <UserButton afterSignOutUrl="/" />
+
           <span className="icon-wrapper" onClick={() => handleRefresh()}>
             <HiRefresh className={rotate ? 'rotate' : ''} />
           </span>

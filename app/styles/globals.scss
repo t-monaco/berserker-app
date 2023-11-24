@@ -24,10 +24,32 @@
 }
 
 body {
+  align-items: center;
   background-color: var(--primary-background-color);
   color: var(--primary-font-color);
-  padding: 1.5rem 1rem;
-  height: 100vh;
   display: flex;
   flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  padding: 1.5rem 1rem;
+
+  .cl-card {
+    background-color: var(--primary-background-color);
+    overflow-y: hidden;
+
+    .cl-formFieldInput {
+      &:focus {
+        box-shadow: none;
+        border: 3px solid var(--primary-color);
+      }
+    }
+
+    .cl-footer {
+      display: none;
+    }
+
+    .cl-formButtonPrimary {
+      color: var(--secondary-font-color);
+    }
+  }
 }

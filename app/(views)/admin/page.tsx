@@ -2,10 +2,21 @@
 
 import Link from 'next/link';
 import { BasicHero } from '@/app/components/Generics/Generics.styled';
+import { getUserRole } from '@/actions/getUserRole';
+import { useUser } from '@clerk/nextjs';
 
 export default function Admin() {
+  // const { user } = useUser();
+  // if (user?.id) {
+  //   const userRole = getUserRole(user?.id).finally((res) => {
+  //     console.log(res);
+  //     return res;
+  //   });
+  //   console.log('looo', userRole);
+  // }
+
   return (
-    <main className="flex flex-col gap-6 flex-1 justify-center items-center">
+    <main className="flex flex-col gap-6 flex-1 justify-center items-center w-full">
       <div className="flex flex-col gap-[5rem] w-full">
         <h1 className="text-center text-[20px]">ADMIN PANEL</h1>
         <div className="flex flex-col gap-[1.3rem] text-[18px]">

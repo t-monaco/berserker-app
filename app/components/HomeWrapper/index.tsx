@@ -22,9 +22,14 @@ type HomeWrapperProps = {
       title: string;
     }[];
   })[];
+  userRole?: string;
 };
 
-const HomeWrapper: React.FC<HomeWrapperProps> = ({ programs, workouts }) => {
+const HomeWrapper: React.FC<HomeWrapperProps> = ({
+  programs,
+  userRole,
+  workouts,
+}) => {
   dayjs.extend(dayOfYear);
 
   const [selectedDateId, setSelectedDateId] = useState(
@@ -45,6 +50,7 @@ const HomeWrapper: React.FC<HomeWrapperProps> = ({ programs, workouts }) => {
   return (
     <main className="flex flex-col gap-6 flex-1">
       <Calendar
+        userRole={userRole}
         setSelectedDateId={setSelectedDateId}
         selectedDateId={selectedDateId}
       />
