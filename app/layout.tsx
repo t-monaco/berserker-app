@@ -1,10 +1,10 @@
-import type { Metadata } from 'next';
-
-import './styles/globals.scss';
 import StyledComponentsRegistry from '@/lib/registry';
-import { drukFont } from './fonts/fonts';
+import { ClerkProvider } from '@clerk/nextjs';
+import type { Metadata } from 'next';
 import { Toaster } from 'react-hot-toast';
-import Provider from './provider';
+import { drukFont } from './fonts/fonts';
+import './styles/globals.scss';
+import { dark } from '@clerk/themes';
 
 export const metadata: Metadata = {
   title: 'Berserker Program',
@@ -21,13 +21,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={drukFont.className}>
-        <Toaster />
-        <Provider>
+    <ClerkProvider
+      appearance={{
+        baseTheme: dark,
+        variables: { colorPrimary: '#adfe19' },
+      }}
+    >
+      <html lang="en">
+        <body className={drukFont.className}>
+          <Toaster />
           <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
-        </Provider>
-      </body>
-    </html>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

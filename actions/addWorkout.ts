@@ -3,6 +3,7 @@
 import { Block, IFormInput } from '@/app/components/WorkoutCreate';
 import { covertToUpperCaseArrObj } from '@/app/utils/utils';
 import prisma from '@/lib/prisma';
+import { auth, currentUser } from '@clerk/nextjs';
 import { Prisma } from '@prisma/client';
 import dayjs from 'dayjs';
 import dayOfYear from 'dayjs/plugin/dayOfYear';
