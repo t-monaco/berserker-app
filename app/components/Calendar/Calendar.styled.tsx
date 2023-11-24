@@ -47,6 +47,9 @@ export const CalendarWrapper = styled.div<object>`
       padding: 0.2rem 0.4rem;
       color: var(--secondary-font-color);
       border: 2px solid var(--primary-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
 
       &:active {
         color: var(--primary-color);
