@@ -9,11 +9,11 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import { HiRefresh } from 'react-icons/hi';
 import { CalDate } from '../DateBox';
 import * as Styled from './Calendar.styled';
-import { UserButton, useUser } from '@clerk/nextjs';
 
 type CalendarProps = {
   selectedDateId: string;
   setSelectedDateId: Dispatch<SetStateAction<string>>;
+  // TODO: if I used clerk's organization i can remove this props and get the role from the useUser
   userRole?: string;
 };
 
@@ -57,8 +57,6 @@ const Calendar: React.FC<CalendarProps> = ({
         {dayjs().format('MMMM YYYY').toUpperCase()}
         <div className="flex gap-4">
           {userRole === 'ADMIN' && <Link href="/admin">ADMIN</Link>}
-          <UserButton afterSignOutUrl="/" />
-
           <span className="icon-wrapper" onClick={() => handleRefresh()}>
             <HiRefresh className={rotate ? 'rotate' : ''} />
           </span>

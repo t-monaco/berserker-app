@@ -21,7 +21,6 @@ const DateBox: React.FC<DateProps> = ({
 }) => {
   return (
     <Styled.DateBoxWrapper
-      // className={`${selected ? 'selected' : ''}`}
       selected={selected}
       onClick={() => setSelectedDateId(calDate.dateId)}
     >

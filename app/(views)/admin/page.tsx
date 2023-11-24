@@ -1,9 +1,18 @@
 'use client';
 
 import { BasicHero } from '@/app/components/Generics/Generics.styled';
+import { useUser } from '@clerk/nextjs';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 
 export default function Admin() {
+  //This should be fixed by clerk, auth method not retrieving the correct information.
+  const { isLoaded, user } = useUser();
+
+  if (isLoaded && user?.organizationMemberships?.[0]?.role !== 'admin') {
+    redirect('/');
+  }
+
   return (
     <main className="flex flex-col gap-6 flex-1 justify-center items-center w-full">
       <div className="flex flex-col gap-[5rem] w-full">

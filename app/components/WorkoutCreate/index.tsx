@@ -1,15 +1,16 @@
 'use client';
 
+import { addWorkout } from '@/actions/addWorkout';
 import { BasicBtn, BasicSelect, DatePicker } from '@/app/components';
+import { useUser } from '@clerk/nextjs';
+import { redirect, useRouter } from 'next/navigation';
+import { useState } from 'react';
 import { SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
+import { BeatLoader } from 'react-spinners';
 import { SelectOption } from '../Form/BasicSelect';
 import * as Styled from './WorkoutCreate.styled';
 import WorkoutCreateBlock from './WorkoutCreateBlock';
-import { addWorkout } from '@/actions/addWorkout';
-import toast from 'react-hot-toast';
-import { useRouter } from 'next/navigation';
-import { useState, useTransition } from 'react';
-import { BeatLoader } from 'react-spinners';
 
 type WorkoutCreateProps = {
   programs: SelectOption[];
@@ -33,6 +34,13 @@ const WorkoutCreate: React.FC<WorkoutCreateProps> = ({
   categories,
   programs,
 }) => {
+  //This should be fixed by clerk, auth method not retrieving the correct information.
+  const { isLoaded, user } = useUser();
+
+  if (isLoaded && user?.organizationMemberships?.[0]?.role !== 'admin') {
+    redirect('/');
+  }
+
   const [loading, setLoading] = useState(false);
 
   const {

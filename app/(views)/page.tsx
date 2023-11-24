@@ -2,7 +2,7 @@ import prisma from '@/lib/prisma';
 import { SelectOption } from '../components/Form/BasicSelect';
 import HomeWrapper from '../components/HomeWrapper';
 import { getDatesIdentifierArr } from '../utils/utils';
-import { auth } from '@clerk/nextjs';
+import { CreateOrganization, auth } from '@clerk/nextjs';
 
 export const dynamic = 'force-dynamic';
 
