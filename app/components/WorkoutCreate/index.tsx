@@ -2,15 +2,19 @@
 
 import { addWorkout } from '@/actions/addWorkout';
 import { BasicBtn, BasicSelect, DatePicker } from '@/app/components';
+import { fetcher } from '@/lib/fetcher';
 import { useUser } from '@clerk/nextjs';
 import { redirect, useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { BeatLoader } from 'react-spinners';
+import { BeatLoader, PulseLoader } from 'react-spinners';
+import useSWR from 'swr';
 import { SelectOption } from '../Form/BasicSelect';
 import * as Styled from './WorkoutCreate.styled';
 import WorkoutCreateBlock from './WorkoutCreateBlock';
+import Link from 'next/link';
+import NoDataToast from './NoDataToast';
 
 type WorkoutCreateProps = {
   programs: SelectOption[];
@@ -46,6 +50,7 @@ const WorkoutCreate: React.FC<WorkoutCreateProps> = ({
   const {
     register,
     control,
+    setValue,
     handleSubmit,
     watch,
     reset,
@@ -54,7 +59,7 @@ const WorkoutCreate: React.FC<WorkoutCreateProps> = ({
     defaultValues: {
       date: 0,
       programId: '',
-      blocks: [{ title: '', duration: '', category: '', description: '' }],
+      blocks: [],
     },
   });
   const { fields, append, remove } = useFieldArray({
@@ -71,6 +76,26 @@ const WorkoutCreate: React.FC<WorkoutCreateProps> = ({
       ...watchFieldArray[index],
     };
   });
+
+  const watchedFields = watch(['date', 'programId']);
+
+  const { data, error, isLoading } = useSWR(
+    watchedFields[0] && watchedFields[1]
+      ? `/api/workout?date=${watchedFields[0]}&programId=${watchedFields[1]}`
+      : null,
+    fetcher,
+  );
+
+  useEffect(() => {
+    const workoutData = data?.data;
+    if (workoutData) {
+      setValue('blocks', data.data.blocks);
+    } else if (workoutData === null) {
+      toast.loading((t) => <NoDataToast t={t} setValue={setValue} />, {
+        duration: Infinity,
+      });
+    }
+  }, [data?.data]);
 
   const processForm: SubmitHandler<IFormInput> = async (data) => {
     setLoading(true);
@@ -104,19 +129,25 @@ const WorkoutCreate: React.FC<WorkoutCreateProps> = ({
       </div>
       <span className="divider" />
       <div className="w-full flex flex-col overflow-scroll flex-shrink-0 gap-7">
-        {controlledFields.map((field, index) => {
-          return (
-            <WorkoutCreateBlock
-              register={register}
-              control={control}
-              key={index}
-              id={index}
-              removeAction={remove}
-              categories={categories}
-              errors={errors}
-            />
-          );
-        })}
+        {isLoading ? (
+          <div className="m-auto">
+            <PulseLoader color="#adfe19" />
+          </div>
+        ) : (
+          controlledFields.map((field, index) => {
+            return (
+              <WorkoutCreateBlock
+                register={register}
+                control={control}
+                key={index}
+                id={index}
+                removeAction={remove}
+                categories={categories}
+                errors={errors}
+              />
+            );
+          })
+        )}
 
         <BasicBtn
           priority="secondary"
@@ -136,6 +167,9 @@ const WorkoutCreate: React.FC<WorkoutCreateProps> = ({
       <BasicBtn type="submit" disabled={loading}>
         {loading ? <BeatLoader speedMultiplier={0.7} /> : 'SAVE WORKOUT'}
       </BasicBtn>
+      <Link className="w-full" href="/admin">
+        <BasicBtn type="button">CANCEL</BasicBtn>
+      </Link>
     </Styled.WorkoutCreateWrapper>
   );
 };

@@ -53,3 +53,8 @@ export const getDatesIdentifierArr = () => {
 
   return datesIdentifier;
 };
+
+export const getWorkoutDateIdentifier = (date: number) => {
+  dayjs.extend(dayOfYear);
+  return `${dayjs(date).year()}-${dayjs(date).dayOfYear()}`;
+};

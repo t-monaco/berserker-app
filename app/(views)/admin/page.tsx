@@ -19,13 +19,7 @@ export default function Admin() {
         <h1 className="text-center text-[20px]">ADMIN PANEL</h1>
         <div className="flex flex-col gap-[1.3rem] text-[18px]">
           <BasicHero position="left">
-            <Link href="/admin/create">CREATE WORKOUT</Link>
-          </BasicHero>
-          <BasicHero position="right">
-            <Link href="/admin/create"> EDIT WORKOUT</Link>
-          </BasicHero>
-          <BasicHero position="left">
-            <Link href="/admin/create">COPY WORKOUT</Link>
+            <Link href="/admin/workout">ADD/EDIT WORKOUT</Link>
           </BasicHero>
           <BasicHero position="right">
             <Link href="/">BACK TO HOME</Link>
