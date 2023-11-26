@@ -9,7 +9,7 @@ export default async function AdminWorkout() {
 
   return (
     <main className="flex flex-col gap-10 flex-1 justify-center items-center overflow-scroll w-full">
-      <h1 className="text-center text-[20px] flex-shrink-0">ADMIN WORKOUT</h1>
+      <h1 className="text-center text-[20px] flex-shrink-0">MANAGE WORKOUT</h1>
       <WorkoutCreate programs={programOptions} categories={categoriesOptions} />
     </main>
   );

@@ -14,6 +14,7 @@ import { SelectOption } from '../Form/BasicSelect';
 import * as Styled from './WorkoutCreate.styled';
 import WorkoutCreateBlock from './WorkoutCreateBlock';
 import Link from 'next/link';
+import NoDataToast from './NoDataToast';
 
 type WorkoutCreateProps = {
   programs: SelectOption[];
@@ -86,10 +87,13 @@ const WorkoutCreate: React.FC<WorkoutCreateProps> = ({
   );
 
   useEffect(() => {
-    if (data?.data) {
+    const workoutData = data?.data;
+    if (workoutData) {
       setValue('blocks', data.data.blocks);
-    } else {
-      setValue('blocks', []);
+    } else if (workoutData === null) {
+      toast.loading((t) => <NoDataToast t={t} setValue={setValue} />, {
+        duration: Infinity,
+      });
     }
   }, [data?.data]);
 
