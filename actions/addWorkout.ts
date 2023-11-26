@@ -1,9 +1,11 @@
 'use server';
 
 import { Block, IFormInput } from '@/app/components/WorkoutCreate';
-import { covertToUpperCaseArrObj } from '@/app/utils/utils';
+import {
+  covertToUpperCaseArrObj,
+  getWorkoutDateIdentifier,
+} from '@/app/utils/utils';
 import prisma from '@/lib/prisma';
-import { auth, currentUser } from '@clerk/nextjs';
 import { Prisma } from '@prisma/client';
 import dayjs from 'dayjs';
 import dayOfYear from 'dayjs/plugin/dayOfYear';
@@ -17,16 +19,28 @@ export const addWorkout = async (data: IFormInput) => {
 
   const convertedBlocks = covertToUpperCaseArrObj(blocks, keysToConvert);
 
-  const dateDB = `${dayjs(date).year()}-${dayjs(date).dayOfYear()}`;
+  const dateDB = getWorkoutDateIdentifier(date);
 
   try {
-    await prisma.workout.create({
-      data: {
+    await prisma.workout.upsert({
+      where: {
+        workoutIdentifier: {
+          date: dateDB,
+          programId,
+        },
+      },
+      update: {
+        date: dateDB,
+        programId,
+        blocks: convertedBlocks as Block[],
+      },
+      create: {
         date: dateDB,
         programId,
         blocks: convertedBlocks as Block[],
       },
     });
+
     revalidatePath('/');
   } catch (e) {
     if (e instanceof Prisma.PrismaClientKnownRequestError) {

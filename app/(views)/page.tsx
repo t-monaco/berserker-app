@@ -2,26 +2,19 @@ import prisma from '@/lib/prisma';
 import { SelectOption } from '../components/Form/BasicSelect';
 import HomeWrapper from '../components/HomeWrapper';
 import { getDatesIdentifierArr } from '../utils/utils';
-import { CreateOrganization, auth } from '@clerk/nextjs';
+import { auth } from '@clerk/nextjs';
+import { getProgramsOpt } from '@/actions/getProgramsOpt';
 
 export const dynamic = 'force-dynamic';
 
 export default async function Home() {
+  const programOptions = await getProgramsOpt();
+
   const workouts = await prisma.workout.findMany({
     where: {
       date: { in: getDatesIdentifierArr() },
     },
   });
-
-  const programs = await prisma.program.findMany();
-
-  const programOptions = programs.reduce(
-    (acc: SelectOption[], { name, id }) => [
-      ...acc,
-      { label: name.toUpperCase(), value: id },
-    ],
-    [],
-  );
 
   const { userId } = auth();
 

@@ -30,7 +30,9 @@ const WorkoutCreateBlock: React.FC<WorkoutCreateBlockProps> = ({
   return (
     <Styled.WorkoutCreateBlockWrapper>
       <Styled.DeleteBlockWrapper>
-        <button onClick={() => removeAction(id)}>REMOVE BLOCK</button>
+        <button type="button" onClick={() => removeAction(id)}>
+          REMOVE BLOCK
+        </button>
       </Styled.DeleteBlockWrapper>
       <BasicInput
         name={`blocks.${id}.title`}

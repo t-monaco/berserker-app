@@ -33,6 +33,7 @@
     "react-spinners": "^0.13.8",
     "rehype-highlight": "^7.0.0",
     "styled-components": "^6.1.1",
+    "swr": "^2.2.4",
     "zod": "^3.22.4"
   },
   "devDependencies": {
