@@ -58,3 +58,17 @@ export const getWorkoutDateIdentifier = (date: number) => {
   dayjs.extend(dayOfYear);
   return `${dayjs(date).year()}-${dayjs(date).dayOfYear()}`;
 };
+
+/**
+ * Disables scroll, usually when a Modal is open.
+ */
+export const disableScroll = () => {
+  document.body.style.overflow = 'hidden';
+};
+
+/**
+ * Enables scroll
+ */
+export const enableScroll = () => {
+  document.body.style.overflow = 'unset';
+};
