@@ -66,10 +66,15 @@ export const RMWrapper = styled.div`
   input {
     background-color: transparent;
     border: none;
-    border-bottom: 3px solid var(--primary-color);
+    border-bottom: 3px solid var(--primary-font-color);
     font-size: 1rem;
     text-align: center;
     width: 5rem;
+
+    &:focus {
+      border: 3px solid var(--primary-color);
+      border-radius: 7px;
+    }
   }
 `;
 
@@ -83,9 +88,14 @@ export const PercentageBlock = styled.div`
   input {
     background-color: transparent;
     border: none;
-    border-bottom: 3px solid var(--primary-color);
+    border-bottom: 3px solid var(--primary-font-color);
     text-align: center;
     width: 5rem;
+
+    &:focus {
+      border: 3px solid var(--primary-color);
+      border-radius: 7px;
+    }
   }
 
   .arrow-wrapper {

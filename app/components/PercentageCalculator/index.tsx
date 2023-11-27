@@ -11,8 +11,8 @@ type PercentageCalculatorProps = {
 };
 
 interface CalculatorForm {
-  rm: number;
-  percentages: { percentage: number }[];
+  rm: number | null;
+  percentages: { percentage: number | null }[];
 }
 
 const PercentageCalculator: React.FC<PercentageCalculatorProps> = ({
@@ -21,8 +21,8 @@ const PercentageCalculator: React.FC<PercentageCalculatorProps> = ({
 }) => {
   const { register, control, watch, reset } = useForm<CalculatorForm>({
     defaultValues: {
-      rm: 0,
-      percentages: [{ percentage: 0 }],
+      rm: null,
+      percentages: [{ percentage: null }],
     },
   });
 
@@ -40,6 +40,8 @@ const PercentageCalculator: React.FC<PercentageCalculatorProps> = ({
       ...watchFieldArray[index],
     };
   });
+
+  const checkNull = (n: number | null) => (n ? n : 0);
 
   return (
     <Styled.CalculatorModal
@@ -68,7 +70,7 @@ const PercentageCalculator: React.FC<PercentageCalculatorProps> = ({
               <div className="arrow-wrapper">
                 <FaLongArrowAltRight />
               </div>
-              <p>{(percentage * watchedRM) / 100}kg</p>
+              <p>{(checkNull(percentage) * checkNull(watchedRM)) / 100}kg</p>
               <button type="button" onClick={() => remove(index)}>
                 X
               </button>
@@ -82,7 +84,7 @@ const PercentageCalculator: React.FC<PercentageCalculatorProps> = ({
           <button
             className="add"
             type="button"
-            onClick={() => append({ percentage: 0 })}
+            onClick={() => append({ percentage: null })}
           >
             <FaPlus />
           </button>
