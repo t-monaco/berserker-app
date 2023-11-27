@@ -8,7 +8,7 @@ export const BlockItemWrapper = styled.div<object>`
   background-color: var(--secondary-background-color);
   border-radius: 7px;
   cursor: pointer;
-  padding: 1.25rem 1rem;
+  padding: 1.25rem 3rem 1.25rem 1rem;
   max-height: 12rem;
   display: flex;
   flex-direction: column;
@@ -81,7 +81,7 @@ export const BlockDescription = styled.div<object>`
   gap: 0.5rem;
   overflow-y: hidden;
   white-space: pre-line;
-  word-break: break-all;
+  /* word-break: break-all; */
 
   > * {
     flex-shrink: 0;

@@ -47,6 +47,13 @@ const WorkoutCreate: React.FC<WorkoutCreateProps> = ({
 
   const [loading, setLoading] = useState(false);
 
+  const blockObj = {
+    title: '',
+    duration: '',
+    category: '',
+    description: '',
+  };
+
   const {
     register,
     control,
@@ -90,7 +97,7 @@ const WorkoutCreate: React.FC<WorkoutCreateProps> = ({
     const workoutData = data?.data;
     if (workoutData) {
       setValue('blocks', data.data.blocks);
-    } else if (workoutData === null) {
+    } else if (workoutData === null && controlledFields.length > 0) {
       toast.loading((t) => <NoDataToast t={t} setValue={setValue} />, {
         duration: Infinity,
       });
@@ -134,7 +141,7 @@ const WorkoutCreate: React.FC<WorkoutCreateProps> = ({
             <PulseLoader color="#adfe19" />
           </div>
         ) : (
-          controlledFields.map((field, index) => {
+          controlledFields.map((_, index) => {
             return (
               <WorkoutCreateBlock
                 register={register}
@@ -152,14 +159,7 @@ const WorkoutCreate: React.FC<WorkoutCreateProps> = ({
         <BasicBtn
           priority="secondary"
           type="button"
-          onClick={() =>
-            append({
-              title: '',
-              duration: '',
-              category: '',
-              description: '',
-            })
-          }
+          onClick={() => append(blockObj)}
         >
           ADD BLOCK
         </BasicBtn>
@@ -167,7 +167,7 @@ const WorkoutCreate: React.FC<WorkoutCreateProps> = ({
       <BasicBtn type="submit" disabled={loading}>
         {loading ? <BeatLoader speedMultiplier={0.7} /> : 'SAVE WORKOUT'}
       </BasicBtn>
-      <Link className="w-full" href="/admin">
+      <Link className="shrink-0 w-full" href="/admin">
         <BasicBtn type="button">CANCEL</BasicBtn>
       </Link>
     </Styled.WorkoutCreateWrapper>
