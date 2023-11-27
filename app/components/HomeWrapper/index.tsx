@@ -5,6 +5,7 @@ import { useMemo, useState } from 'react';
 import { BlockWrapper, Calendar, ProgramSelector } from '..';
 import { SelectOption } from '../Form/BasicSelect';
 import dayjs from 'dayjs';
+import Header from '../Header';
 
 type HomeWrapperProps = {
   programs: SelectOption[];
@@ -49,8 +50,8 @@ const HomeWrapper: React.FC<HomeWrapperProps> = ({
 
   return (
     <main className="flex flex-col gap-6 flex-1">
+      <Header userRole={userRole} />
       <Calendar
-        userRole={userRole}
         setSelectedDateId={setSelectedDateId}
         selectedDateId={selectedDateId}
       />
