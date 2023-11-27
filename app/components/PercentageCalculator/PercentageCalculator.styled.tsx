@@ -33,6 +33,11 @@ export const CalculatorForm = styled.form`
   flex-grow: 1;
   gap: 1.5rem;
   width: 100%;
+
+  input {
+    outline: none;
+    border-radius: 0;
+  }
 `;
 
 export const PercentagesWrapper = styled.div`
