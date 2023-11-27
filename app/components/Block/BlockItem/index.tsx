@@ -4,6 +4,7 @@ import { drukFont, messinaFont } from '@/app/fonts/fonts';
 import * as Styled from './BlockItem.styled';
 import { useState } from 'react';
 import Markdown from 'react-markdown';
+import { disableScroll, enableScroll } from '@/app/utils/utils';
 
 export type BlockItemProps = {
   title: string;
@@ -27,10 +28,12 @@ const BlockItem: React.FC<BlockItemProps> = ({
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const showModal = () => {
+    disableScroll();
     setIsModalOpen(true);
   };
 
   const handleCancel = () => {
+    enableScroll();
     setIsModalOpen(false);
   };
 

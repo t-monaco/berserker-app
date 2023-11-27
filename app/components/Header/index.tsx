@@ -8,6 +8,7 @@ import { HiRefresh } from 'react-icons/hi';
 import { FaCalculator } from 'react-icons/fa';
 import * as Styled from './Header.styled';
 import PercentageCalculator from '../PercentageCalculator';
+import { disableScroll, enableScroll } from '@/app/utils/utils';
 
 type HeaderProps = {
   // TODO: if I used clerk's organization i can remove this props and get the role from the useUser
@@ -30,10 +31,12 @@ const Header: React.FC<HeaderProps> = ({ userRole }) => {
   const [isCalculatorOpen, setIsCalculatorOpen] = useState(false);
 
   const showCalculatorModal = () => {
+    disableScroll();
     setIsCalculatorOpen(true);
   };
 
   const handleCancelCalculatorModal = () => {
+    enableScroll();
     setIsCalculatorOpen(false);
   };
 
