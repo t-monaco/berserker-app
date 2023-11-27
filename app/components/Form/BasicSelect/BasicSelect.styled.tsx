@@ -1,7 +1,6 @@
 'use client';
 
 import styled from 'styled-components';
-import { Select } from 'antd';
 
 export const SelectWrapper = styled.div<object>`
   display: flex;
@@ -21,6 +20,10 @@ export const SelectWrapper = styled.div<object>`
 
   .ant-select {
     height: 2.8rem;
+
+    * {
+      font-size: 16px;
+    }
 
     .ant-select-selector {
       color: var(--primary-font-color);

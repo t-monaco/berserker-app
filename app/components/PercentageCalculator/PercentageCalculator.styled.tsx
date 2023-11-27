@@ -12,6 +12,11 @@ export const CalculatorModal = styled(Modal)`
     padding: 1.25rem 1rem;
   }
 
+  // prevents zoom on mobile devices
+  * {
+    font-size: 1rem;
+  }
+
   .ant-modal-body {
     align-items: center;
     display: flex;
@@ -22,6 +27,7 @@ export const CalculatorModal = styled(Modal)`
     h1 {
       font-size: 1.2rem;
       text-align: center;
+      flex-shrink: 0;
     }
   }
 `;
@@ -37,6 +43,7 @@ export const CalculatorForm = styled.form`
   input {
     outline: none;
     border-radius: 0;
+    font-size: 1rem;
   }
 `;
 
@@ -60,6 +67,7 @@ export const RMWrapper = styled.div`
     background-color: transparent;
     border: none;
     border-bottom: 3px solid var(--primary-color);
+    font-size: 1rem;
     text-align: center;
     width: 5rem;
   }
@@ -102,6 +110,7 @@ export const FormButtonsWrapper = styled.div`
   display: flex;
   width: 100%;
   gap: 1rem;
+  flex-shrink: 0;
 
   button {
     border-radius: 7px;

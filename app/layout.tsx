@@ -9,10 +9,16 @@ import { dark } from '@clerk/themes';
 export const metadata: Metadata = {
   title: 'Berserker Program',
   description: 'Berserker Program',
+  appleWebApp: {
+    capable: true,
+    title: 'Berserker Program',
+    statusBarStyle: 'black-translucent',
+  },
   manifest: '/manifest.json',
   icons: {
     icon: '/favicon.ico',
   },
+  viewport: { width: 'device-width', initialScale: 1, maximumScale: 1 },
 };
 
 export default function RootLayout({

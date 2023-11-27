@@ -21,6 +21,7 @@ export const InputWrapper = styled.div<object>`
     border: 2px solid var(--secondary-background-color);
     background-color: var(--secondary-background-color);
     border-radius: 7px;
+    font-size: 1rem;
 
     &:focus {
       border-color: var(--primary-color);
