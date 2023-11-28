@@ -1,6 +1,6 @@
 import { messinaFont } from '@/app/fonts/fonts';
 import { BsThreeDotsVertical } from 'react-icons/bs';
-import { FaArrowDownLong, FaRegSquarePlus } from 'react-icons/fa6';
+import { FaRegSquarePlus } from 'react-icons/fa6';
 import { MdInstallMobile } from 'react-icons/md';
 import { TbShare2 } from 'react-icons/tb';
 import * as Styled from './AddToHomeScreenModal.styled';
@@ -25,7 +25,6 @@ const AddToHomeScreenModal: React.FC<AddToHomeScreenModalProps> = ({
       centered
       footer={null}
       className={messinaFont.className}
-      maskClosable={false}
     >
       <p className="text-xl">
         For the best experience, we recommend installing the Berserker Program
