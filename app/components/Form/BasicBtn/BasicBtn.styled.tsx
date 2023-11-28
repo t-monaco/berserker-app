@@ -1,22 +1,19 @@
 'use client';
 
 import styled from 'styled-components';
-import { BasicBtnProps } from '.';
 
 export const BasicBtnWrapper = styled.button<{
   $priority: 'primary' | 'secondary';
+  $bgColor: string;
+  $fontColor?: string;
 }>`
   align-items: center;
-  background-color: ${({ $priority }) =>
-    $priority === 'primary'
-      ? 'var(--primary-color)'
-      : 'var(--primary-background-color)'};
+  background-color: ${({ $priority, $bgColor }) =>
+    $priority === 'primary' ? $bgColor : 'var(--primary-background-color)'};
   border-radius: 7px;
-  border: 3px solid var(--primary-color);
-  color: ${({ $priority }) =>
-    $priority === 'primary'
-      ? 'var(--secondary-font-color)'
-      : 'var(--primary-color)'};
+  border: ${({ $bgColor }) => `3px solid ${$bgColor}`};
+  color: ${({ $priority, $bgColor, $fontColor }) =>
+    $priority === 'primary' ? $fontColor : $bgColor};
   display: flex;
   justify-content: center;
   flex-shrink: 0;

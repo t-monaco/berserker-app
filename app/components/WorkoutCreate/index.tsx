@@ -4,17 +4,17 @@ import { addWorkout } from '@/actions/addWorkout';
 import { BasicBtn, BasicSelect, DatePicker } from '@/app/components';
 import { fetcher } from '@/lib/fetcher';
 import { useUser } from '@clerk/nextjs';
-import { redirect, useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { redirect } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
-import toast from 'react-hot-toast';
+import { FaPlus } from 'react-icons/fa';
 import { BeatLoader, PulseLoader } from 'react-spinners';
+import { toast } from 'react-toastify';
 import useSWR from 'swr';
 import { SelectOption } from '../Form/BasicSelect';
 import * as Styled from './WorkoutCreate.styled';
 import WorkoutCreateBlock from './WorkoutCreateBlock';
-import Link from 'next/link';
-import NoDataToast from './NoDataToast';
 
 type WorkoutCreateProps = {
   programs: SelectOption[];
@@ -45,7 +45,7 @@ const WorkoutCreate: React.FC<WorkoutCreateProps> = ({
     redirect('/');
   }
 
-  const [loading, setLoading] = useState(false);
+  const [loadingPOST, setLoadingPOST] = useState(false);
 
   const blockObj = {
     title: '',
@@ -57,7 +57,6 @@ const WorkoutCreate: React.FC<WorkoutCreateProps> = ({
   const {
     register,
     control,
-    setValue,
     handleSubmit,
     watch,
     reset,
@@ -69,24 +68,14 @@ const WorkoutCreate: React.FC<WorkoutCreateProps> = ({
       blocks: [],
     },
   });
-  const { fields, append, remove } = useFieldArray({
+  const { fields, append, remove, replace } = useFieldArray({
     control,
     name: 'blocks',
   });
 
-  const router = useRouter();
-
-  const watchFieldArray = watch('blocks');
-  const controlledFields = fields.map((field, index) => {
-    return {
-      ...field,
-      ...watchFieldArray[index],
-    };
-  });
-
   const watchedFields = watch(['date', 'programId']);
 
-  const { data, error, isLoading } = useSWR(
+  const { data, isLoading } = useSWR(
     watchedFields[0] && watchedFields[1]
       ? `/api/workout?date=${watchedFields[0]}&programId=${watchedFields[1]}`
       : null,
@@ -94,29 +83,24 @@ const WorkoutCreate: React.FC<WorkoutCreateProps> = ({
   );
 
   useEffect(() => {
-    const workoutData = data?.data;
-    if (workoutData) {
-      setValue('blocks', data.data.blocks);
-    } else if (workoutData === null && controlledFields.length > 0) {
-      toast.loading((t) => <NoDataToast t={t} setValue={setValue} />, {
-        duration: Infinity,
-      });
+    if (data?.data?.blocks.length) {
+      replace(data?.data.blocks);
     }
-  }, [data?.data]);
+    if (data?.data?.blocks.length === 0 || data?.data === null) {
+      toast.warning('There is no data for the selected workout.');
+    }
+  }, [data, replace]);
 
   const processForm: SubmitHandler<IFormInput> = async (data) => {
-    setLoading(true);
+    setLoadingPOST(true);
     const result = await addWorkout(data);
 
     if (result.success) {
-      toast.success(result.message as string);
-      reset();
-      // redirect from next not working inside trycatch of server actions.
-      router.push('/admin');
+      toast.success(result.message);
     } else {
-      setLoading(false);
       toast.error(result.message);
     }
+    setLoadingPOST(false);
   };
 
   return (
@@ -141,12 +125,12 @@ const WorkoutCreate: React.FC<WorkoutCreateProps> = ({
             <PulseLoader color="#adfe19" />
           </div>
         ) : (
-          controlledFields.map((_, index) => {
+          fields.map((field, index) => {
             return (
               <WorkoutCreateBlock
                 register={register}
                 control={control}
-                key={index}
+                key={field.id}
                 id={index}
                 removeAction={remove}
                 categories={categories}
@@ -156,19 +140,41 @@ const WorkoutCreate: React.FC<WorkoutCreateProps> = ({
           })
         )}
 
-        <BasicBtn
-          priority="secondary"
-          type="button"
-          onClick={() => append(blockObj)}
-        >
-          ADD BLOCK
-        </BasicBtn>
+        <div className="buttonsWrapper w-full grid grid-cols-2 gap-7">
+          <BasicBtn
+            priority="secondary"
+            type="button"
+            bgColor="var(--secondary-color)"
+            onClick={() => reset()}
+          >
+            RESET
+          </BasicBtn>
+          <BasicBtn
+            priority="secondary"
+            type="button"
+            bgColor="var(--primary-color)"
+            onClick={() => append(blockObj)}
+          >
+            <FaPlus />
+          </BasicBtn>
+        </div>
       </div>
-      <BasicBtn type="submit" disabled={loading}>
-        {loading ? <BeatLoader speedMultiplier={0.7} /> : 'SAVE WORKOUT'}
+      <BasicBtn
+        type="submit"
+        bgColor="var(--primary-color)"
+        fontColor="var(--secondary-font-color)"
+        disabled={loadingPOST}
+      >
+        {loadingPOST ? <BeatLoader speedMultiplier={0.7} /> : 'SAVE WORKOUT'}
       </BasicBtn>
       <Link className="shrink-0 w-full" href="/admin">
-        <BasicBtn type="button">CANCEL</BasicBtn>
+        <BasicBtn
+          type="button"
+          bgColor="var(--secondary-color)"
+          fontColor="var(--primary-font-color)"
+        >
+          CANCEL
+        </BasicBtn>
       </Link>
     </Styled.WorkoutCreateWrapper>
   );
