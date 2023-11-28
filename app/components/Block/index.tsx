@@ -1,6 +1,6 @@
-import BlockItem, { BlockItemProps } from './BlockItem';
-import * as Styled from './Block.styled';
 import { sortBlockByCategory } from '@/app/utils/utils';
+import * as Styled from './Block.styled';
+import BlockItem from './BlockItem';
 
 type BlockWrapperProps = {
   blocks: {

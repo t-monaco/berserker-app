@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import dayOfYear from 'dayjs/plugin/dayOfYear';
 
-const categoryOrder = ['structure', 'strength', 'metcon'];
+const categoryOrder = ['MOBILITY', 'STRUCTURE', 'STRENGTH', 'METCON'];
 
 export const sortBlockByCategory = (
   blocks: {
