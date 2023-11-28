@@ -6,6 +6,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { drukFont } from './fonts/fonts';
 import './styles/globals.scss';
+import AddToHomeScreen from './components/AddToHomeScreen';
 
 export const metadata: Metadata = {
   title: 'Berserker Program',
@@ -54,6 +55,7 @@ export default function RootLayout({
             theme="dark"
           />
           <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+          <AddToHomeScreen />
         </body>
       </html>
     </ClerkProvider>
