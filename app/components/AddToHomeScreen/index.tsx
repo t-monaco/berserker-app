@@ -1,11 +1,13 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { setCookie, getCookie } from 'cookies-next';
+import { getCookie, setCookie } from 'cookies-next';
 import dynamic from 'next/dynamic';
+import { useEffect, useState } from 'react';
 
 const ModuleLoading = () => (
-  <p className="animate-bounce text-white font-bold">Loading...</p>
+  <div className="w-screen h-screen grid place-items-center">
+    <p className="animate-bounce text-white font-bold">Loading...</p>
+  </div>
 );
 const AddToIosSafari = dynamic(() => import('./AddToHomeScreenModal'), {
   loading: () => <ModuleLoading />,
@@ -78,6 +80,7 @@ export default function AddToHomeScreen() {
           onClick={closePrompt}
         >
           <AddToHomeScreenModal
+            isIOS={isIOS}
             isOpen={displayPrompt}
             closePrompt={closePrompt}
             doNotShowAgain={doNotShowAgain}
