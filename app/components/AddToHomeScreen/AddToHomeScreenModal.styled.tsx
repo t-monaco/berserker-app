@@ -8,7 +8,7 @@ export const ModalWrapper = styled(Modal)`
     background-color: var(--secondary-background-color);
     border-radius: 7px;
     color: var(--primary-font-color);
-    min-height: 60vh;
+    min-height: 50vh;
     padding: 2.5rem 1.2rem;
   }
 
@@ -31,7 +31,7 @@ export const ModalWrapper = styled(Modal)`
     flex-direction: column;
     gap: 1.5rem;
     height: 100%;
-    justify-content: space-around;
+    justify-content: space-between;
     text-align: center;
 
     * {
@@ -40,14 +40,6 @@ export const ModalWrapper = styled(Modal)`
 
     .share {
       color: var(--primary-color);
-    }
-
-    button {
-      border: 2px solid var(--primary-color);
-      border-radius: 7px;
-      color: var(--primary-color);
-      padding: 0.4rem;
-      width: 100%;
     }
   }
 `;
