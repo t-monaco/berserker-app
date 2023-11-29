@@ -50,7 +50,7 @@ const HomeWrapper: React.FC<HomeWrapperProps> = ({
 
   return (
     <main className="flex flex-col gap-6 flex-1">
-      <Header userRole={userRole} />
+      <Header />
       <Calendar
         setSelectedDateId={setSelectedDateId}
         selectedDateId={selectedDateId}
