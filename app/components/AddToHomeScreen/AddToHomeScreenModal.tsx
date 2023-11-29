@@ -25,6 +25,7 @@ const AddToHomeScreenModal: React.FC<AddToHomeScreenModalProps> = ({
       centered
       footer={null}
       className={messinaFont.className}
+      maskClosable={false}
     >
       <p className="text-xl">
         For the best experience, we recommend installing the Berserker Program
