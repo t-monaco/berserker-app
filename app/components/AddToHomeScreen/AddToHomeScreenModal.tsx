@@ -7,14 +7,12 @@ import * as Styled from './AddToHomeScreenModal.styled';
 
 type AddToHomeScreenModalProps = {
   closePrompt: () => void;
-  doNotShowAgain: () => void;
   isOpen: boolean;
   isIOS: boolean | null;
 };
 
 const AddToHomeScreenModal: React.FC<AddToHomeScreenModalProps> = ({
   closePrompt,
-  doNotShowAgain,
   isOpen,
   isIOS,
 }) => {
@@ -60,9 +58,6 @@ const AddToHomeScreenModal: React.FC<AddToHomeScreenModalProps> = ({
         </div>
         <p className="text-left">4. Click it.</p>
       </div>
-      <button className="text-lg" onClick={doNotShowAgain}>
-        Don&apos;t show again
-      </button>
     </Styled.ModalWrapper>
   );
 };
