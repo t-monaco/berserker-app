@@ -8,7 +8,7 @@ export const ModalWrapper = styled(Modal)`
     background-color: var(--secondary-background-color);
     border-radius: 7px;
     color: var(--primary-font-color);
-    height: 60vh;
+    min-height: 60vh;
     padding: 2.5rem 1.2rem;
   }
 
@@ -29,13 +29,15 @@ export const ModalWrapper = styled(Modal)`
     align-items: center;
     display: flex;
     flex-direction: column;
-    font-size: 1.2rem;
     gap: 1.5rem;
     height: 100%;
     justify-content: space-around;
     text-align: center;
 
-    .add,
+    * {
+      flex-shrink: 0;
+    }
+
     .share {
       color: var(--primary-color);
     }
