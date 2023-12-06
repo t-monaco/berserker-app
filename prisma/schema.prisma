@@ -7,23 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-type WorkoutBlock {
-  // categoryId    String @db.ObjectId
-  category    String
-  description String
-  duration    String
-  title       String
-}
-
-model Category {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  name      String   @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@map("categories")
-}
-
 model Program {
   id        String    @id @default(auto()) @map("_id") @db.ObjectId
   name      String
@@ -34,14 +17,37 @@ model Program {
   @@map("programs")
 }
 
+model Category {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Block     Block[]
+
+  @@map("categories")
+}
+
+model Block {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  description String
+  duration    String
+  title       String
+  categoryId  String   @db.ObjectId
+  category    Category @relation(fields: [categoryId], references: [id])
+  workoutId   String   @db.ObjectId
+  workout     Workout  @relation(fields: [workoutId], references: [id])
+
+  @@map("blocks")
+}
+
 model Workout {
-  id        String         @id @default(auto()) @map("_id") @db.ObjectId
-  blocks    WorkoutBlock[]
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  blocks    Block[]
   date      String
-  programId String         @db.ObjectId
-  program   Program        @relation(fields: [programId], references: [id])
-  createdAt DateTime       @default(now())
-  updatedAt DateTime       @updatedAt
+  programId String   @db.ObjectId
+  program   Program  @relation(fields: [programId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@unique([date, programId], name: "workoutIdentifier")
   @@map("workouts")
@@ -59,5 +65,5 @@ model User {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  @@map("userRole")
+  @@map("users")
 }
