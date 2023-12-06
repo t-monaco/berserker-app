@@ -13,7 +13,11 @@ export async function GET(req: NextRequest) {
         programId: programId,
       },
     },
+    include: {
+      blocks: true,
+    },
   });
 
+  // console.log('aca\naaa', workoutData);
   return NextResponse.json({ data: workoutData }, { status: 200 });
 }

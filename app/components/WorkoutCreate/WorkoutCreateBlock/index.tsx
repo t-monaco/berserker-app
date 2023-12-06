@@ -47,11 +47,11 @@ const WorkoutCreateBlock: React.FC<WorkoutCreateBlockProps> = ({
         error={errors?.['blocks']?.[id]?.['duration']?.message}
       />
       <BasicSelect
-        name={`blocks.${id}.category`}
+        name={`blocks.${id}.categoryId`}
         label="SELECT CATEGORY"
         options={categories}
         control={control}
-        error={errors?.['blocks']?.[id]?.['category']?.message}
+        error={errors?.['blocks']?.[id]?.['categoryId']?.message}
       />
       <BasicTextArea
         register={register}

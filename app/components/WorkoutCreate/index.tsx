@@ -22,9 +22,11 @@ type WorkoutCreateProps = {
 };
 
 export type Block = {
+  id?: string;
+  workoutId?: string;
   title: string;
   duration: string;
-  category: string;
+  categoryId: string;
   description: string;
 };
 
@@ -50,7 +52,7 @@ const WorkoutCreate: React.FC<WorkoutCreateProps> = ({
   const blockObj = {
     title: '',
     duration: '',
-    category: '',
+    categoryId: '',
     description: '',
   };
 
