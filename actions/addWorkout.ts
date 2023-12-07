@@ -1,96 +1,101 @@
 'use server';
 
-import { Block, IFormInput } from '@/app/components/WorkoutCreate';
 import {
   covertToUpperCaseArrObj,
   getWorkoutDateIdentifier,
+  splitBlocks,
 } from '@/app/utils/utils';
 import prisma from '@/lib/prisma';
+import { CreateWorkoutForm } from '@/types/types';
 import { Prisma } from '@prisma/client';
-import dayjs from 'dayjs';
-import dayOfYear from 'dayjs/plugin/dayOfYear';
 import { revalidatePath } from 'next/cache';
 
-export const addWorkout = async (data: IFormInput) => {
-  dayjs.extend(dayOfYear);
+export const addWorkout = async (data: CreateWorkoutForm) => {
   const { date, programId, blocks } = data;
 
-  const keysToConvert = ['title', 'duration'];
+  const keysToConvert: (keyof Prisma.BlockCreateManyInput)[] = [
+    'title',
+    'duration',
+  ];
 
-  // add generic type to funciton
   const convertedBlocks = covertToUpperCaseArrObj(blocks, keysToConvert);
 
   const dateDB = getWorkoutDateIdentifier(date);
 
-  const newBlocks: Block[] = [];
-  const updateBlocks: Block[] = [];
-
-  for (const b of convertedBlocks) {
-    if (b?.id) {
-      updateBlocks.push(b);
-    } else {
-      newBlocks.push(b);
-    }
-  }
+  const { newBlocks, existingBlocks } = splitBlocks(blocks);
 
   try {
-    const workout = await prisma.workout.upsert({
+    // * Replace this for a create an if null create?
+    const oldWorkout = await prisma.workout.findUnique({
       where: {
         workoutIdentifier: {
           date: dateDB,
           programId,
         },
       },
-      update: { date: dateDB, programId },
-      create: {
-        date: dateDB,
-        programId,
-        blocks: {
-          create: convertedBlocks.map(({ id, workoutId, ...data }) => ({
-            ...data,
-          })) as Block[],
-        },
+      include: {
+        blocks: true,
       },
-      include: { blocks: true },
     });
 
-    // add new blocks to existing wod
-    if (newBlocks.length) {
-      await prisma.block.createMany({
-        data: newBlocks.map((b) => ({ ...b, workoutId: workout.id })),
+    if (!oldWorkout) {
+      await prisma.workout.create({
+        data: {
+          date: dateDB,
+          programId,
+          blocks: {
+            create: convertedBlocks.map(({ id, workoutId, ...data }) => ({
+              ...data,
+            })),
+          },
+        },
+        include: { blocks: true },
       });
-    }
-
-    // update blocks to existing wod
-    if (updateBlocks.length) {
-      await prisma.$transaction(
-        updateBlocks.map((b) => {
-          const { workoutId, id, ...data } = b;
-          return prisma.block.update({
-            where: { id: b.id },
-            data: { ...data },
+    } else {
+      // If there the user sent no block, it means workout should be deleted.
+      if (!convertedBlocks.length) {
+        await prisma.workout.delete({
+          where: { id: oldWorkout.id },
+        });
+      } else {
+        // add new blocks to existing wod
+        if (newBlocks.length) {
+          await prisma.block.createMany({
+            data: newBlocks.map((b) => ({ ...b, workoutId: oldWorkout.id })),
           });
-        }),
-      );
+        }
+
+        // update blocks to existing wod
+        if (existingBlocks.length) {
+          await prisma.$transaction(
+            existingBlocks.map((b) => {
+              const { workoutId, id, ...data } = b;
+              return prisma.block.update({
+                where: { id: b.id },
+                data: { ...data },
+              });
+            }),
+          );
+        }
+
+        // delete blocks to existing wod
+        const updateBlocksId = existingBlocks.map((b) => b?.id);
+        const dbBlocksId = oldWorkout.blocks.map((b) => b?.id);
+        const deleteBlocksIds = dbBlocksId.filter(
+          (id) => !updateBlocksId.includes(id),
+        );
+
+        if (deleteBlocksIds.length) {
+          await prisma.$transaction(
+            deleteBlocksIds.map((id) =>
+              prisma.block.delete({
+                where: { id },
+              }),
+            ),
+          );
+        }
+      }
     }
-
-    // delete blocks to existing wod
-    const updateBlocksId = updateBlocks.map((b) => b?.id);
-    const dbBlocksId = workout.blocks.map((b) => b?.id);
-    const deleteBlocksIds = dbBlocksId.filter(
-      (id) => !updateBlocksId.includes(id),
-    );
-
-    if (deleteBlocksIds.length) {
-      await prisma.$transaction(
-        deleteBlocksIds.map((id) =>
-          prisma.block.delete({
-            where: { id },
-          }),
-        ),
-      );
-    }
-
     revalidatePath('/');
   } catch (e) {
     console.log('ERRROOOR\nERRROOOR\nERRROOOR\n', e);
