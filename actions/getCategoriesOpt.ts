@@ -8,7 +8,7 @@ export const getCategoriesOpt = async () => {
   return categories.reduce(
     (acc: SelectOption[], { name, id }) => [
       ...acc,
-      { label: name.toUpperCase(), value: name },
+      { label: name.toUpperCase(), value: id },
     ],
     [],
   );

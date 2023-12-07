@@ -5,18 +5,19 @@ import {
   UseFieldArrayRemove,
   UseFormRegister,
 } from 'react-hook-form';
-import { IFormInput } from '..';
+
 import { SelectOption } from '../../Form/BasicSelect';
 import * as Styled from './WorkoutCreateBlock.styled';
+import { CreateWorkoutForm } from '@/types/types';
 
 type WorkoutCreateBlockProps = {
   id: number;
   removeAction: UseFieldArrayRemove;
-  register: UseFormRegister<IFormInput>;
+  register: UseFormRegister<CreateWorkoutForm>;
   // TODO: Use generics, same as BasicInput
-  control: Control<IFormInput, any>;
+  control: Control<CreateWorkoutForm, any>;
   categories: SelectOption[];
-  errors?: FieldErrors<IFormInput>;
+  errors?: FieldErrors<CreateWorkoutForm>;
 };
 
 const WorkoutCreateBlock: React.FC<WorkoutCreateBlockProps> = ({
@@ -47,11 +48,11 @@ const WorkoutCreateBlock: React.FC<WorkoutCreateBlockProps> = ({
         error={errors?.['blocks']?.[id]?.['duration']?.message}
       />
       <BasicSelect
-        name={`blocks.${id}.category`}
+        name={`blocks.${id}.categoryId`}
         label="SELECT CATEGORY"
         options={categories}
         control={control}
-        error={errors?.['blocks']?.[id]?.['category']?.message}
+        error={errors?.['blocks']?.[id]?.['categoryId']?.message}
       />
       <BasicTextArea
         register={register}

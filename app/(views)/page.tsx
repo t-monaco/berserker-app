@@ -3,17 +3,14 @@ import HomeWrapper from '../components/HomeWrapper';
 import { getDatesIdentifierArr } from '../utils/utils';
 import { auth } from '@clerk/nextjs';
 import { getProgramsOpt } from '@/actions/getProgramsOpt';
+import { getWorkouts } from '@/actions/getWorkouts';
 
 export const dynamic = 'force-dynamic';
 
 export default async function Home() {
   const programOptions = await getProgramsOpt();
 
-  const workouts = await prisma.workout.findMany({
-    where: {
-      date: { in: getDatesIdentifierArr() },
-    },
-  });
+  const workouts = await getWorkouts();
 
   const { userId } = auth();
 
