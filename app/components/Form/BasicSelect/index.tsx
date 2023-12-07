@@ -1,17 +1,17 @@
 import { drukFont } from '@/app/fonts/fonts';
 import { Select } from 'antd';
 import { Control, Controller, Path } from 'react-hook-form';
-import { IFormInput } from '../../WorkoutCreate';
 import * as Styled from './BasicSelect.styled';
+import { CreateWorkoutForm } from '@/types/types';
 
 export type SelectOption = { label: string; value: string };
 
 type BasicSelectProps = {
   label: string;
-  name: Path<IFormInput>;
+  name: Path<CreateWorkoutForm>;
   options: SelectOption[];
   // TODO: Use generics, same as BasicInput
-  control: Control<IFormInput, any>;
+  control: Control<CreateWorkoutForm, any>;
   error?: string;
 };
 
