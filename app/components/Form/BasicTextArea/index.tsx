@@ -1,12 +1,13 @@
 import { messinaFont } from '@/app/fonts/fonts';
 import * as Styled from './BasicTextArea.styled';
 import { Path, UseFormRegister } from 'react-hook-form';
-import { IFormInput } from '../../WorkoutCreate';
+import { CreateWorkoutForm } from '@/types/types';
 
+// TODO: use generics
 type BasicTextAreaProps = {
   label: string;
-  name: Path<IFormInput>;
-  register: UseFormRegister<IFormInput>;
+  name: Path<CreateWorkoutForm>;
+  register: UseFormRegister<CreateWorkoutForm>;
   error?: string;
 };
 

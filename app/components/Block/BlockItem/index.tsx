@@ -4,22 +4,14 @@ import { drukFont, messinaFont } from '@/app/fonts/fonts';
 import * as Styled from './BlockItem.styled';
 import { useState } from 'react';
 import Markdown from 'react-markdown';
-import { disableScroll, enableScroll } from '@/app/utils/utils';
+import {
+  contentOverflow,
+  disableScroll,
+  enableScroll,
+} from '@/app/utils/utils';
+import { BlockReturnType } from '@/types/types';
 
-export type BlockItemProps = {
-  title: string;
-  duration: string;
-  category: string;
-  description: string;
-};
-
-// TODO : move to utils
-const contentOverflow = (text: string) => {
-  const MAX_LINES = 3;
-  return text.split('\n').length > MAX_LINES;
-};
-
-const BlockItem: React.FC<BlockItemProps> = ({
+const BlockItem: React.FC<BlockReturnType> = ({
   title,
   duration,
   category,
@@ -41,7 +33,7 @@ const BlockItem: React.FC<BlockItemProps> = ({
     <>
       <Styled.BlockItemWrapper
         onClick={showModal}
-        className={contentOverflow(description) ? 'overflow' : ''}
+        className={contentOverflow(description, 3) ? 'overflow' : ''}
       >
         <Styled.BlockHeader>
           <h2 className="title">{title}</h2>
@@ -50,7 +42,9 @@ const BlockItem: React.FC<BlockItemProps> = ({
         <Styled.BlockDescription className={messinaFont.className}>
           <Markdown>{description}</Markdown>
         </Styled.BlockDescription>
-        <Styled.BlockCategory>{category}</Styled.BlockCategory>
+        <Styled.BlockCategory>
+          {category.name.toUpperCase()}
+        </Styled.BlockCategory>
         <Styled.ExpandIcon />
       </Styled.BlockItemWrapper>
 
@@ -69,7 +63,9 @@ const BlockItem: React.FC<BlockItemProps> = ({
         <Styled.BlockDescription className={messinaFont.className}>
           <Markdown>{description}</Markdown>
         </Styled.BlockDescription>
-        <Styled.BlockCategory>{category}</Styled.BlockCategory>
+        <Styled.BlockCategory>
+          {category.name.toUpperCase()}
+        </Styled.BlockCategory>
       </Styled.BlockModal>
     </>
   );

@@ -1,14 +1,14 @@
 import { drukFont } from '@/app/fonts/fonts';
+import customDayJS from '@/lib/dayjs';
+import { CreateWorkoutForm } from '@/types/types';
 import { DatePicker as DatePickerAntd } from 'antd';
-import dayjs from 'dayjs';
 import { Control, Controller, Path } from 'react-hook-form';
-import { IFormInput } from '../../WorkoutCreate';
 import * as Styled from './DatePicker.styled';
 
 type DatePickerProps = {
   label: string;
-  name: Path<IFormInput>;
-  control: Control<IFormInput, any>;
+  name: Path<CreateWorkoutForm>;
+  control: Control<CreateWorkoutForm, any>;
 };
 
 const DatePicker: React.FC<DatePickerProps> = ({ label, name, control }) => {
@@ -24,13 +24,13 @@ const DatePicker: React.FC<DatePickerProps> = ({ label, name, control }) => {
             size="large"
             className={drukFont.className}
             allowClear={false}
-            placeholder={dayjs().format('YYYY-MM-DD')}
+            placeholder={customDayJS().format('YYYY-MM-DD')}
             format="YYYY-MM-DD"
-            // defaultValue={dayjs().format('YYYY-MM-DD')}
+            // defaultValue={customDayJS().format('YYYY-MM-DD')}
             ref={field.ref}
             name={field.name}
             onBlur={field.onBlur}
-            value={field.value ? dayjs(field.value as string) : null}
+            value={field.value ? customDayJS(field.value as string) : null}
             onChange={(date) => {
               field.onChange(date ? date.valueOf() : null);
             }}

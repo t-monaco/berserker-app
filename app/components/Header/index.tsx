@@ -1,8 +1,8 @@
 'use client';
 
 import { disableScroll, enableScroll } from '@/app/utils/utils';
+import customDayJS from '@/lib/dayjs';
 import { useUser } from '@clerk/nextjs';
-import dayjs from 'dayjs';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useMemo, useState } from 'react';
@@ -49,7 +49,7 @@ const Header: React.FC<HeaderProps> = () => {
   return (
     <Styled.HeaderWrapper>
       <div className="month-year">
-        {dayjs().format('MMMM YYYY').toUpperCase()}
+        {customDayJS().format('MMMM YYYY').toUpperCase()}
         <div className="flex gap-4">
           {isAdmin && <Link href="/admin">ADMIN</Link>}
           <span className="icon-wrapper" onClick={() => showCalculatorModal()}>

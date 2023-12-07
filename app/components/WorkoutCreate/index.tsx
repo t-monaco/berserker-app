@@ -15,24 +15,12 @@ import useSWR from 'swr';
 import { SelectOption } from '../Form/BasicSelect';
 import * as Styled from './WorkoutCreate.styled';
 import WorkoutCreateBlock from './WorkoutCreateBlock';
+import { CreateWorkoutForm } from '@/types/types';
 
 type WorkoutCreateProps = {
   programs: SelectOption[];
   categories: SelectOption[];
 };
-
-export type Block = {
-  title: string;
-  duration: string;
-  category: string;
-  description: string;
-};
-
-export interface IFormInput {
-  date: number;
-  programId: string;
-  blocks: Block[];
-}
 
 const WorkoutCreate: React.FC<WorkoutCreateProps> = ({
   categories,
@@ -50,7 +38,7 @@ const WorkoutCreate: React.FC<WorkoutCreateProps> = ({
   const blockObj = {
     title: '',
     duration: '',
-    category: '',
+    categoryId: '',
     description: '',
   };
 
@@ -61,7 +49,7 @@ const WorkoutCreate: React.FC<WorkoutCreateProps> = ({
     watch,
     reset,
     formState: { errors },
-  } = useForm<IFormInput>({
+  } = useForm<CreateWorkoutForm>({
     defaultValues: {
       date: 0,
       programId: '',
@@ -91,7 +79,7 @@ const WorkoutCreate: React.FC<WorkoutCreateProps> = ({
     }
   }, [data, replace]);
 
-  const processForm: SubmitHandler<IFormInput> = async (data) => {
+  const processForm: SubmitHandler<CreateWorkoutForm> = async (data) => {
     setLoadingPOST(true);
     const result = await addWorkout(data);
 

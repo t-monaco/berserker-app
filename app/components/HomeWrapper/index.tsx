@@ -1,28 +1,16 @@
 'use client';
 
-import dayOfYear from 'dayjs/plugin/dayOfYear';
+import customDayJS from '@/lib/dayjs';
 import { useMemo, useState } from 'react';
 import { BlockWrapper, Calendar, ProgramSelector } from '..';
 import { SelectOption } from '../Form/BasicSelect';
-import dayjs from 'dayjs';
 import Header from '../Header';
+import { Prisma } from '@prisma/client';
+import { getWorkouts } from '@/actions/getWorkouts';
 
 type HomeWrapperProps = {
   programs: SelectOption[];
-  workouts: ({
-    id: string;
-    date: string;
-    programId: string;
-    createdAt: Date;
-    updatedAt: Date;
-  } & {
-    blocks: {
-      category: string;
-      description: string;
-      duration: string;
-      title: string;
-    }[];
-  })[];
+  workouts: Prisma.PromiseReturnType<typeof getWorkouts>;
   userRole?: string;
 };
 
@@ -31,10 +19,8 @@ const HomeWrapper: React.FC<HomeWrapperProps> = ({
   userRole,
   workouts,
 }) => {
-  dayjs.extend(dayOfYear);
-
   const [selectedDateId, setSelectedDateId] = useState(
-    `${dayjs().year()}-${dayjs().dayOfYear()}`,
+    `${customDayJS().year()}-${customDayJS().dayOfYear()}`,
   );
 
   const [selectedProgram, setSelectedProgram] = useState(programs[0]);
