@@ -1,8 +1,7 @@
 'use client';
 
 import { DateBox } from '@/app/components';
-import dayjs from 'dayjs';
-import dayOfYear from 'dayjs/plugin/dayOfYear';
+import customDayJS from '@/lib/dayjs';
 import { Dispatch, SetStateAction } from 'react';
 import { CalDate } from '../DateBox';
 import * as Styled from './Calendar.styled';
@@ -16,9 +15,8 @@ const Calendar: React.FC<CalendarProps> = ({
   selectedDateId,
   setSelectedDateId,
 }) => {
-  dayjs.extend(dayOfYear);
-  const startOfWeek = dayjs().startOf('week');
-  const endOfWeek = dayjs().endOf('week');
+  const startOfWeek = customDayJS().startOf('week');
+  const endOfWeek = customDayJS().endOf('week');
 
   let calDays: CalDate[] = [];
   let day = startOfWeek;
