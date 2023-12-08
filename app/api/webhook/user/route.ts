@@ -1,6 +1,7 @@
 import { Webhook } from 'svix';
 import { headers } from 'next/headers';
 import { WebhookEvent } from '@clerk/nextjs/server';
+import prisma from '@/lib/prisma';
 
 export async function POST(req: Request) {
   // You can find this in the Clerk Dashboard -> Webhooks -> choose the webhook
@@ -41,20 +42,32 @@ export async function POST(req: Request) {
       'svix-timestamp': svix_timestamp,
       'svix-signature': svix_signature,
     }) as WebhookEvent;
+
+    switch (evt.type) {
+      case 'user.created':
+        const { id, first_name, last_name, username, email_addresses } =
+          evt.data;
+
+        if (!username) {
+          break;
+        }
+
+        await prisma.user.create({
+          data: {
+            userIdClerk: id,
+            firstName: first_name,
+            lastName: last_name,
+            username: username,
+            email: email_addresses[0]?.email_address,
+          },
+        });
+    }
   } catch (err) {
     console.error('Error verifying webhook:', err);
     return new Response('Error occured', {
       status: 400,
     });
   }
-
-  // Get the ID and type
-  const { id } = evt.data;
-  const eventType = evt.type;
-
-  console.log(`Webhook with and ID of ${id} and type of ${eventType}`);
-  console.log('Webhook body:', body);
-  console.log('HOLAAA PAAAA\n\nPAAAAA\nESTAS EN EL WEBHOOK');
 
   return new Response('', { status: 200 });
 }
