@@ -51,12 +51,13 @@ export async function POST(req: Request) {
 
   // Try to insert the user into the DB
   if (evt.type === 'user.created') {
-    const { id, first_name, last_name, email_addresses } = evt.data;
+    const { id, first_name, last_name, email_addresses, username } = evt.data;
 
     const userData = {
       clerkId: id,
       firstName: first_name,
       lastName: last_name,
+      username: username ?? 'NO_USERNAME',
       email: email_addresses[0]?.email_address,
     };
 
@@ -72,12 +73,9 @@ export async function POST(req: Request) {
       }
     } catch (err) {
       console.error('Error while pushing user into DB:', err);
-      return new Response(
-        `Error while pushing user into DB. ${err} ${userData}`,
-        {
-          status: 400,
-        },
-      );
+      return new Response(`Error while pushing user into DB. Error: ${err}`, {
+        status: 400,
+      });
     }
   }
 }
