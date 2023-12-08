@@ -50,17 +50,17 @@ export async function POST(req: Request) {
   }
 
   // Try to insert the user into the DB
-  try {
-    if (evt.type === 'user.created') {
-      const { id, first_name, last_name, email_addresses } = evt.data;
+  if (evt.type === 'user.created') {
+    const { id, first_name, last_name, email_addresses } = evt.data;
 
-      const userData = {
-        userIdClerk: id,
-        firstName: first_name,
-        lastName: last_name,
-        email: email_addresses[0]?.email_address,
-      };
+    const userData = {
+      clerkId: id,
+      firstName: first_name,
+      lastName: last_name,
+      email: email_addresses[0]?.email_address,
+    };
 
+    try {
       const user = await prisma.user.create({
         data: userData,
       });
@@ -68,13 +68,16 @@ export async function POST(req: Request) {
       if (user) {
         return new Response('Webhook completed successfully.', { status: 200 });
       } else {
-        throw new Error(`FAILED INSERTING USER: ${userData}`);
+        throw new Error('Failed inserting user.');
       }
+    } catch (err) {
+      console.error('Error while pushing user into DB:', err);
+      return new Response(
+        `Error while pushing user into DB. ${err} ${userData}`,
+        {
+          status: 400,
+        },
+      );
     }
-  } catch (err) {
-    console.error('Error while pushing user into DB:', err);
-    return new Response(`Error while pushing user into DB. ${err}`, {
-      status: 400,
-    });
   }
 }
