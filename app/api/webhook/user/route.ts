@@ -50,11 +50,7 @@ export async function POST(req: Request) {
   }
 
   if (evt.type === 'user.created') {
-    const { id, first_name, last_name, username, email_addresses } = evt.data;
-
-    if (!username) {
-      return new Response('Username undefined', { status: 400 });
-    }
+    const { id, first_name, last_name, email_addresses } = evt.data;
 
     // Try to insert the user into the DB
     try {
@@ -63,7 +59,6 @@ export async function POST(req: Request) {
           userIdClerk: id,
           firstName: first_name,
           lastName: last_name,
-          username: username,
           email: email_addresses[0]?.email_address,
         },
       });
