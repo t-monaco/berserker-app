@@ -73,7 +73,7 @@ export async function POST(req: Request) {
     }
   } catch (err) {
     console.error('Error while pushing user into DB:', err);
-    return new Response('Error while pushing user into DB', {
+    return new Response(`Error while pushing user into DB. ${err}`, {
       status: 400,
     });
   }
