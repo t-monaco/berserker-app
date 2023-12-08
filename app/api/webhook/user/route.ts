@@ -43,17 +43,25 @@ export async function POST(req: Request) {
       'svix-signature': svix_signature,
     }) as WebhookEvent;
 
-    const { id, first_name, last_name, username, email_addresses } = evt.data;
+    switch (evt.type) {
+      case 'user.created':
+        const { id, first_name, last_name, username, email_addresses } =
+          evt.data;
 
-    await prisma.user.create({
-      data: {
-        userIdClerk: id,
-        firstName: first_name,
-        lastName: last_name,
-        username,
-        email: email_addresses[0]?.email_address,
-      },
-    });
+        if (!username) {
+          break;
+        }
+
+        await prisma.user.create({
+          data: {
+            userIdClerk: id,
+            firstName: first_name,
+            lastName: last_name,
+            username: username,
+            email: email_addresses[0]?.email_address,
+          },
+        });
+    }
   } catch (err) {
     console.error('Error verifying webhook:', err);
     return new Response('Error occured', {
