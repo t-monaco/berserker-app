@@ -42,26 +42,6 @@ export async function POST(req: Request) {
       'svix-timestamp': svix_timestamp,
       'svix-signature': svix_signature,
     }) as WebhookEvent;
-
-    switch (evt.type) {
-      case 'user.created':
-        const { id, first_name, last_name, username, email_addresses } =
-          evt.data;
-
-        if (!username) {
-          break;
-        }
-
-        await prisma.user.create({
-          data: {
-            userIdClerk: id,
-            firstName: first_name,
-            lastName: last_name,
-            username: username,
-            email: email_addresses[0]?.email_address,
-          },
-        });
-    }
   } catch (err) {
     console.error('Error verifying webhook:', err);
     return new Response('Error occured', {
@@ -69,5 +49,31 @@ export async function POST(req: Request) {
     });
   }
 
-  return new Response('', { status: 200 });
+  if (evt.type === 'user.created') {
+    const { id, first_name, last_name, username, email_addresses } = evt.data;
+
+    if (!username) {
+      return new Response('Username undefined', { status: 400 });
+    }
+
+    // Try to insert the user into the DB
+    try {
+      await prisma.user.create({
+        data: {
+          userIdClerk: id,
+          firstName: first_name,
+          lastName: last_name,
+          username: username,
+          email: email_addresses[0]?.email_address,
+        },
+      });
+    } catch (err) {
+      console.error('Error while pushing user into DB:', err);
+      return new Response('Error while pushing user into DB', {
+        status: 400,
+      });
+    }
+  }
+
+  return new Response('Webhook completed successfully.', { status: 200 });
 }
