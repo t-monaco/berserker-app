@@ -16,7 +16,7 @@ export default async function Home() {
 
   const userRole = await prisma.user.findUnique({
     where: {
-      userIdClerk: userId ?? '',
+      clerkId: userId ?? '',
     },
   });
 
