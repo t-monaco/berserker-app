@@ -1,6 +1,8 @@
 import { Webhook } from 'svix';
 import { headers } from 'next/headers';
 import { WebhookEvent } from '@clerk/nextjs/server';
+import prisma from '@/lib/prisma';
+import { Prisma } from '@prisma/client';
 
 export async function POST(req: Request) {
   // You can find this in the Clerk Dashboard -> Webhooks -> choose the webhook
@@ -48,13 +50,33 @@ export async function POST(req: Request) {
     });
   }
 
-  // Get the ID and type
-  const { id } = evt.data;
-  const eventType = evt.type;
+  // Try to insert the user into the DB
+  if (evt.type === 'user.created') {
+    const { id, first_name, last_name, email_addresses, username } = evt.data;
 
-  console.log(`Webhook with and ID of ${id} and type of ${eventType}`);
-  console.log('Webhook body:', body);
-  console.log('HOLAAA PAAAA\n\nPAAAAA\nESTAS EN EL WEBHOOK');
+    const userData: Prisma.UserCreateInput = {
+      clerkId: id,
+      firstName: first_name,
+      lastName: last_name,
+      username: username ?? 'NO_USERNAME',
+      email: email_addresses[0]?.email_address,
+    };
 
-  return new Response('', { status: 200 });
+    try {
+      const user = await prisma.user.create({
+        data: userData,
+      });
+
+      if (user) {
+        return new Response('Webhook completed successfully.', { status: 200 });
+      } else {
+        throw new Error('Failed inserting user.');
+      }
+    } catch (err) {
+      console.error('Error while pushing user into DB:', err);
+      return new Response(`Error while pushing user into DB. Error: ${err}`, {
+        status: 400,
+      });
+    }
+  }
 }
