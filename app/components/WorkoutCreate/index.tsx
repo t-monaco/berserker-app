@@ -3,9 +3,8 @@
 import { addWorkout } from '@/actions/addWorkout';
 import { BasicBtn, BasicSelect, DatePicker } from '@/app/components';
 import { fetcher } from '@/lib/fetcher';
-import { useUser } from '@clerk/nextjs';
+import { CreateWorkoutForm } from '@/types/types';
 import Link from 'next/link';
-import { redirect } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
 import { FaPlus } from 'react-icons/fa';
@@ -15,7 +14,6 @@ import useSWR from 'swr';
 import { SelectOption } from '../Form/BasicSelect';
 import * as Styled from './WorkoutCreate.styled';
 import WorkoutCreateBlock from './WorkoutCreateBlock';
-import { CreateWorkoutForm } from '@/types/types';
 
 type WorkoutCreateProps = {
   programs: SelectOption[];
@@ -26,13 +24,6 @@ const WorkoutCreate: React.FC<WorkoutCreateProps> = ({
   categories,
   programs,
 }) => {
-  //This should be fixed by clerk, auth method not retrieving the correct information.
-  const { isLoaded, user } = useUser();
-
-  if (isLoaded && user?.organizationMemberships?.[0]?.role !== 'admin') {
-    redirect('/');
-  }
-
   const [loadingPOST, setLoadingPOST] = useState(false);
 
   const blockObj = {
