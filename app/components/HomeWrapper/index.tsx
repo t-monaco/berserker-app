@@ -11,12 +11,12 @@ import { getWorkouts } from '@/actions/getWorkouts';
 type HomeWrapperProps = {
   programs: SelectOption[];
   workouts: Prisma.PromiseReturnType<typeof getWorkouts>;
-  userRole?: string;
+  isAdmin: boolean;
 };
 
 const HomeWrapper: React.FC<HomeWrapperProps> = ({
   programs,
-  userRole,
+  isAdmin,
   workouts,
 }) => {
   const [selectedDateId, setSelectedDateId] = useState(
@@ -36,7 +36,7 @@ const HomeWrapper: React.FC<HomeWrapperProps> = ({
 
   return (
     <main className="flex flex-col gap-6 flex-1">
-      <Header />
+      <Header isAdmin={isAdmin} />
       <Calendar
         setSelectedDateId={setSelectedDateId}
         selectedDateId={selectedDateId}
