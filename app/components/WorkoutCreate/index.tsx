@@ -62,10 +62,18 @@ const WorkoutCreate: React.FC<WorkoutCreateProps> = ({
   );
 
   useEffect(() => {
-    if (data?.data?.blocks.length) {
-      replace(data?.data.blocks);
+    if (data?.length) {
+      replace(
+        data.map(({ title, duration, description, category, id }) => ({
+          id,
+          title,
+          duration,
+          description,
+          categoryId: category.id,
+        })),
+      );
     }
-    if (data?.data?.blocks.length === 0 || data?.data === null) {
+    if (data?.length === 0) {
       toast.warning('There is no data for the selected workout.');
     }
   }, [data, replace]);
