@@ -1,0 +1,48 @@
+{
+  "id": "mig_clmc4ce5es60mq883f50",
+  "parentID": "mig_clmc1816mi8cn5entffg",
+  "checksum": "1:d4c05e762b230229fcc10a5e104464f2e1ff6ffe4d21abc6acb4abc1a7382d65",
+  "operations": [
+    {
+      "addTable": {
+        "table": "workouts_test"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "date",
+          "type": "string"
+        },
+        "table": "workouts_test"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "blocks",
+          "type": "string"
+        },
+        "table": "workouts_test"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "programId",
+          "type": "string"
+        },
+        "table": "workouts_test"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "__parsed_extra",
+          "type": "multiple"
+        },
+        "table": "workouts_test"
+      }
+    }
+  ]
+}
