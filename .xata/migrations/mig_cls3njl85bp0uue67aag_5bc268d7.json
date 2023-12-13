@@ -1,0 +1,63 @@
+{
+  "id": "mig_cls3njl85bp0uue67aag",
+  "parentID": "mig_cls2t8585bp0uue67870",
+  "checksum": "1:5bc268d7b3bc5bb5519ee968027a8eafe77762b715906058f94c6c94b5c02fb1",
+  "operations": [
+    {
+      "addTable": {
+        "table": "Block"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "description",
+          "type": "text"
+        },
+        "table": "Block"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "duration",
+          "type": "string"
+        },
+        "table": "Block"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "title",
+          "type": "string"
+        },
+        "table": "Block"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "categoryId",
+          "type": "link",
+          "link": {
+            "table": "Category"
+          }
+        },
+        "table": "Block"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "workoutId",
+          "type": "link",
+          "link": {
+            "table": "Workout"
+          }
+        },
+        "table": "Block"
+      }
+    }
+  ]
+}

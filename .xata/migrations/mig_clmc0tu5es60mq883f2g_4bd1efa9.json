@@ -1,0 +1,12 @@
+{
+  "id": "mig_clmc0tu5es60mq883f2g",
+  "parentID": "mig_clmbtcu5es60mq883dp0",
+  "checksum": "1:4bd1efa90135d89f89933ce369f506e19aba7a23348628ed528581fdf349fc1a",
+  "operations": [
+    {
+      "addTable": {
+        "table": "Workouts"
+      }
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "id": "mig_cls2sp8n92nsbftmff5g",
+  "parentID": "mig_cls2sllfl05jup8q8fjg",
+  "checksum": "1:5da4ea101fd0517f476dc2753bfd73c1bd5a6bcc02b1db81eab64bebdff3fcd9",
+  "operations": [
+    {
+      "renameTable": {
+        "newName": "Workout",
+        "oldName": "workouts"
+      }
+    }
+  ]
+}

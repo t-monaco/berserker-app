@@ -1,0 +1,14 @@
+{
+  "id": "mig_cls6f8tfl05jup8q91k0",
+  "parentID": "mig_cls6f7585bp0uue67h20",
+  "checksum": "1:9e40724114653d026d4b8ac10677c3545bf5ef7228222dcaafd802c9f69f2d16",
+  "operations": [
+    {
+      "renameColumn": {
+        "newName": "workout",
+        "oldName": "workoutId",
+        "table": "Block"
+      }
+    }
+  ]
+}

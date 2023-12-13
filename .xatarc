@@ -1,0 +1,6 @@
+{
+  "databaseURL": "https://Tom-s-M-naco-s-workspace-htprur.eu-central-1.xata.sh/db/berserkerApp",
+  "codegen": {
+    "output": "xata/xata.ts"
+  }
+}

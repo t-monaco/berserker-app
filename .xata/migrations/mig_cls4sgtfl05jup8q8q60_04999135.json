@@ -1,0 +1,52 @@
+{
+  "id": "mig_cls4sgtfl05jup8q8q60",
+  "parentID": "mig_cls4s25fl05jup8q8q50",
+  "checksum": "1:04999135dbc7bcaf7dd8be4f29a295c6c1c149ee81ae0f58a4ae8c144bb0aba9",
+  "operations": [
+    {
+      "removeColumn": {
+        "column": "clerkId",
+        "table": "User"
+      }
+    },
+    {
+      "removeColumn": {
+        "column": "email",
+        "table": "User"
+      }
+    },
+    {
+      "removeColumn": {
+        "column": "username",
+        "table": "User"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "clerkId",
+          "type": "string"
+        },
+        "table": "User"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "email",
+          "type": "email"
+        },
+        "table": "User"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "username",
+          "type": "string"
+        },
+        "table": "User"
+      }
+    }
+  ]
+}

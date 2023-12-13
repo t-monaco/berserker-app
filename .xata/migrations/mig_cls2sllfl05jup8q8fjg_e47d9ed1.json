@@ -1,0 +1,33 @@
+{
+  "id": "mig_cls2sllfl05jup8q8fjg",
+  "parentID": "mig_cls2rblfl05jup8q8fhg",
+  "checksum": "1:e47d9ed120f4152eeabf2fe18bacc7933ac0119492e130594468a51e6a13b7e7",
+  "operations": [
+    {
+      "addTable": {
+        "table": "workouts"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "date",
+          "type": "string"
+        },
+        "table": "workouts"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "programId",
+          "type": "link",
+          "link": {
+            "table": "Program"
+          }
+        },
+        "table": "workouts"
+      }
+    }
+  ]
+}
