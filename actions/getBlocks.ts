@@ -35,11 +35,14 @@ export const getBlocks = async () => {
     },
   })
     .select([
-      '*',
-      'workout.*',
-      'workout.program.id',
+      'id',
+      'title',
+      'duration',
+      'description',
       'category.id',
       'category.name',
+      'workout.date',
+      'workout.program.id',
     ])
     .getAll();
 

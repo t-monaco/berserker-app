@@ -8,7 +8,7 @@ import Header from '../Header';
 
 type HomeWrapperProps = {
   programs: SelectOption[];
-  blocks: any; //TODO
+  blocks: string;
   isAdmin: boolean;
 };
 
@@ -24,7 +24,7 @@ const HomeWrapper: React.FC<HomeWrapperProps> = ({
   const [selectedProgram, setSelectedProgram] = useState(programs[0]);
 
   const workoutBlocks = useMemo(
-    () => blocks?.[selectedDateId]?.[selectedProgram.value],
+    () => JSON.parse(blocks)?.[selectedDateId]?.[selectedProgram.value],
     [blocks, selectedDateId, selectedProgram],
   );
 
