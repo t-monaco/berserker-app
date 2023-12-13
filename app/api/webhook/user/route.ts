@@ -59,6 +59,7 @@ export async function POST(req: Request) {
       lastName: last_name,
       username: username,
       email: email_addresses[0]?.email_address,
+      role: 'USER',
     };
 
     try {
