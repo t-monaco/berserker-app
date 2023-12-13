@@ -1,0 +1,12 @@
+{
+  "id": "mig_cls4mvlfl05jup8q8p30",
+  "parentID": "mig_cls4kvdfl05jup8q8p1g",
+  "checksum": "1:cd8c240a37f0638674913ffd92a08578e8668f0aaa35f0356ee3385d83991fec",
+  "operations": [
+    {
+      "addTable": {
+        "table": "Cat"
+      }
+    }
+  ]
+}

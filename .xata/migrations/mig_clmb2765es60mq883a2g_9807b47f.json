@@ -1,0 +1,21 @@
+{
+  "id": "mig_clmb2765es60mq883a2g",
+  "parentID": "mig_clmb1f96mi8cn5entang",
+  "checksum": "1:9807b47f251915ec830ecbd33f1a9b1ad373354bf51c29cfbac49bfe2fb226e3",
+  "operations": [
+    {
+      "addTable": {
+        "table": "Programs"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "name",
+          "type": "string"
+        },
+        "table": "Programs"
+      }
+    }
+  ]
+}

@@ -9,9 +9,9 @@ import {
   disableScroll,
   enableScroll,
 } from '@/app/utils/utils';
-import { BlockReturnType } from '@/types/types';
+import { Block } from '@/xata/xata';
 
-const BlockItem: React.FC<BlockReturnType> = ({
+const BlockItem: React.FC<Block> = ({
   title,
   duration,
   category,
@@ -33,7 +33,7 @@ const BlockItem: React.FC<BlockReturnType> = ({
     <>
       <Styled.BlockItemWrapper
         onClick={showModal}
-        className={contentOverflow(description, 3) ? 'overflow' : ''}
+        className={contentOverflow(description ?? '', 3) ? 'overflow' : ''}
       >
         <Styled.BlockHeader>
           <h2 className="title">{title}</h2>
@@ -43,7 +43,7 @@ const BlockItem: React.FC<BlockReturnType> = ({
           <Markdown>{description}</Markdown>
         </Styled.BlockDescription>
         <Styled.BlockCategory>
-          {category.name.toUpperCase()}
+          {category!.name!.toUpperCase()}
         </Styled.BlockCategory>
         <Styled.ExpandIcon />
       </Styled.BlockItemWrapper>
@@ -64,7 +64,7 @@ const BlockItem: React.FC<BlockReturnType> = ({
           <Markdown>{description}</Markdown>
         </Styled.BlockDescription>
         <Styled.BlockCategory>
-          {category.name.toUpperCase()}
+          {category!.name!.toUpperCase()}
         </Styled.BlockCategory>
       </Styled.BlockModal>
     </>

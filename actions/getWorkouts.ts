@@ -1,17 +1,12 @@
 'use server';
 
 import { getDatesIdentifierArr } from '@/app/utils/utils';
-import prisma from '@/lib/prisma';
+import { xata } from '@/xata/xata';
 
 export const getWorkouts = async () => {
-  return await prisma.workout.findMany({
-    where: {
-      date: { in: getDatesIdentifierArr() },
-    },
-    include: {
-      blocks: {
-        include: { category: true },
-      },
-    },
-  });
+  const workouts = xata.db.Workout.filter({
+    date: { $any: getDatesIdentifierArr() },
+  }).getAll();
+
+  return workouts;
 };

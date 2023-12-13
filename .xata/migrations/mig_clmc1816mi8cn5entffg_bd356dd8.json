@@ -1,0 +1,16 @@
+{
+  "id": "mig_clmc1816mi8cn5entffg",
+  "parentID": "mig_clmc14p6mi8cn5entfeg",
+  "checksum": "1:bd356dd884d8792d884c7aae844622772e47f8687f3fa04fe0cbc8ca2117506b",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "blocks",
+          "type": "json"
+        },
+        "table": "Workouts"
+      }
+    }
+  ]
+}

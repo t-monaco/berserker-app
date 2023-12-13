@@ -1,0 +1,19 @@
+{
+  "id": "mig_clmco7p6mi8cn5entfs0",
+  "parentID": "mig_clmcnu65es60mq883jsg",
+  "checksum": "1:a705b8dc7b4869d16aaa44649aea7ddf11242e35946f63b3a143c1611dd57613",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "program_id",
+          "type": "link",
+          "link": {
+            "table": "Programs"
+          }
+        },
+        "table": "Workouts"
+      }
+    }
+  ]
+}

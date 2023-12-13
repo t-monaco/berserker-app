@@ -1,14 +1,13 @@
 import customDayJS from '@/lib/dayjs';
-import { BlockReturnType } from '@/types/types';
-import { Prisma } from '@prisma/client';
+import { Block } from '@/xata/xata';
 
 const categoryOrder = ['MOBILITY', 'STRUCTURE', 'STRENGTH', 'METCON'];
 
 // TODO: change this in the GET? (findMany)
-export const sortBlockByCategory = (blocks: BlockReturnType[]) => {
+export const sortBlockByCategory = (blocks: Block[]) => {
   return blocks.sort((a, b) => {
-    const categoryAIndex = categoryOrder.indexOf(a?.category.name);
-    const categoryBIndex = categoryOrder.indexOf(b?.category.name);
+    const categoryAIndex = categoryOrder.indexOf(a!.category!.name!);
+    const categoryBIndex = categoryOrder.indexOf(b!.category!.name!);
 
     return categoryAIndex - categoryBIndex;
   });

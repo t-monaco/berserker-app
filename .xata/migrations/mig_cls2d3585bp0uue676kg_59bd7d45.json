@@ -1,0 +1,12 @@
+{
+  "id": "mig_cls2d3585bp0uue676kg",
+  "parentID": "mig_clmcoem8ivt6d0dek440",
+  "checksum": "1:59bd7d45f1aa0cd159567762cfe8f9eb43c38988d9aa324f1fe32f8d5ddc676e",
+  "operations": [
+    {
+      "removeTable": {
+        "table": "Blocks"
+      }
+    }
+  ]
+}

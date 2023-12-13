@@ -1,0 +1,66 @@
+{
+  "id": "mig_cls2kelfl05jup8q8ef0",
+  "parentID": "mig_cls2jjgn92nsbftmfdtg",
+  "checksum": "1:23284f46ea65b76f61dbf9e7769cfdbbc14c814cc05b7b494ac2f90c5b0cee9b",
+  "operations": [
+    {
+      "addTable": {
+        "table": "User"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "clerkId",
+          "type": "string"
+        },
+        "table": "User"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "email",
+          "type": "email"
+        },
+        "table": "User"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "username",
+          "type": "string"
+        },
+        "table": "User"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "firstName",
+          "type": "string"
+        },
+        "table": "User"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "lastName",
+          "type": "string"
+        },
+        "table": "User"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "role",
+          "type": "string"
+        },
+        "table": "User"
+      }
+    }
+  ]
+}

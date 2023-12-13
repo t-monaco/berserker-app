@@ -1,0 +1,13 @@
+{
+  "id": "mig_clmb4q65es60mq883ao0",
+  "parentID": "mig_clmb3up6mi8cn5entbv0",
+  "checksum": "1:dcb01e9d692d169502e6c3ecac63971375e703ea4883480f657337a750a85cf0",
+  "operations": [
+    {
+      "removeColumn": {
+        "column": "blocks",
+        "table": "Workouts"
+      }
+    }
+  ]
+}

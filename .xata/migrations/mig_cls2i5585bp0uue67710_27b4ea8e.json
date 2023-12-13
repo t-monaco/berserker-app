@@ -1,0 +1,21 @@
+{
+  "id": "mig_cls2i5585bp0uue67710",
+  "parentID": "mig_cls2dal85bp0uue676o0",
+  "checksum": "1:27b4ea8e9ec2059dbdf1a56ca88f29c468960dcb823ed619ea678636ddc598cc",
+  "operations": [
+    {
+      "addTable": {
+        "table": "categories"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "name",
+          "type": "string"
+        },
+        "table": "categories"
+      }
+    }
+  ]
+}
