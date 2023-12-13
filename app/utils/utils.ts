@@ -97,3 +97,24 @@ export const enableScroll = () => {
  */
 export const contentOverflow = (text: string, linesLimit: number) =>
   text.split('\n').length > linesLimit;
+
+export const groupBlocksByDateAndProgram = (blocks: Block[]) =>
+  blocks.reduce((acc: Record<string, Record<string, Block[]>>, block) => {
+    const { date, program } = block.workout || {};
+    const dateKey = date || '';
+    const programKey = program?.id || '';
+
+    // Initialize nested objects if they don't exist
+    acc[dateKey] = acc[dateKey] || {};
+    acc[dateKey][programKey] = acc[dateKey][programKey] || [];
+
+    acc[dateKey][programKey].push({
+      id: block.id,
+      title: block.title,
+      description: block.description,
+      duration: block.duration,
+      category: block.category,
+    });
+
+    return acc;
+  }, {});
