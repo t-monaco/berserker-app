@@ -1,31 +1,31 @@
 'use server';
 
 import { getDatesIdentifierArr } from '@/app/utils/utils';
-import prisma from '@/lib/prisma';
-import { xata } from '@/xata/xata';
+import { Block, xata } from '@/xata/xata';
 
-const groupBlocksByWorkout = (blocks) =>
-  blocks.reduce((result, block) => {
-    const { date, program } = block.workout;
-    const dateKey = date;
-    const programKey = program.id;
+const groupBlocksByWorkout = (blocks: Block[]) =>
+  blocks.reduce((acc: Record<string, Record<string, Block[]>>, block) => {
+    const { date, program } = block.workout!;
+    const dateKey = date!;
+    const programKey = program!.id;
 
-    if (!result[dateKey]) {
-      result[dateKey] = {};
+    if (!acc[dateKey]) {
+      acc[dateKey] = {};
     }
 
-    if (!result[dateKey][programKey]) {
-      result[dateKey][programKey] = [];
+    if (!acc[dateKey][programKey]) {
+      acc[dateKey][programKey] = [];
     }
 
-    result[dateKey][programKey].push({
+    acc[dateKey][programKey].push({
+      id: block.id,
       title: block.title,
       description: block.description,
       duration: block.duration,
       category: block.category,
     });
 
-    return result;
+    return acc;
   }, {});
 
 export const getBlocks = async () => {
@@ -44,10 +44,4 @@ export const getBlocks = async () => {
     .getAll();
 
   return groupBlocksByWorkout(blocks);
-
-  return await prisma.block.findMany({
-    include: {
-      category: true,
-    },
-  });
 };

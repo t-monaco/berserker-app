@@ -5,7 +5,6 @@ import { useMemo, useState } from 'react';
 import { BlockWrapper, Calendar, ProgramSelector } from '..';
 import { SelectOption } from '../Form/BasicSelect';
 import Header from '../Header';
-import { Prisma } from '@prisma/client';
 
 type HomeWrapperProps = {
   programs: SelectOption[];

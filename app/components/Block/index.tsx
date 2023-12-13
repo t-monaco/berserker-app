@@ -1,11 +1,10 @@
 import { sortBlockByCategory } from '@/app/utils/utils';
 import * as Styled from './Block.styled';
 import BlockItem from './BlockItem';
-import { Prisma } from '@prisma/client';
-import { getBlocks } from '@/actions/getBlocks';
+import { Block } from '@/xata/xata';
 
 type BlockWrapperProps = {
-  blocks: Prisma.PromiseReturnType<typeof getBlocks>;
+  blocks: Block[];
 };
 
 const EmptyBlocks = () => {

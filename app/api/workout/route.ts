@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(req: NextRequest) {
   const date = parseInt(req.nextUrl.searchParams.get('date') ?? '');
-  const programId = req.nextUrl.searchParams.get('programId') as string;
+  const programId = req.nextUrl.searchParams.get('program') as string;
 
   const blocks = await xata.db.Block.filter({
     'workout.date': getWorkoutDateIdentifier(date),

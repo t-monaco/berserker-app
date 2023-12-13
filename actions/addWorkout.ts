@@ -5,18 +5,15 @@ import {
   getWorkoutDateIdentifier,
   splitBlocks,
 } from '@/app/utils/utils';
-import { CreateWorkoutForm } from '@/types/types';
-import { xata } from '@/xata/xata';
-import { Prisma } from '@prisma/client';
+import { BlockForm, CreateWorkoutForm } from '@/types/types';
+import { DatabaseSchema, xata } from '@/xata/xata';
+import { TransactionOperation } from '@xata.io/client';
 import { revalidatePath } from 'next/cache';
 
 export const addWorkout = async (data: CreateWorkoutForm) => {
-  const { date, programId, blocks } = data;
+  const { date, program, blocks } = data;
 
-  const keysToConvert: (keyof Prisma.BlockCreateManyInput)[] = [
-    'title',
-    'duration',
-  ];
+  const keysToConvert: (keyof BlockForm)[] = ['title', 'duration'];
 
   const convertedBlocks = covertToUpperCaseArrObj(blocks, keysToConvert);
 
@@ -26,21 +23,21 @@ export const addWorkout = async (data: CreateWorkoutForm) => {
 
   try {
     const oldWorkout = await xata.db.Workout.filter({
-      $all: { date: dateDB, 'program.id': programId },
+      $all: { date: dateDB, 'program.id': program },
     }).getFirst();
 
     if (!oldWorkout) {
       // TODO: all inside a transaction
       const newWorkout = await xata.db.Workout.create({
         date: dateDB,
-        program: programId,
+        program,
       });
 
       await xata.db.Block.create(
-        convertedBlocks.map(({ title, duration, description, categoryId }) => ({
+        convertedBlocks.map(({ title, duration, description, category }) => ({
           title,
           duration,
-          category: categoryId,
+          category,
           description,
           workout: newWorkout.id,
         })),
@@ -60,11 +57,11 @@ export const addWorkout = async (data: CreateWorkoutForm) => {
         // add new blocks to existing wod
         if (newBlocks.length) {
           await xata.db.Block.create(
-            newBlocks.map(({ title, duration, description, categoryId }) => ({
+            newBlocks.map(({ title, duration, description, category }) => ({
               title,
               duration,
               description,
-              category: categoryId,
+              category,
               workout: oldWorkout.id,
             })),
           );
@@ -72,22 +69,25 @@ export const addWorkout = async (data: CreateWorkoutForm) => {
 
         // update blocks to existing wod
         if (existingBlocks.length) {
-          await xata.transactions.run(
-            existingBlocks.map(
-              ({ id, title, description, categoryId, duration }) => ({
-                update: {
-                  id,
-                  table: 'Block',
-                  fields: {
-                    title,
-                    duration,
-                    description,
-                    category: categoryId,
-                  },
+          const blocksUpdateTransaction: TransactionOperation<
+            DatabaseSchema,
+            keyof DatabaseSchema
+          >[] = existingBlocks.map(
+            ({ id, title, description, category, duration }) => ({
+              update: {
+                id: id!,
+                table: 'Block',
+                fields: {
+                  title,
+                  duration,
+                  description,
+                  category,
                 },
-              }),
-            ),
+              },
+            }),
           );
+
+          await xata.transactions.run(blocksUpdateTransaction);
         }
 
         // delete blocks to existing wod
