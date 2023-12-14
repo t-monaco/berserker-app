@@ -1,0 +1,14 @@
+{
+  "id": "mig_cltf6link0nh201gahug",
+  "parentID": "mig_cltf6j2nk0nh201gahtg",
+  "checksum": "1:5033cdc360f8b050588ba00d89d02e9f5f06faaff8ebaf0c6abb7380209c26d0",
+  "operations": [
+    {
+      "renameColumn": {
+        "newName": "title",
+        "oldName": "title_n",
+        "table": "Block"
+      }
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "id": "mig_cltesrm2uc75n6t8g5t0",
+  "parentID": "mig_cltesq2nk0nh201gaggg",
+  "checksum": "1:877a52c931b8ce75319fa7518ef18dea9333c83d05705d36ae9b11d10daa7142",
+  "operations": [
+    {
+      "renameColumn": {
+        "newName": "name",
+        "oldName": "namee",
+        "table": "Program"
+      }
+    }
+  ]
+}

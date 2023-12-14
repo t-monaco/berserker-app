@@ -1,0 +1,14 @@
+{
+  "id": "mig_cltf202nk0nh201gahkg",
+  "parentID": "mig_cltf1tqnk0nh201gahjg",
+  "checksum": "1:94980e22cd28830f72aaa22e41ef54fa0cffd56ab6a1504deb28c258e08c4f21",
+  "operations": [
+    {
+      "renameColumn": {
+        "newName": "email",
+        "oldName": "email_n",
+        "table": "User"
+      }
+    }
+  ]
+}

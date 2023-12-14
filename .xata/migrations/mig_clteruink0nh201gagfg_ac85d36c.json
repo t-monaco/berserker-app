@@ -1,0 +1,18 @@
+{
+  "id": "mig_clteruink0nh201gagfg",
+  "parentID": "mig_cltei6m2uc75n6t8g4tg",
+  "checksum": "1:ac85d36cc734de0ef14ce0eb510e7938acfe609ab1534f59eaf07be2123bff1e",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "namee",
+          "type": "string",
+          "notNull": true,
+          "defaultValue": "berserker lp"
+        },
+        "table": "Program"
+      }
+    }
+  ]
+}
