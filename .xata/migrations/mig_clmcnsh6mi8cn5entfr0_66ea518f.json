@@ -1,0 +1,13 @@
+{
+  "id": "mig_clmcnsh6mi8cn5entfr0",
+  "parentID": "mig_clmcbj16mi8cn5entfig",
+  "checksum": "1:66ea518f44241fbee4c290857663556841923758f4094a70ade424b4be739b72",
+  "operations": [
+    {
+      "removeColumn": {
+        "column": "program_id",
+        "table": "Workouts"
+      }
+    }
+  ]
+}

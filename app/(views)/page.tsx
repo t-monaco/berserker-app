@@ -1,30 +1,26 @@
-import prisma from '@/lib/prisma';
+import { getBlocks } from '@/actions/getBlocks';
 import HomeWrapper from '../components/HomeWrapper';
-import { getDatesIdentifierArr } from '../utils/utils';
-import { auth } from '@clerk/nextjs';
 import { getProgramsOpt } from '@/actions/getProgramsOpt';
-import { getWorkouts } from '@/actions/getWorkouts';
+import { isAdmin } from '@/actions/isAdmin';
+import AddToHomeScreen from '../components/AddToHomeScreen';
 
 export const dynamic = 'force-dynamic';
 
 export default async function Home() {
   const programOptions = await getProgramsOpt();
 
-  const workouts = await getWorkouts();
+  const isUserAdmin = await isAdmin();
 
-  const { userId } = auth();
-
-  const userRole = await prisma.user.findUnique({
-    where: {
-      userIdClerk: userId ?? '',
-    },
-  });
+  const blocks = await getBlocks();
 
   return (
-    <HomeWrapper
-      programs={programOptions}
-      workouts={workouts}
-      userRole={userRole?.role}
-    />
+    <>
+      <HomeWrapper
+        programs={programOptions}
+        blocks={JSON.stringify(blocks)}
+        isAdmin={isUserAdmin}
+      />
+      <AddToHomeScreen />
+    </>
   );
 }

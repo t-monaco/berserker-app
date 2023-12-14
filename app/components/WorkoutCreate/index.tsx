@@ -3,9 +3,8 @@
 import { addWorkout } from '@/actions/addWorkout';
 import { BasicBtn, BasicSelect, DatePicker } from '@/app/components';
 import { fetcher } from '@/lib/fetcher';
-import { useUser } from '@clerk/nextjs';
+import { CreateWorkoutForm } from '@/types/types';
 import Link from 'next/link';
-import { redirect } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
 import { FaPlus } from 'react-icons/fa';
@@ -15,7 +14,7 @@ import useSWR from 'swr';
 import { SelectOption } from '../Form/BasicSelect';
 import * as Styled from './WorkoutCreate.styled';
 import WorkoutCreateBlock from './WorkoutCreateBlock';
-import { CreateWorkoutForm } from '@/types/types';
+import { BlockRecord } from '@/xata/xata';
 
 type WorkoutCreateProps = {
   programs: SelectOption[];
@@ -26,19 +25,12 @@ const WorkoutCreate: React.FC<WorkoutCreateProps> = ({
   categories,
   programs,
 }) => {
-  //This should be fixed by clerk, auth method not retrieving the correct information.
-  const { isLoaded, user } = useUser();
-
-  if (isLoaded && user?.organizationMemberships?.[0]?.role !== 'admin') {
-    redirect('/');
-  }
-
   const [loadingPOST, setLoadingPOST] = useState(false);
 
   const blockObj = {
     title: '',
     duration: '',
-    categoryId: '',
+    category: '',
     description: '',
   };
 
@@ -52,7 +44,7 @@ const WorkoutCreate: React.FC<WorkoutCreateProps> = ({
   } = useForm<CreateWorkoutForm>({
     defaultValues: {
       date: 0,
-      programId: '',
+      program: '',
       blocks: [],
     },
   });
@@ -61,20 +53,28 @@ const WorkoutCreate: React.FC<WorkoutCreateProps> = ({
     name: 'blocks',
   });
 
-  const watchedFields = watch(['date', 'programId']);
+  const watchedFields = watch(['date', 'program']);
 
-  const { data, isLoading } = useSWR(
+  const { data, isLoading } = useSWR<BlockRecord[], boolean>(
     watchedFields[0] && watchedFields[1]
-      ? `/api/workout?date=${watchedFields[0]}&programId=${watchedFields[1]}`
+      ? `/api/workout?date=${watchedFields[0]}&program=${watchedFields[1]}`
       : null,
     fetcher,
   );
 
   useEffect(() => {
-    if (data?.data?.blocks.length) {
-      replace(data?.data.blocks);
+    if (data?.length) {
+      replace(
+        data.map(({ title, duration, description, category, id }) => ({
+          id: id,
+          title: title!,
+          duration: duration!,
+          description: description!,
+          category: category!.id,
+        })),
+      );
     }
-    if (data?.data?.blocks.length === 0 || data?.data === null) {
+    if (data?.length === 0) {
       toast.warning('There is no data for the selected workout.');
     }
   }, [data, replace]);
@@ -99,11 +99,11 @@ const WorkoutCreate: React.FC<WorkoutCreateProps> = ({
       <div className="w-full flex flex-col flex-shrink-0 gap-7">
         <DatePicker name="date" label="SELECT DATE" control={control} />
         <BasicSelect
-          name="programId"
+          name="program"
           label="SELECT PROGRAM"
           options={programs}
           control={control}
-          error={errors.programId?.message}
+          error={errors.program?.message}
         />
       </div>
       <span className="divider" />

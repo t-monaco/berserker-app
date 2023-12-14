@@ -1,0 +1,14 @@
+{
+  "id": "mig_cls6fbdfl05jup8q91l0",
+  "parentID": "mig_cls6f8tfl05jup8q91k0",
+  "checksum": "1:bdc0097e91c664fff3269993a736cc85ae52df5ff7bfe3f7696596d7b086e38e",
+  "operations": [
+    {
+      "renameColumn": {
+        "newName": "program",
+        "oldName": "programId",
+        "table": "Workout"
+      }
+    }
+  ]
+}

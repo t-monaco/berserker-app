@@ -1,0 +1,13 @@
+{
+  "id": "mig_cltf6bink0nh201gahpg",
+  "parentID": "mig_cltf4pank0nh201gahog",
+  "checksum": "1:0fc84db7ffa5d9edc458f51586842df634b4755a37c4beb15ee613c69f91de0e",
+  "operations": [
+    {
+      "removeColumn": {
+        "column": "description",
+        "table": "Block"
+      }
+    }
+  ]
+}

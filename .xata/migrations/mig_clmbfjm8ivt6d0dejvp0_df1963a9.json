@@ -1,0 +1,16 @@
+{
+  "id": "mig_clmbfjm8ivt6d0dejvp0",
+  "parentID": "mig_clmbf5u5es60mq883c2g",
+  "checksum": "1:df1963a901e4df028a66ad60e15c9aaf658a40242fffe7975a4174dd74e61fcc",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "title",
+          "type": "string"
+        },
+        "table": "Blocks"
+      }
+    }
+  ]
+}

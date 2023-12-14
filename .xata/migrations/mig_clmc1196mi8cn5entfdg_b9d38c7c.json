@@ -1,0 +1,16 @@
+{
+  "id": "mig_clmc1196mi8cn5entfdg",
+  "parentID": "mig_clmc0tu5es60mq883f2g",
+  "checksum": "1:b9d38c7cafbe80c4149d59e1cc8beb845d396d2bdff7a04d977b95cf3335cfe3",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "date",
+          "type": "string"
+        },
+        "table": "Workouts"
+      }
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "id": "mig_cls2pqgn92nsbftmfef0",
+  "parentID": "mig_cls2lvgn92nsbftmfe0g",
+  "checksum": "1:4104136b02f4e539036a47e9ed08d47f4ddb3d68a7938c456315c89d5d49b43a",
+  "operations": [
+    {
+      "removeTable": {
+        "table": "Workout"
+      }
+    }
+  ]
+}

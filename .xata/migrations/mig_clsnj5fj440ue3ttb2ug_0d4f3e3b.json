@@ -1,0 +1,67 @@
+{
+  "id": "mig_clsnj5fj440ue3ttb2ug",
+  "parentID": "mig_clsnai7j440ue3ttb2lg",
+  "checksum": "1:0d4f3e3b78a21126f178b49b4b413737c3e6829892d5f9df11f69a08350314b9",
+  "operations": [
+    {
+      "removeColumn": {
+        "column": "clerkId",
+        "table": "User"
+      }
+    },
+    {
+      "removeColumn": {
+        "column": "email",
+        "table": "User"
+      }
+    },
+    {
+      "removeColumn": {
+        "column": "username",
+        "table": "User"
+      }
+    },
+    {
+      "removeColumn": {
+        "column": "role",
+        "table": "User"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "clerkId",
+          "type": "string"
+        },
+        "table": "User"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "email",
+          "type": "email"
+        },
+        "table": "User"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "username",
+          "type": "string"
+        },
+        "table": "User"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "role",
+          "type": "string"
+        },
+        "table": "User"
+      }
+    }
+  ]
+}

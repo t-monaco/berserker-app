@@ -1,23 +1,23 @@
 import { getWorkoutDateIdentifier } from '@/app/utils/utils';
-import prisma from '@/lib/prisma';
+import { xata } from '@/lib/xataDB';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(req: NextRequest) {
   const date = parseInt(req.nextUrl.searchParams.get('date') ?? '');
-  const programId = req.nextUrl.searchParams.get('programId') as string;
+  const programId = req.nextUrl.searchParams.get('program') as string;
 
-  const workoutData = await prisma.workout.findUnique({
-    where: {
-      workoutIdentifier: {
-        date: getWorkoutDateIdentifier(date),
-        programId: programId,
-      },
-    },
-    include: {
-      blocks: true,
-    },
-  });
+  const blocks = await xata.db.Block.filter({
+    'workout.date': getWorkoutDateIdentifier(date),
+    'workout.program.id': programId,
+  })
+    .select([
+      'title',
+      'description',
+      'duration',
+      'category.id',
+      'category.name',
+    ])
+    .getAll();
 
-  // console.log('aca\naaa', workoutData);
-  return NextResponse.json({ data: workoutData }, { status: 200 });
+  return NextResponse.json(blocks, { status: 200 });
 }

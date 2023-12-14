@@ -1,0 +1,14 @@
+{
+  "id": "mig_cls6f7585bp0uue67h20",
+  "parentID": "mig_cls4sgtfl05jup8q8q60",
+  "checksum": "1:86be5266fd7b8c59e6b1779ef7a2ddacc9399612ea565b2b42e3114c2d041146",
+  "operations": [
+    {
+      "renameColumn": {
+        "newName": "category",
+        "oldName": "categoryId",
+        "table": "Block"
+      }
+    }
+  ]
+}
