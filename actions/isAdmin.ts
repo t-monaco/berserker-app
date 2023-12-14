@@ -1,6 +1,6 @@
 'use server';
 
-import { xata } from '@/xata/xata';
+import { xata } from '@/lib/xataDB';
 import { auth } from '@clerk/nextjs';
 
 export const isAdmin = async () => {
