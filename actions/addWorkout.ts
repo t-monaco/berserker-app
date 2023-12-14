@@ -20,7 +20,7 @@ export const addWorkout = async (data: CreateWorkoutForm) => {
 
   const dateDB = getWorkoutDateIdentifier(date);
 
-  const { newBlocks, existingBlocks } = splitBlocks(blocks);
+  const { newBlocks, existingBlocks } = splitBlocks(convertedBlocks);
 
   try {
     const oldWorkout = await xata.db.Workout.filter({
