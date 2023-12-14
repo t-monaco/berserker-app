@@ -1,0 +1,13 @@
+{
+  "id": "mig_cltf1tqnk0nh201gahjg",
+  "parentID": "mig_cltf1sank0nh201gahig",
+  "checksum": "1:89014f9cdc99fbeb5395fa078e0b1c6b94e58b645daa85477d0b783e25843244",
+  "operations": [
+    {
+      "removeColumn": {
+        "column": "clerkId",
+        "table": "User"
+      }
+    }
+  ]
+}

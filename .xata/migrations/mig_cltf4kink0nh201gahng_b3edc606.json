@@ -1,0 +1,18 @@
+{
+  "id": "mig_cltf4kink0nh201gahng",
+  "parentID": "mig_cltf4dink0nh201gahmg",
+  "checksum": "1:b3edc606c271a6cfb5fe48859f8dc01711afef5820d323e100621056180d30dd",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "duration_n",
+          "type": "string",
+          "notNull": true,
+          "defaultValue": "duration"
+        },
+        "table": "Block"
+      }
+    }
+  ]
+}

@@ -10,6 +10,7 @@ import './styles/globals.scss';
 export const metadata: Metadata = {
   title: 'Berserker Program',
   description: 'Berserker Program',
+  generator: 'Next.js',
   appleWebApp: {
     capable: true,
     title: 'Berserker Program',
@@ -25,6 +26,7 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 1,
+  themeColor: 'black',
 };
 
 export default function RootLayout({

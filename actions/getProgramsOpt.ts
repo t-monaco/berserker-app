@@ -1,7 +1,7 @@
 'use server';
 
 import { SelectOption } from '@/app/components/Form/BasicSelect';
-import { xata } from '@/xata/xata';
+import { xata } from '@/lib/xataDB';
 
 export const getProgramsOpt = async () => {
   const programs = await xata.db.Program.select(['id', 'name']).getAll();

@@ -4,7 +4,7 @@ import {
   getDatesIdentifierArr,
   groupBlocksByDateAndProgram,
 } from '@/app/utils/utils';
-import { xata } from '@/xata/xata';
+import { xata } from '@/lib/xataDB';
 
 export const getBlocks = async () => {
   const blocks = await xata.db.Block.filter({
@@ -21,6 +21,7 @@ export const getBlocks = async () => {
       'category.name',
       'workout.date',
       'workout.program.id',
+      'workout.program.name',
     ])
     .getAll();
 

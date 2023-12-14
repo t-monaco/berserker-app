@@ -9,12 +9,21 @@ import type {
 const tables = [
   {
     name: 'Category',
-    columns: [{ name: 'name', type: 'string', unique: true }],
+    columns: [
+      { name: 'name', type: 'string', notNull: true, defaultValue: 'metcon' },
+    ],
     revLinks: [{ column: 'category', table: 'Block' }],
   },
   {
     name: 'Program',
-    columns: [{ name: 'name', type: 'string' }],
+    columns: [
+      {
+        name: 'name',
+        type: 'string',
+        notNull: true,
+        defaultValue: 'berserker lp',
+      },
+    ],
     revLinks: [{ column: 'program', table: 'Workout' }],
   },
   {
@@ -28,11 +37,21 @@ const tables = [
   {
     name: 'Block',
     columns: [
-      { name: 'description', type: 'text' },
-      { name: 'duration', type: 'string' },
-      { name: 'title', type: 'string' },
       { name: 'category', type: 'link', link: { table: 'Category' } },
       { name: 'workout', type: 'link', link: { table: 'Workout' } },
+      {
+        name: 'description',
+        type: 'text',
+        notNull: true,
+        defaultValue: 'description',
+      },
+      {
+        name: 'duration',
+        type: 'string',
+        notNull: true,
+        defaultValue: 'duration',
+      },
+      { name: 'title', type: 'string', notNull: true, defaultValue: 'title' },
     ],
   },
   {
@@ -40,10 +59,11 @@ const tables = [
     columns: [
       { name: 'firstName', type: 'string' },
       { name: 'lastName', type: 'string' },
-      { name: 'role', type: 'string' },
-      { name: 'clerkId', type: 'string' },
-      { name: 'email', type: 'email' },
-      { name: 'username', type: 'string' },
+      { name: 'active', type: 'bool', notNull: true, defaultValue: 'true' },
+      { name: 'clerkId', type: 'string', unique: true },
+      { name: 'email', type: 'email', unique: true },
+      { name: 'username', type: 'string', unique: true },
+      { name: 'role', type: 'string', notNull: true, defaultValue: 'USER' },
     ],
   },
 ] as const;
@@ -95,5 +115,3 @@ export const getXataClient = () => {
   instance = new XataClient();
   return instance;
 };
-
-export const xata = getXataClient();

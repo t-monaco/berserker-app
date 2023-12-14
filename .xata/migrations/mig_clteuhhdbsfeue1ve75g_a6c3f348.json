@@ -1,0 +1,14 @@
+{
+  "id": "mig_clteuhhdbsfeue1ve75g",
+  "parentID": "mig_clteug1dbsfeue1ve74g",
+  "checksum": "1:a6c3f3482d44d269884534bf6f52a09eea1c8aa59164ab60c4d5f9640fc2cc02",
+  "operations": [
+    {
+      "renameColumn": {
+        "newName": "name",
+        "oldName": "namee",
+        "table": "Category"
+      }
+    }
+  ]
+}

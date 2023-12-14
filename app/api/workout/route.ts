@@ -1,5 +1,5 @@
 import { getWorkoutDateIdentifier } from '@/app/utils/utils';
-import { xata } from '@/xata/xata';
+import { xata } from '@/lib/xataDB';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(req: NextRequest) {

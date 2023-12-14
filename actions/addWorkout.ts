@@ -6,9 +6,10 @@ import {
   splitBlocks,
 } from '@/app/utils/utils';
 import { BlockForm, CreateWorkoutForm } from '@/types/types';
-import { DatabaseSchema, xata } from '@/xata/xata';
+import { DatabaseSchema } from '@/xata/xata';
 import { TransactionOperation } from '@xata.io/client';
 import { revalidatePath } from 'next/cache';
+import { xata } from '@/lib/xataDB';
 
 export const addWorkout = async (data: CreateWorkoutForm) => {
   const { date, program, blocks } = data;
