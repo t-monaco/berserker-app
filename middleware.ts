@@ -1,6 +1,6 @@
 import { authMiddleware, redirectToSignIn } from '@clerk/nextjs';
 import { NextResponse } from 'next/server';
-import { xata } from './xata/xata';
+import { xata } from '@/lib/xataDB';
 
 // This example protects all routes including api/trpc routes
 // Please edit this to allow other routes to be public as needed.
