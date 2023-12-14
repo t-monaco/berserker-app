@@ -1,6 +1,6 @@
 'use server';
 
-import prisma from '@/lib/prisma';
+import { xata } from '@/lib/xataDB';
 import { auth } from '@clerk/nextjs';
 
 export const isAdmin = async () => {
@@ -8,11 +8,9 @@ export const isAdmin = async () => {
 
   if (!userId) return false;
 
-  const userDB = await prisma.user.findUnique({
-    where: {
-      clerkId: userId,
-    },
-  });
+  const userDB = await xata.db.User.filter({ clerkId: userId })
+    .select(['role'])
+    .getFirst();
 
   if (userDB?.role === 'ADMIN') return true;
 

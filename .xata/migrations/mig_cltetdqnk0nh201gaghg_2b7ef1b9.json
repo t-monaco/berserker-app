@@ -1,0 +1,18 @@
+{
+  "id": "mig_cltetdqnk0nh201gaghg",
+  "parentID": "mig_cltesrm2uc75n6t8g5t0",
+  "checksum": "1:2b7ef1b9b1675d155a5ea9bc54b368371e83d7f6c203f66803a2eae48af7a474",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "namee",
+          "type": "string",
+          "notNull": true,
+          "defaultValue": "metcon"
+        },
+        "table": "Category"
+      }
+    }
+  ]
+}

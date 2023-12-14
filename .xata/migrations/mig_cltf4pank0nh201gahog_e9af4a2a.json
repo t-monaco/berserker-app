@@ -1,0 +1,18 @@
+{
+  "id": "mig_cltf4pank0nh201gahog",
+  "parentID": "mig_cltf4kink0nh201gahng",
+  "checksum": "1:e9af4a2ab61aa20952496da2968887e05b4c75550b5fb0ae00272d578e9609ea",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "title_n",
+          "type": "string",
+          "notNull": true,
+          "defaultValue": "title"
+        },
+        "table": "Block"
+      }
+    }
+  ]
+}

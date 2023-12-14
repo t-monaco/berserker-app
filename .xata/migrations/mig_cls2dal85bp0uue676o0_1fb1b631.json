@@ -1,0 +1,12 @@
+{
+  "id": "mig_cls2dal85bp0uue676o0",
+  "parentID": "mig_cls2d9d85bp0uue676n0",
+  "checksum": "1:1fb1b631a87db8b4c6e355a4183a18712c81794f0824bf09f757e9d12dc7ee75",
+  "operations": [
+    {
+      "removeTable": {
+        "table": "Programs"
+      }
+    }
+  ]
+}

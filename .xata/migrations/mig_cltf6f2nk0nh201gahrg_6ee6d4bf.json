@@ -1,0 +1,13 @@
+{
+  "id": "mig_cltf6f2nk0nh201gahrg",
+  "parentID": "mig_cltf6d2nk0nh201gahqg",
+  "checksum": "1:6ee6d4bfe52eaebb65838570580dc6f729a3162b86866ba7741e88a08eda5693",
+  "operations": [
+    {
+      "removeColumn": {
+        "column": "duration",
+        "table": "Block"
+      }
+    }
+  ]
+}

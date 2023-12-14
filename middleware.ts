@@ -1,6 +1,6 @@
 import { authMiddleware, redirectToSignIn } from '@clerk/nextjs';
 import { NextResponse } from 'next/server';
-import prisma from './lib/prisma';
+import { xata } from '@/lib/xataDB';
 
 // This example protects all routes including api/trpc routes
 // Please edit this to allow other routes to be public as needed.
@@ -8,14 +8,11 @@ import prisma from './lib/prisma';
 export default authMiddleware({
   publicRoutes: ['/api/webhook(.*)', '/sign-in', '/sign-up'],
   async afterAuth(auth, req, evt) {
-    const userDB = await prisma.user.findUnique({
-      where: {
-        clerkId: auth.userId ?? '',
-      },
-      cacheStrategy: {
-        ttl: 60,
-      },
-    });
+    const userDB = await xata.db.User.filter({
+      clerkId: auth.userId,
+    })
+      .select(['role'])
+      .getFirst();
 
     // Handle users who aren't authenticated
     if (!auth.userId && !auth.isPublicRoute) {

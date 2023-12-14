@@ -1,8 +1,7 @@
 import { Webhook } from 'svix';
 import { headers } from 'next/headers';
 import { WebhookEvent } from '@clerk/nextjs/server';
-import prisma from '@/lib/prisma';
-import { Prisma } from '@prisma/client';
+import { xata } from '@/lib/xataDB';
 
 export async function POST(req: Request) {
   // You can find this in the Clerk Dashboard -> Webhooks -> choose the webhook
@@ -54,18 +53,17 @@ export async function POST(req: Request) {
   if (evt.type === 'user.created') {
     const { id, first_name, last_name, email_addresses, username } = evt.data;
 
-    const userData: Prisma.UserCreateInput = {
+    const userData = {
       clerkId: id,
       firstName: first_name,
       lastName: last_name,
-      username: username ?? 'NO_USERNAME',
+      username: username,
       email: email_addresses[0]?.email_address,
+      role: 'USER',
     };
 
     try {
-      const user = await prisma.user.create({
-        data: userData,
-      });
+      const user = await xata.db.User.create(userData);
 
       if (user) {
         return new Response('Webhook completed successfully.', { status: 200 });

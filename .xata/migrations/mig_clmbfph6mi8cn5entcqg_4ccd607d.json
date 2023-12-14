@@ -1,0 +1,16 @@
+{
+  "id": "mig_clmbfph6mi8cn5entcqg",
+  "parentID": "mig_clmbfjm8ivt6d0dejvp0",
+  "checksum": "1:4ccd607d5a5b82b2827e0e76912b56dd9e1a71845b1dc4602821cc35f752c6a7",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "duration",
+          "type": "text"
+        },
+        "table": "Blocks"
+      }
+    }
+  ]
+}

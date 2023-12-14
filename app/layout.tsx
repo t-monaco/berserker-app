@@ -6,11 +6,11 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { drukFont } from './fonts/fonts';
 import './styles/globals.scss';
-import AddToHomeScreen from './components/AddToHomeScreen';
 
 export const metadata: Metadata = {
   title: 'Berserker Program',
   description: 'Berserker Program',
+  generator: 'Next.js',
   appleWebApp: {
     capable: true,
     title: 'Berserker Program',
@@ -26,6 +26,7 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 1,
+  themeColor: 'black',
 };
 
 export default function RootLayout({
@@ -55,7 +56,6 @@ export default function RootLayout({
             theme="dark"
           />
           <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
-          <AddToHomeScreen />
         </body>
       </html>
     </ClerkProvider>

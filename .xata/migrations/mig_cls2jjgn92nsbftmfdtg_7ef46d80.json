@@ -1,0 +1,21 @@
+{
+  "id": "mig_cls2jjgn92nsbftmfdtg",
+  "parentID": "mig_cls2j30n92nsbftmfdl0",
+  "checksum": "1:7ef46d804181ca132d90da40b1f888e5bda48c05d7f9851df98b377c769aea86",
+  "operations": [
+    {
+      "addTable": {
+        "table": "Program"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "name",
+          "type": "string"
+        },
+        "table": "Program"
+      }
+    }
+  ]
+}

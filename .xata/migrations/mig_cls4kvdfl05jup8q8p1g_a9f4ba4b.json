@@ -1,0 +1,23 @@
+{
+  "id": "mig_cls4kvdfl05jup8q8p1g",
+  "parentID": "mig_cls3q0t85bp0uue67ae0",
+  "checksum": "1:a9f4ba4b4fe824d891fafadae871f2d157b2fb4fc63f5d81d17930e9f5078283",
+  "operations": [
+    {
+      "removeColumn": {
+        "column": "name",
+        "table": "Category"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "name",
+          "type": "string",
+          "unique": true
+        },
+        "table": "Category"
+      }
+    }
+  ]
+}
