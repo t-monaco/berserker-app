@@ -1,0 +1,14 @@
+{
+  "id": "mig_cltf6d2nk0nh201gahqg",
+  "parentID": "mig_cltf6bink0nh201gahpg",
+  "checksum": "1:b724b812c473c35ec1c0d1c416562a63a3cb5a47c13d5b48b84a0baf42d189c0",
+  "operations": [
+    {
+      "renameColumn": {
+        "newName": "description",
+        "oldName": "description_n",
+        "table": "Block"
+      }
+    }
+  ]
+}

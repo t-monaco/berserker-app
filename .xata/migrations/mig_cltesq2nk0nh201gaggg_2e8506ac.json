@@ -1,0 +1,13 @@
+{
+  "id": "mig_cltesq2nk0nh201gaggg",
+  "parentID": "mig_clteruink0nh201gagfg",
+  "checksum": "1:2e8506ac614e6900580354d96927a5935d281418622ee24c2ce5e8141057806f",
+  "operations": [
+    {
+      "removeColumn": {
+        "column": "name",
+        "table": "Program"
+      }
+    }
+  ]
+}
