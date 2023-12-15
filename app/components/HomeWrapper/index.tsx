@@ -3,8 +3,8 @@
 import customDayJS from '@/lib/dayjs';
 import { useMemo, useState } from 'react';
 import { BlockWrapper, Calendar, ProgramSelector } from '..';
-import { SelectOption } from '../Form/BasicSelect';
 import Header from '../Header';
+import { SelectOption } from '@/types/types';
 
 type HomeWrapperProps = {
   programs: SelectOption[];

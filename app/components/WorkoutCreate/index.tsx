@@ -3,7 +3,7 @@
 import { addWorkout } from '@/actions/addWorkout';
 import { BasicBtn, BasicSelect, DatePicker } from '@/app/components';
 import { fetcher } from '@/lib/fetcher';
-import { CreateWorkoutForm } from '@/types/types';
+import { CreateWorkoutForm, SelectOption } from '@/types/types';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
@@ -11,7 +11,6 @@ import { FaPlus } from 'react-icons/fa';
 import { BeatLoader, PulseLoader } from 'react-spinners';
 import { toast } from 'react-toastify';
 import useSWR from 'swr';
-import { SelectOption } from '../Form/BasicSelect';
 import * as Styled from './WorkoutCreate.styled';
 import WorkoutCreateBlock from './WorkoutCreateBlock';
 import { BlockRecord } from '@/xata/xata';

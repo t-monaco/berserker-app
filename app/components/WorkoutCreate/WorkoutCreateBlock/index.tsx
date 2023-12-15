@@ -6,15 +6,13 @@ import {
   UseFormRegister,
 } from 'react-hook-form';
 
-import { SelectOption } from '../../Form/BasicSelect';
 import * as Styled from './WorkoutCreateBlock.styled';
-import { CreateWorkoutForm } from '@/types/types';
+import { CreateWorkoutForm, SelectOption } from '@/types/types';
 
 type WorkoutCreateBlockProps = {
   id: number;
   removeAction: UseFieldArrayRemove;
   register: UseFormRegister<CreateWorkoutForm>;
-  // TODO: Use generics, same as BasicInput
   control: Control<CreateWorkoutForm, any>;
   categories: SelectOption[];
   errors?: FieldErrors<CreateWorkoutForm>;
