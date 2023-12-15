@@ -1,13 +1,23 @@
 import customDayJS from '@/lib/dayjs';
 import { Block } from '@/xata/xata';
 
-const categoryOrder = ['MOBILITY', 'STRUCTURE', 'STRENGTH', 'METCON'];
+const categoryOrder = [
+  'MOBILITY',
+  'STRUCTURE',
+  'TECHNIQUE',
+  'STRENGTH',
+  'METCON',
+];
 
 // TODO: change this in the GET? (findMany)
 export const sortBlockByCategory = (blocks: Block[]) => {
   return blocks.sort((a, b) => {
-    const categoryAIndex = categoryOrder.indexOf(a!.category!.name!);
-    const categoryBIndex = categoryOrder.indexOf(b!.category!.name!);
+    const categoryAIndex = categoryOrder.indexOf(
+      a.category!.name.toUpperCase(),
+    );
+    const categoryBIndex = categoryOrder.indexOf(
+      b.category!.name.toUpperCase(),
+    );
 
     return categoryAIndex - categoryBIndex;
   });
