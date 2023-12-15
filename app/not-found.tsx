@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { BasicBtn } from './components';
+import BasicBtn from '@/app/components/Form/BasicBtn';
 
 export default function NotFound() {
   return (

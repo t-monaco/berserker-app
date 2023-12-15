@@ -2,9 +2,11 @@
 
 import customDayJS from '@/lib/dayjs';
 import { useMemo, useState } from 'react';
-import { BlockWrapper, Calendar, ProgramSelector } from '..';
-import Header from '../Header';
 import { SelectOption } from '@/types/types';
+import Header from '@/app/components/Header';
+import Calendar from '@/app/components/Calendar';
+import ProgramSelector from '@/app/components/ProgramSelector';
+import BlockWrapper from '@/app/components/Block';
 
 type HomeWrapperProps = {
   programs: SelectOption[];

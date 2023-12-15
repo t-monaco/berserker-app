@@ -1,9 +1,12 @@
 'use client';
 
 import { addWorkout } from '@/actions/addWorkout';
-import { BasicBtn, BasicSelect, DatePicker } from '@/app/components';
+import BasicBtn from '@/app/components/Form/BasicBtn';
+import BasicSelect from '@/app/components/Form/BasicSelect';
+import DatePicker from '@/app/components/Form/DatePicker';
 import { fetcher } from '@/lib/fetcher';
 import { CreateWorkoutForm, SelectOption } from '@/types/types';
+import { BlockRecord } from '@/xata/xata';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
@@ -13,7 +16,6 @@ import { toast } from 'react-toastify';
 import useSWR from 'swr';
 import * as Styled from './WorkoutCreate.styled';
 import WorkoutCreateBlock from './WorkoutCreateBlock';
-import { BlockRecord } from '@/xata/xata';
 
 type WorkoutCreateProps = {
   programs: SelectOption[];

@@ -13,3 +13,10 @@ export type CreateWorkoutForm = {
 };
 
 export type SelectOption = { label: string; value: string };
+
+export type CalendarDate = {
+  dateNum: string;
+  dateName: string;
+  dateOfYear: number;
+  dateId: string;
+};

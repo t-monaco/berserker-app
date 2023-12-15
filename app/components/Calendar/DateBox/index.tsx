@@ -1,16 +1,10 @@
 import { Dispatch, SetStateAction } from 'react';
 import * as Styled from './DateBox.styled';
-
-export type CalDate = {
-  dateNum: string;
-  dateName: string;
-  dateOfYear: number;
-  dateId: string;
-};
+import { CalendarDate } from '@/types/types';
 
 type DateProps = {
   selected: boolean;
-  calDate: CalDate;
+  calDate: CalendarDate;
   setSelectedDateId: Dispatch<SetStateAction<string>>;
 };
 
