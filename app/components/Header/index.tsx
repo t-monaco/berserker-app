@@ -4,7 +4,7 @@ import { disableScroll, enableScroll } from '@/app/utils/utils';
 import customDayJS from '@/lib/dayjs';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useTransition } from 'react';
 import { FaCalculator } from 'react-icons/fa';
 import { HiRefresh } from 'react-icons/hi';
 import PercentageCalculator from '../PercentageCalculator';
@@ -15,16 +15,13 @@ type HeaderProps = {
 };
 
 const Header: React.FC<HeaderProps> = ({ isAdmin }) => {
-  // TODO: this should be updated, using pending status from next/navigation or the fetched query.
-  const [rotate, setRotate] = useState(false);
+  const [isPending, startTransition] = useTransition();
   const router = useRouter();
 
   const handleRefresh = () => {
-    setRotate(true);
-    router.refresh();
-    setTimeout(() => {
-      setRotate(false);
-    }, 3000);
+    startTransition(() => {
+      router.refresh();
+    });
   };
 
   const [isCalculatorOpen, setIsCalculatorOpen] = useState(false);
@@ -49,7 +46,7 @@ const Header: React.FC<HeaderProps> = ({ isAdmin }) => {
             <FaCalculator />
           </span>
           <span className="icon-wrapper" onClick={() => handleRefresh()}>
-            <HiRefresh className={rotate ? 'rotate' : ''} />
+            <HiRefresh className={isPending ? 'rotate' : ''} />
           </span>
         </div>
       </div>
