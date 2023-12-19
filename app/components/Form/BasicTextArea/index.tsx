@@ -1,22 +1,20 @@
 import { messinaFont } from '@/app/fonts/fonts';
+import { FieldValues, Path, UseFormRegister } from 'react-hook-form';
 import * as Styled from './BasicTextArea.styled';
-import { Path, UseFormRegister } from 'react-hook-form';
-import { CreateWorkoutForm } from '@/types/types';
 
-// TODO: use generics
-type BasicTextAreaProps = {
+type BasicTextAreaProps<T extends FieldValues> = {
   label: string;
-  name: Path<CreateWorkoutForm>;
-  register: UseFormRegister<CreateWorkoutForm>;
+  name: Path<T>;
+  register: UseFormRegister<T>;
   error?: string;
 };
 
-const BasicTextArea: React.FC<BasicTextAreaProps> = ({
+const BasicTextArea = <T extends FieldValues>({
   label,
   name,
   register,
   error,
-}) => {
+}: BasicTextAreaProps<T>) => {
   return (
     <Styled.TextAreaWrapper>
       <label htmlFor={name}>{label}</label>

@@ -1,27 +1,24 @@
 import { drukFont } from '@/app/fonts/fonts';
+import { SelectOption } from '@/types/types';
 import { Select } from 'antd';
-import { Control, Controller, Path } from 'react-hook-form';
+import { Control, Controller, FieldValues, Path } from 'react-hook-form';
 import * as Styled from './BasicSelect.styled';
-import { CreateWorkoutForm } from '@/types/types';
 
-export type SelectOption = { label: string; value: string };
-
-type BasicSelectProps = {
+type BasicSelectProps<T extends FieldValues> = {
   label: string;
-  name: Path<CreateWorkoutForm>;
+  name: Path<T>;
   options: SelectOption[];
-  // TODO: Use generics, same as BasicInput
-  control: Control<CreateWorkoutForm, any>;
+  control: Control<T, any>;
   error?: string;
 };
 
-const BasicSelect: React.FC<BasicSelectProps> = ({
+const BasicSelect = <T extends FieldValues>({
   label,
   name,
   options,
   control,
   error,
-}) => {
+}: BasicSelectProps<T>) => {
   return (
     <Styled.SelectWrapper>
       <label htmlFor={name}>{label}</label>
