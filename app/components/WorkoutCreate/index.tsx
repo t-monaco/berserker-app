@@ -56,7 +56,7 @@ const WorkoutCreate: React.FC<WorkoutCreateProps> = ({
 
   const watchedFields = watch(['date', 'program']);
 
-  const { data, isLoading } = useSWR<BlockRecord[], boolean>(
+  const { data, isLoading, mutate } = useSWR<BlockRecord[], boolean>(
     watchedFields[0] && watchedFields[1]
       ? `/api/workout?date=${watchedFields[0]}&program=${watchedFields[1]}`
       : null,
@@ -86,6 +86,7 @@ const WorkoutCreate: React.FC<WorkoutCreateProps> = ({
 
     if (result.success) {
       toast.success(result.message);
+      mutate(); // this revalidate the above GET request.
     } else {
       toast.error(result.message);
     }

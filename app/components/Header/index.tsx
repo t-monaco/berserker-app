@@ -12,9 +12,10 @@ import * as Styled from './Header.styled';
 
 type HeaderProps = {
   isAdmin: boolean;
+  resetDates: () => void;
 };
 
-const Header: React.FC<HeaderProps> = ({ isAdmin }) => {
+const Header: React.FC<HeaderProps> = ({ isAdmin, resetDates }) => {
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
 
@@ -39,7 +40,9 @@ const Header: React.FC<HeaderProps> = ({ isAdmin }) => {
   return (
     <Styled.HeaderWrapper>
       <div className="month-year">
-        {customDayJS().format('MMMM YYYY').toUpperCase()}
+        <p onClick={isAdmin ? () => resetDates() : undefined}>
+          {customDayJS().format('MMMM YYYY').toUpperCase()}
+        </p>
         <div className="flex gap-4">
           {isAdmin && <Link href="/admin">ADMIN</Link>}
           <span className="icon-wrapper" onClick={() => showCalculatorModal()}>

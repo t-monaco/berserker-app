@@ -1,6 +1,6 @@
+import { CalendarDate } from '@/types/types';
 import { Dispatch, SetStateAction } from 'react';
 import * as Styled from './DateBox.styled';
-import { CalendarDate } from '@/types/types';
 
 type DateProps = {
   selected: boolean;

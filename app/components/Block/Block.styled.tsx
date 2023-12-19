@@ -8,4 +8,5 @@ export const BlockWrapper = styled.div<object>`
   gap: 1.5rem;
   padding-top: 1rem;
   overflow-y: scroll;
+  width: 100%;
 `;

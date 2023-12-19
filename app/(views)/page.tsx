@@ -11,15 +11,9 @@ export default async function Home() {
 
   const isUserAdmin = await isAdmin();
 
-  const blocks = await getBlocks();
-
   return (
     <>
-      <HomeWrapper
-        programs={programOptions}
-        blocks={JSON.stringify(blocks)}
-        isAdmin={isUserAdmin}
-      />
+      <HomeWrapper programs={programOptions} isAdmin={isUserAdmin} />
       <AddToHomeScreen />
     </>
   );
