@@ -30,9 +30,9 @@ const DatePicker: React.FC<DatePickerProps> = ({ label, name, control }) => {
             ref={field.ref}
             name={field.name}
             onBlur={field.onBlur}
-            value={field.value ? customDayJS(field.value as string) : null}
+            value={field.value ? customDayJS.unix(field.value as number) : null}
             onChange={(date) => {
-              field.onChange(date ? date.valueOf() : null);
+              field.onChange(date ? date.unix() : null);
             }}
           />
         </Styled.DatePickerWrapper>

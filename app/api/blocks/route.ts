@@ -1,23 +1,29 @@
-import { getWorkoutDateIdentifier } from '@/app/utils/utils';
+import { getDatesIdentifierArr } from '@/app/utils/utils';
 import { xata } from '@/lib/xataDB';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(req: NextRequest) {
   const dateUnix = parseInt(req.nextUrl.searchParams.get('date') ?? '');
-  const programId = req.nextUrl.searchParams.get('program') as string;
 
   const blocks = await xata.db.Block.filter({
-    'workout.date': getWorkoutDateIdentifier(dateUnix),
-    'workout.program.id': programId,
+    'workout.date': {
+      $any: getDatesIdentifierArr(dateUnix),
+    },
   })
     .select([
+      'id',
       'title',
-      'description',
       'duration',
+      'description',
       'category.id',
       'category.name',
+      'workout.date',
+      'workout.program.id',
+      'workout.program.name',
     ])
     .getAll();
 
-  return NextResponse.json(blocks, { status: 200 });
+  return NextResponse.json(blocks, {
+    status: 200,
+  });
 }

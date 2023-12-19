@@ -3,7 +3,7 @@
 import { Dispatch, SetStateAction, useState } from 'react';
 import { FiChevronDown } from 'react-icons/fi';
 import * as Styled from './ProgramSelector.styled';
-import { SelectOption } from '../Form/BasicSelect';
+import { SelectOption } from '@/types/types';
 
 type ProgramSelectorProps = {
   programs: SelectOption[];
