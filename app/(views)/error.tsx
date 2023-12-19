@@ -1,6 +1,6 @@
 'use client';
 
-import { BasicBtn } from '../components';
+import BasicBtn from '@/app/components/Form/BasicBtn';
 
 type ErrorProps = { reset: () => void };
 

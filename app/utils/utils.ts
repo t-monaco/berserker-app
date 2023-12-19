@@ -1,13 +1,23 @@
 import customDayJS from '@/lib/dayjs';
 import { Block } from '@/xata/xata';
 
-const categoryOrder = ['MOBILITY', 'STRUCTURE', 'STRENGTH', 'METCON'];
+const categoryOrder = [
+  'MOBILITY',
+  'STRUCTURE',
+  'TECHNIQUE',
+  'STRENGTH',
+  'METCON',
+];
 
 // TODO: change this in the GET? (findMany)
 export const sortBlockByCategory = (blocks: Block[]) => {
   return blocks.sort((a, b) => {
-    const categoryAIndex = categoryOrder.indexOf(a!.category!.name!);
-    const categoryBIndex = categoryOrder.indexOf(b!.category!.name!);
+    const categoryAIndex = categoryOrder.indexOf(
+      a.category!.name.toUpperCase(),
+    );
+    const categoryBIndex = categoryOrder.indexOf(
+      b.category!.name.toUpperCase(),
+    );
 
     return categoryAIndex - categoryBIndex;
   });
@@ -55,9 +65,11 @@ export const splitBlocks = <T extends { [key: string]: any }>(blocks: T[]) => {
   return { newBlocks, existingBlocks };
 };
 
-export const getDatesIdentifierArr = () => {
-  const startOfWeek = customDayJS().startOf('week');
-  const endOfWeek = customDayJS().endOf('week');
+export const getDatesIdentifierArr = (date?: number) => {
+  const referenceDay = date ? customDayJS.unix(date) : customDayJS();
+
+  const startOfWeek = referenceDay.startOf('week');
+  const endOfWeek = referenceDay.endOf('week');
 
   let datesIdentifier = [];
   let day = startOfWeek;
@@ -69,8 +81,10 @@ export const getDatesIdentifierArr = () => {
   return datesIdentifier;
 };
 
-export const getWorkoutDateIdentifier = (date: number) => {
-  return `${customDayJS(date).year()}-${customDayJS(date).dayOfYear()}`;
+export const getWorkoutDateIdentifier = (dateUnix: number) => {
+  return `${customDayJS.unix(dateUnix).year()}-${customDayJS
+    .unix(dateUnix)
+    .dayOfYear()}`;
 };
 
 /**

@@ -6,7 +6,13 @@ import { xata } from '@/lib/xataDB';
 // Please edit this to allow other routes to be public as needed.
 // See https://clerk.com/docs/references/nextjs/auth-middleware for more information about configuring your Middleware
 export default authMiddleware({
-  publicRoutes: ['/api/webhook(.*)', '/sign-in', '/sign-up'],
+  publicRoutes: [
+    '/api/webhook(.*)',
+    '/sign-in',
+    '/sign-up',
+    '/favicon.ico',
+    '/manifest.json',
+  ],
   async afterAuth(auth, req, evt) {
     const userDB = await xata.db.User.filter({
       clerkId: auth.userId,

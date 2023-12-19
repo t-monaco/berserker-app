@@ -13,9 +13,16 @@ export const HeaderWrapper = styled.div`
   .month-year {
     align-items: center;
     display: flex;
-    font-size: 10px;
     justify-content: space-between;
     text-align: center;
+
+    p {
+      font-size: 14px;
+    }
+
+    a {
+      font-size: 12px;
+    }
 
     .icon-wrapper {
       background-color: var(--primary-color);

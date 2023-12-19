@@ -1,8 +1,8 @@
 import { getBlocks } from '@/actions/getBlocks';
-import HomeWrapper from '../components/HomeWrapper';
+import HomeWrapper from '@/app/components/HomeWrapper';
 import { getProgramsOpt } from '@/actions/getProgramsOpt';
 import { isAdmin } from '@/actions/isAdmin';
-import AddToHomeScreen from '../components/AddToHomeScreen';
+import AddToHomeScreen from '@/app/components/AddToHomeScreen';
 
 export const dynamic = 'force-dynamic';
 
@@ -11,15 +11,9 @@ export default async function Home() {
 
   const isUserAdmin = await isAdmin();
 
-  const blocks = await getBlocks();
-
   return (
     <>
-      <HomeWrapper
-        programs={programOptions}
-        blocks={JSON.stringify(blocks)}
-        isAdmin={isUserAdmin}
-      />
+      <HomeWrapper programs={programOptions} isAdmin={isUserAdmin} />
       <AddToHomeScreen />
     </>
   );

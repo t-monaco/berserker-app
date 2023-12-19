@@ -11,3 +11,12 @@ export type CreateWorkoutForm = {
   program: string;
   blocks: BlockForm[];
 };
+
+export type SelectOption = { label: string; value: string };
+
+export type CalendarDate = {
+  dateNum: string;
+  dateName: string;
+  dateOfYear: number;
+  dateId: string;
+};

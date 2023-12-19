@@ -4,7 +4,7 @@ import { disableScroll, enableScroll } from '@/app/utils/utils';
 import customDayJS from '@/lib/dayjs';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useTransition } from 'react';
 import { FaCalculator } from 'react-icons/fa';
 import { HiRefresh } from 'react-icons/hi';
 import PercentageCalculator from '../PercentageCalculator';
@@ -12,19 +12,17 @@ import * as Styled from './Header.styled';
 
 type HeaderProps = {
   isAdmin: boolean;
+  resetDates: () => void;
 };
 
-const Header: React.FC<HeaderProps> = ({ isAdmin }) => {
-  // TODO: this should be updated, using pending status from next/navigation or the fetched query.
-  const [rotate, setRotate] = useState(false);
+const Header: React.FC<HeaderProps> = ({ isAdmin, resetDates }) => {
+  const [isPending, startTransition] = useTransition();
   const router = useRouter();
 
   const handleRefresh = () => {
-    setRotate(true);
-    router.refresh();
-    setTimeout(() => {
-      setRotate(false);
-    }, 3000);
+    startTransition(() => {
+      router.refresh();
+    });
   };
 
   const [isCalculatorOpen, setIsCalculatorOpen] = useState(false);
@@ -42,14 +40,16 @@ const Header: React.FC<HeaderProps> = ({ isAdmin }) => {
   return (
     <Styled.HeaderWrapper>
       <div className="month-year">
-        {customDayJS().format('MMMM YYYY').toUpperCase()}
+        <p onClick={isAdmin ? () => resetDates() : undefined}>
+          {customDayJS().format('MMMM YYYY').toUpperCase()}
+        </p>
         <div className="flex gap-4">
           {isAdmin && <Link href="/admin">ADMIN</Link>}
           <span className="icon-wrapper" onClick={() => showCalculatorModal()}>
             <FaCalculator />
           </span>
           <span className="icon-wrapper" onClick={() => handleRefresh()}>
-            <HiRefresh className={rotate ? 'rotate' : ''} />
+            <HiRefresh className={isPending ? 'rotate' : ''} />
           </span>
         </div>
       </div>

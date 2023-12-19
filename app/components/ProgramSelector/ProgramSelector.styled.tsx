@@ -7,6 +7,7 @@ export const ProgramSelectWrapper = styled(BasicHero)`
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
+  width: 100%;
 `;
 
 export const SelectedProgramWrapper = styled.div<object>`
