@@ -6,6 +6,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { drukFont } from './fonts/fonts';
 import './styles/globals.scss';
+import Head from 'next/head';
 
 export const metadata: Metadata = {
   title: 'Berserker Program',
@@ -42,6 +43,14 @@ export default function RootLayout({
       }}
     >
       <html lang="en">
+        <Head>
+          <link
+            rel="preload"
+            href="/api/data"
+            as="fetch"
+            crossOrigin="anonymous"
+          />
+        </Head>
         <body className={drukFont.className}>
           <ToastContainer
             position="top-center"
