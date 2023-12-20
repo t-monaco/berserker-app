@@ -1,20 +1,18 @@
 'use client';
 
+import { trpc } from '@/app/_trpc/client';
 import BlockWrapper from '@/app/components/Block';
 import Calendar from '@/app/components/Calendar';
 import Header from '@/app/components/Header';
-import ProgramSelector from '@/app/components/ProgramSelector';
 import Loader from '@/app/components/Loader';
+import ProgramSelector from '@/app/components/ProgramSelector';
 import {
   getWorkoutDateIdentifier,
   groupBlocksByDateAndProgram,
 } from '@/app/utils/utils';
 import customDayJS from '@/lib/dayjs';
-import { fetcher } from '@/lib/fetcher';
 import { SelectOption } from '@/types/types';
-import { BlockRecord } from '@/xata/xata';
 import { useMemo, useState } from 'react';
-import useSWR from 'swr';
 
 type HomeWrapperProps = {
   programs: SelectOption[];
@@ -35,15 +33,9 @@ const HomeWrapper: React.FC<HomeWrapperProps> = ({ programs, isAdmin }) => {
 
   const [selectedProgram, setSelectedProgram] = useState(programs[0]);
 
-  const blocksApiUrl = useMemo(
-    () => `/api/blocks?date=${referenceDay.unix()}`,
-    [referenceDay],
-  );
-
-  const { data: blocks, isLoading } = useSWR<BlockRecord[], boolean>(
-    blocksApiUrl ? blocksApiUrl : null,
-    fetcher,
-  );
+  const { data: blocks, isLoading } = trpc.getBlocks.useQuery({
+    dateUnix: referenceDay.unix(),
+  });
 
   const workoutBlocks = useMemo(
     () =>
