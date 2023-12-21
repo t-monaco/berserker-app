@@ -1,19 +1,18 @@
 'use client';
 
 import { addWorkout } from '@/actions/addWorkout';
+import { trpc } from '@/app/_trpc/client';
 import BasicBtn from '@/app/components/Form/BasicBtn';
 import BasicSelect from '@/app/components/Form/BasicSelect';
 import DatePicker from '@/app/components/Form/DatePicker';
-import { fetcher } from '@/lib/fetcher';
+import Loader from '@/app/components/Loader';
 import { CreateWorkoutForm, SelectOption } from '@/types/types';
-import { BlockRecord } from '@/xata/xata';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
 import { FaPlus } from 'react-icons/fa';
-import { BeatLoader, PulseLoader } from 'react-spinners';
+import { BeatLoader } from 'react-spinners';
 import { toast } from 'react-toastify';
-import useSWR from 'swr';
 import * as Styled from './WorkoutCreate.styled';
 import WorkoutCreateBlock from './WorkoutCreateBlock';
 
@@ -27,6 +26,7 @@ const WorkoutCreate: React.FC<WorkoutCreateProps> = ({
   programs,
 }) => {
   const [loadingPOST, setLoadingPOST] = useState(false);
+  const trpcUtils = trpc.useUtils();
 
   const blockObj = {
     title: '',
@@ -56,12 +56,14 @@ const WorkoutCreate: React.FC<WorkoutCreateProps> = ({
 
   const watchedFields = watch(['date', 'program']);
 
-  const { data, isLoading, mutate } = useSWR<BlockRecord[], boolean>(
-    watchedFields[0] && watchedFields[1]
-      ? `/api/workout?date=${watchedFields[0]}&program=${watchedFields[1]}`
-      : null,
-    fetcher,
-  );
+  const { data, isLoading, isFetching } =
+    trpc.getBlocksByDateAndProgram.useQuery(
+      {
+        dateUnix: watchedFields[0],
+        programId: watchedFields[1],
+      },
+      { enabled: Boolean(watchedFields[0]) && Boolean(watchedFields[1]) },
+    );
 
   useEffect(() => {
     if (data?.length) {
@@ -86,7 +88,7 @@ const WorkoutCreate: React.FC<WorkoutCreateProps> = ({
 
     if (result.success) {
       toast.success(result.message);
-      mutate(); // this revalidate the above GET request.
+      trpcUtils.getBlocksByDateAndProgram.invalidate(); // this revalidate the above GET request.
     } else {
       toast.error(result.message);
     }
@@ -109,11 +111,9 @@ const WorkoutCreate: React.FC<WorkoutCreateProps> = ({
         />
       </div>
       <span className="divider" />
-      <div className="w-full flex flex-col overflow-scroll flex-shrink-0 gap-7">
-        {isLoading ? (
-          <div className="m-auto">
-            <PulseLoader color="#adfe19" />
-          </div>
+      <div className="w-full flex flex-col overflow-scroll flex-shrink-0 gap-7 items-center">
+        {isLoading && isFetching ? (
+          <Loader />
         ) : (
           fields.map((field, index) => {
             return (

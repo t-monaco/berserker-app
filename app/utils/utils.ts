@@ -112,7 +112,8 @@ export const enableScroll = () => {
 export const contentOverflow = (text: string, linesLimit: number) =>
   text.split('\n').length > linesLimit;
 
-export const groupBlocksByDateAndProgram = (blocks: Block[]) =>
+// TODO fixed blocks type
+export const groupBlocksByDateAndProgram = (blocks: any[]) =>
   blocks.reduce((acc: Record<string, Record<string, Block[]>>, block) => {
     const { date, program } = block.workout || {};
     const dateKey = date || '';
