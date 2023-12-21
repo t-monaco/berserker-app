@@ -1,19 +1,27 @@
-import { getBlocks } from '@/src/actions/getBlocks';
-import HomeWrapper from '@/src/components/HomeWrapper';
-import { getProgramsOpt } from '@/src/actions/getProgramsOpt';
 import { isAdmin } from '@/src/actions/isAdmin';
 import AddToHomeScreen from '@/src/components/AddToHomeScreen';
+import HomeWrapper from '@/src/components/HomeWrapper';
+import { serverTrpc } from '../trpc/server';
+import { SelectOption } from '../types/types';
 
 export const dynamic = 'force-dynamic';
 
 export default async function Home() {
-  const programOptions = await getProgramsOpt();
+  const programs = await serverTrpc.getAllPrograms();
+
+  const programsList = programs.reduce(
+    (acc: SelectOption[], { name, id }) => [
+      ...acc,
+      { label: name.toUpperCase(), value: id },
+    ],
+    [],
+  );
 
   const isUserAdmin = await isAdmin();
 
   return (
     <>
-      <HomeWrapper programs={programOptions} isAdmin={isUserAdmin} />
+      <HomeWrapper programs={programsList} isAdmin={isUserAdmin} />
       <AddToHomeScreen />
     </>
   );

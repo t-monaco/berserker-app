@@ -52,6 +52,16 @@ export const appRouter = router({
 
       return blocks;
     }),
+  getAllPrograms: publicProcedure.query(async () => {
+    const programs = await xata.db.Program.select(['id', 'name']).getAll();
+
+    return programs;
+  }),
+  getAllCategories: publicProcedure.query(async () => {
+    const categories = await xata.db.Category.select(['id', 'name']).getAll();
+
+    return categories;
+  }),
 });
 
 export type AppRouter = typeof appRouter;
