@@ -1,9 +1,9 @@
-import { xata } from '@/lib/xataDB';
+import { xata } from '@/src/lib/xataDB';
 import { publicProcedure, router } from './trpc';
 import {
   getDatesIdentifierArr,
   getWorkoutDateIdentifier,
-} from '@/app/utils/utils';
+} from '@/src/utils/utils';
 import z from 'zod';
 
 export const appRouter = router({
