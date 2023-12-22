@@ -1,7 +1,7 @@
 import { isAdmin } from '@/src/actions/isAdmin';
 import AddToHomeScreen from '@/src/components/AddToHomeScreen';
 import HomeWrapper from '@/src/components/HomeWrapper';
-import { serverTrpc } from '../trpc/server';
+import { serverTrpc } from '../trpc/serverClient';
 import { SelectOption } from '../types/types';
 
 export const dynamic = 'force-dynamic';

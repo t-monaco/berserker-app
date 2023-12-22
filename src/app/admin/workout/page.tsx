@@ -1,5 +1,5 @@
 import WorkoutCreate from '@/src/components/WorkoutCreate';
-import { serverTrpc } from '@/src/trpc/server';
+import { serverTrpc } from '@/src/trpc/serverClient';
 import { SelectOption } from '@/src/types/types';
 
 export default async function AdminWorkout() {
