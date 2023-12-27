@@ -70,8 +70,11 @@ export const appRouter = router({
   inviteMember: publicProcedure
     .input(z.string().email())
     .mutation(async ({ input: newMemberEmail }) => {
+      const signUpURL = `${process.env.NEXT_PUBLIC_SITE_URL}${process.env.NEXT_PUBLIC_CLERK_SIGN_UP_URL}`;
+
       const invitation = await clerkClient.invitations.createInvitation({
         emailAddress: newMemberEmail,
+        redirectUrl: signUpURL,
       });
 
       return invitation;
