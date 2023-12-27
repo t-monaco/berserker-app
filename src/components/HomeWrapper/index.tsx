@@ -13,13 +13,20 @@ import {
 import customDayJS from '@/src/lib/dayjs';
 import { SelectOption } from '@/src/types/types';
 import { useMemo, useState } from 'react';
+import { serverTrpc } from '@/src/trpc/serverClient';
 
 type HomeWrapperProps = {
   programs: SelectOption[];
   isAdmin: boolean;
+  // initialBlocks: Awaited<ReturnType<(typeof serverTrpc)['getBlocks']>>;
+  // initialBlocks: string;
 };
 
-const HomeWrapper: React.FC<HomeWrapperProps> = ({ programs, isAdmin }) => {
+const HomeWrapper: React.FC<HomeWrapperProps> = ({
+  programs,
+  isAdmin,
+  // initialBlocks,
+}) => {
   const [referenceDay, setReferenceDay] = useState(customDayJS());
 
   const [selectedDateId, setSelectedDateId] = useState(
@@ -33,9 +40,16 @@ const HomeWrapper: React.FC<HomeWrapperProps> = ({ programs, isAdmin }) => {
 
   const [selectedProgram, setSelectedProgram] = useState(programs[0]);
 
-  const { data: blocks, isLoading } = trpc.getBlocks.useQuery({
-    dateUnix: referenceDay.unix(),
-  });
+  const { data: blocks, isLoading } = trpc.getBlocks.useQuery(
+    {
+      dateUnix: referenceDay.unix(),
+    },
+    // {
+    //   initialData: JSON.parse(initialBlocks),
+    //   refetchOnMount: false,
+    //   refetchOnReconnect: false,
+    // },
+  );
 
   const workoutBlocks = useMemo(
     () =>

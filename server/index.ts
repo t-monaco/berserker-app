@@ -5,6 +5,7 @@ import {
   getWorkoutDateIdentifier,
 } from '@/src/utils/utils';
 import z from 'zod';
+import { clerkClient } from '@clerk/nextjs';
 
 export const appRouter = router({
   getBlocks: publicProcedure
@@ -32,6 +33,7 @@ export const appRouter = router({
 
       return blocks;
     }),
+
   getBlocksByDateAndProgram: publicProcedure
     .input(z.object({ dateUnix: z.number(), programId: z.string() }))
     .query(async ({ input }) => {
@@ -52,16 +54,28 @@ export const appRouter = router({
 
       return blocks;
     }),
+
   getAllPrograms: publicProcedure.query(async () => {
     const programs = await xata.db.Program.select(['id', 'name']).getAll();
 
     return programs;
   }),
+
   getAllCategories: publicProcedure.query(async () => {
     const categories = await xata.db.Category.select(['id', 'name']).getAll();
 
     return categories;
   }),
+
+  inviteMember: publicProcedure
+    .input(z.string().email())
+    .mutation(async ({ input: newMemberEmail }) => {
+      const invitation = await clerkClient.invitations.createInvitation({
+        emailAddress: newMemberEmail,
+      });
+
+      return invitation;
+    }),
 });
 
 export type AppRouter = typeof appRouter;

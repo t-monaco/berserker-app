@@ -12,8 +12,11 @@ export default function Admin() {
           <Link href="/admin/workout">
             <BasicHero $position="left">ADD/EDIT WORKOUT</BasicHero>
           </Link>
+          <Link href="/admin/invite-member">
+            <BasicHero $position="right">INVITE MEMBER</BasicHero>
+          </Link>
           <Link href="/">
-            <BasicHero $position="right">BACK TO HOME</BasicHero>
+            <BasicHero $position="left">BACK TO HOME</BasicHero>
           </Link>
         </div>
       </div>

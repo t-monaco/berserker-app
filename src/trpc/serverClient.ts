@@ -1,6 +1,11 @@
 import { appRouter } from '@/server';
+import { httpBatchLink } from '@trpc/client';
 
 export const serverTrpc = appRouter.createCaller({
-  eventServer: {},
-  session: {},
+  links: [
+    httpBatchLink({
+      // TODO: use .env URL?
+      url: '/api/trpc',
+    }),
+  ],
 });

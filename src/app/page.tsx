@@ -3,6 +3,7 @@ import AddToHomeScreen from '@/src/components/AddToHomeScreen';
 import HomeWrapper from '@/src/components/HomeWrapper';
 import { serverTrpc } from '../trpc/serverClient';
 import { SelectOption } from '../types/types';
+import customDayJS from '../lib/dayjs';
 
 export const dynamic = 'force-dynamic';
 
@@ -17,11 +18,19 @@ export default async function Home() {
     [],
   );
 
+  // const initialBlocks = await serverTrpc.getBlocks({
+  //   dateUnix: customDayJS().unix(),
+  // });
+
   const isUserAdmin = await isAdmin();
 
   return (
     <>
-      <HomeWrapper programs={programsList} isAdmin={isUserAdmin} />
+      <HomeWrapper
+        // initialBlocks={JSON.stringify(initialBlocks)}
+        programs={programsList}
+        isAdmin={isUserAdmin}
+      />
       <AddToHomeScreen />
     </>
   );
