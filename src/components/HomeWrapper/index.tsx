@@ -1,19 +1,22 @@
 'use client';
 
-import { trpc } from '@/src/trpc/client';
-import BlockWrapper from '@/src/components/Block';
-import Calendar from '@/src/components/Calendar';
-import Header from '@/src/components/Header';
 import Loader from '@/src/components/Loader';
-import ProgramSelector from '@/src/components/ProgramSelector';
+import customDayJS from '@/src/lib/dayjs';
+import { trpc } from '@/src/trpc/client';
+import { SelectOption } from '@/src/types/types';
 import {
   getWorkoutDateIdentifier,
   groupBlocksByDateAndProgram,
 } from '@/src/utils/utils';
-import customDayJS from '@/src/lib/dayjs';
-import { SelectOption } from '@/src/types/types';
+import dynamic from 'next/dynamic';
 import { useMemo, useState } from 'react';
-import { serverTrpc } from '@/src/trpc/serverClient';
+
+const DynamicHeader = dynamic(() => import('@/src/components/Header'));
+const DynamicCalendar = dynamic(() => import('@/src/components/Calendar'));
+const DynamicProgramSelector = dynamic(
+  () => import('@/src/components/ProgramSelector'),
+);
+const DynamicBlockWrapper = dynamic(() => import('@/src/components/Block'));
 
 type HomeWrapperProps = {
   programs: SelectOption[];
@@ -63,20 +66,20 @@ const HomeWrapper: React.FC<HomeWrapperProps> = ({
 
   return (
     <main className="flex flex-col gap-6 flex-1 items-center">
-      <Header isAdmin={isAdmin} resetDates={resetDates} />
-      <Calendar
+      <DynamicHeader isAdmin={isAdmin} resetDates={resetDates} />
+      <DynamicCalendar
         isAdmin={isAdmin}
         setSelectedDateId={setSelectedDateId}
         selectedDateId={selectedDateId}
         referenceDay={referenceDay}
         setReferenceDay={setReferenceDay}
       />
-      <ProgramSelector
+      <DynamicProgramSelector
         programs={programs}
         selectedProgram={selectedProgram}
         setSelectedProgram={setSelectedProgram}
       />
-      {!isLoading ? <BlockWrapper blocks={workoutBlocks} /> : <Loader />}
+      {!isLoading ? <DynamicBlockWrapper blocks={workoutBlocks} /> : <Loader />}
     </main>
   );
 };
