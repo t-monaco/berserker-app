@@ -2,6 +2,7 @@
 
 import { Modal } from 'antd';
 import styled from 'styled-components';
+import { MdDone } from 'react-icons/md';
 
 export const BlockModal = styled(Modal)`
   overflow: visible;
@@ -79,5 +80,26 @@ export const BlockDescription = styled.div<object>`
   a {
     color: var(--primary-color);
     font-weight: 600;
+  }
+`;
+
+export const DoneIcon = styled(MdDone)`
+  border-radius: 7px;
+  border-radius: 50%;
+  border: solid 2px var(--primary-font-color);
+  color: var(--primary-font-color);
+  position: absolute;
+  display: block;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 1;
+  font-size: 2.2rem;
+  opacity: 0.5;
+  padding: 0.2rem;
+
+  &.completed {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    opacity: 1;
   }
 `;
