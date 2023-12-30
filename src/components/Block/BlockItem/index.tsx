@@ -7,16 +7,27 @@ import Markdown from 'react-markdown';
 import * as Styled from './BlockItem.styled';
 
 type BlockItemProps = {
+  completed: boolean;
   onClick: (block: Block) => void;
   blockData: Block;
 };
 
-const BlockItem: React.FC<BlockItemProps> = ({ blockData, onClick }) => {
+const BlockItem: React.FC<BlockItemProps> = ({
+  blockData,
+  onClick,
+  completed,
+}) => {
   return (
     <>
       <Styled.BlockItemWrapper
         onClick={() => onClick(blockData)}
-        className={contentOverflow(blockData.description, 3) ? 'overflow' : ''}
+        className={
+          completed
+            ? 'completed'
+            : contentOverflow(blockData.description, 3)
+              ? 'overflow'
+              : ''
+        }
       >
         <Styled.BlockHeader>
           <h2 className="title">{blockData.title}</h2>

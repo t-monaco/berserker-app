@@ -15,6 +15,21 @@ export const BlockItemWrapper = styled.div<object>`
   position: relative;
   overflow: visible;
 
+  &.completed {
+    &::before {
+      position: absolute;
+      content: 'COMPLETED';
+      height: 100%;
+      width: 100%;
+      color: var(--primary-color);
+      background-color: rgba(0, 0, 0, 0.5);
+      top: 0;
+      left: 0;
+      font-size: 1.5rem;
+      display: grid;
+      place-items: center;
+    }
+  }
   &.overflow {
     padding-bottom: 5px;
     &::after {

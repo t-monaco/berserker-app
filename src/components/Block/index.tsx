@@ -27,6 +27,20 @@ const BlockWrapper: React.FC<BlockWrapperProps> = ({ blocks }) => {
     setSelectedBlock(block);
   };
 
+  const [completedBlocks, setCompletedBlock] = useState<string[]>([]);
+
+  const handleDoneClick = (blockId?: string) => {
+    // TODO: temporary if, just wanted to test the workflow
+    if (!blockId) return;
+    if (completedBlocks.includes(blockId)) {
+      setCompletedBlock(completedBlocks.filter((id) => id !== blockId));
+      handleCancel();
+    } else {
+      setCompletedBlock([...completedBlocks, blockId]);
+      handleCancel();
+    }
+  };
+
   return (
     <>
       <Styled.BlockWrapper>
@@ -36,6 +50,7 @@ const BlockWrapper: React.FC<BlockWrapperProps> = ({ blocks }) => {
               key={block.id}
               onClick={handleBlockClick}
               blockData={block}
+              completed={completedBlocks.includes(block.id) ? true : false}
             />
           ))
         ) : (
@@ -46,6 +61,12 @@ const BlockWrapper: React.FC<BlockWrapperProps> = ({ blocks }) => {
         open={isModalOpen}
         onCancel={handleCancel}
         selectedBlock={selectedBlock}
+        handleComplete={handleDoneClick}
+        completed={
+          selectedBlock && completedBlocks.includes(selectedBlock.id)
+            ? true
+            : false
+        }
       />
     </>
   );
