@@ -1,11 +1,12 @@
 import { isAdmin } from '@/src/actions/isAdmin';
-import AddToHomeScreen from '@/src/components/AddToHomeScreen';
 import HomeWrapper from '@/src/components/HomeWrapper';
+import dynamic from 'next/dynamic';
 import { serverTrpc } from '../trpc/serverClient';
 import { SelectOption } from '../types/types';
-import customDayJS from '../lib/dayjs';
 
-export const dynamic = 'force-dynamic';
+const DynamicAddToHomeScreen = dynamic(
+  () => import('@/src/components/AddToHomeScreen'),
+);
 
 export default async function Home() {
   const programs = await serverTrpc.getAllPrograms();
@@ -31,7 +32,7 @@ export default async function Home() {
         programs={programsList}
         isAdmin={isUserAdmin}
       />
-      <AddToHomeScreen />
+      <DynamicAddToHomeScreen />
     </>
   );
 }

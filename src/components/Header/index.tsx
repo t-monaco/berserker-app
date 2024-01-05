@@ -19,6 +19,7 @@ const Header: React.FC<HeaderProps> = ({ isAdmin, resetDates }) => {
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
 
+  //*INFO: I can use the refetch of react-query, but that will trigger only the getBlocks query. With this I'm refresing the whole page.
   const handleRefresh = () => {
     startTransition(() => {
       router.refresh();

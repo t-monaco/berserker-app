@@ -1,47 +1,8 @@
 'use client';
 
-import dynamic from 'next/dynamic';
-import { useEffect, useState } from 'react';
-
-const ModuleLoading = () => (
-  <div className="w-screen h-screen grid place-items-center">
-    <p className="animate-bounce text-white font-bold">Loading...</p>
-  </div>
-);
-const AddToIosSafari = dynamic(() => import('./AddToHomeScreenModal'), {
-  loading: () => <ModuleLoading />,
-});
-const AddToMobileChrome = dynamic(() => import('./AddToHomeScreenModal'), {
-  loading: () => <ModuleLoading />,
-});
-const AddToMobileFirefox = dynamic(() => import('./AddToHomeScreenModal'), {
-  loading: () => <ModuleLoading />,
-});
-const AddToMobileFirefoxIos = dynamic(() => import('./AddToHomeScreenModal'), {
-  loading: () => <ModuleLoading />,
-});
-const AddToMobileChromeIos = dynamic(() => import('./AddToHomeScreenModal'), {
-  loading: () => <ModuleLoading />,
-});
-const AddToSamsung = dynamic(() => import('./AddToHomeScreenModal'), {
-  loading: () => <ModuleLoading />,
-});
-const AddToOtherBrowser = dynamic(() => import('./AddToHomeScreenModal'), {
-  loading: () => <ModuleLoading />,
-});
-
 import useUserAgent from '@/src/hooks/useUserAgent';
+import { useEffect, useState } from 'react';
 import AddToHomeScreenModal from './AddToHomeScreenModal';
-
-type AddToHomeScreenPromptType =
-  | 'safari'
-  | 'chrome'
-  | 'firefox'
-  | 'other'
-  | 'firefoxIos'
-  | 'chromeIos'
-  | 'samsung'
-  | '';
 
 export default function AddToHomeScreen() {
   const [displayPrompt, setDisplayPrompt] = useState(false);
