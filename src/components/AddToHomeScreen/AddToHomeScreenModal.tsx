@@ -25,10 +25,10 @@ const AddToHomeScreenModal: React.FC<AddToHomeScreenModalProps> = ({
       className={messinaFont.className}
       maskClosable={false}
     >
-      <p className="text-xl">
+      <h1 className="text-xl">
         For the best experience, we recommend installing the Berserker Program
         app to your home screen!
-      </p>
+      </h1>
       <div className="flex flex-col w-full items-start gap-2 text-lg">
         <div className="flex gap-2 items-end">
           <p>1. Look for the</p>
