@@ -12,6 +12,7 @@ export default authMiddleware({
     '/sign-up',
     '/favicon.ico',
     '/manifest.json',
+    '/manifest.ts',
   ],
   async afterAuth(auth, req, evt) {
     const userDB = await xata.db.User.filter({

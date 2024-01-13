@@ -1,13 +1,15 @@
-import { PulseLoader } from 'react-spinners';
+'use client';
+
+import Loader from '@/src/components/Loader';
 
 type LoadingProps = object;
 
 const Loading: React.FC<LoadingProps> = () => {
   return (
-    <div className="w-full h-full flex items-center justify-center">
+    <div className="w-full h-full grid place-items-center	">
       <div className="flex flex-col items-center">
         <h1>Loading</h1>
-        <PulseLoader color="#fff" speedMultiplier={0.7} />
+        <Loader />
       </div>
     </div>
   );

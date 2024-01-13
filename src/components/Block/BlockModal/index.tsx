@@ -6,12 +6,16 @@ import * as Styled from './BlockModal.styled';
 
 type BlockModalProps = ModalProps & {
   selectedBlock: Block | null;
+  handleComplete: (blockId?: string) => void;
+  completed: boolean;
 };
 
 const BlockModal: React.FC<BlockModalProps> = ({
   open,
   onCancel,
   selectedBlock,
+  handleComplete,
+  completed,
 }) => {
   return (
     <Styled.BlockModal
@@ -31,6 +35,10 @@ const BlockModal: React.FC<BlockModalProps> = ({
       <Styled.BlockCategory>
         {selectedBlock?.category?.name.toUpperCase()}
       </Styled.BlockCategory>
+      <Styled.DoneIcon
+        className={completed ? 'completed' : ''}
+        onClick={() => handleComplete(selectedBlock?.id)}
+      />
     </Styled.BlockModal>
   );
 };
