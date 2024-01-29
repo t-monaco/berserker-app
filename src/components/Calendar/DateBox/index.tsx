@@ -3,19 +3,19 @@ import { Dispatch, SetStateAction } from 'react';
 import * as Styled from './DateBox.styled';
 
 type DateProps = {
-  selected: boolean;
   calDate: CalendarDate;
+  selectedDateId: string;
   setSelectedDateId: Dispatch<SetStateAction<string>>;
 };
 
 const DateBox: React.FC<DateProps> = ({
-  selected,
   calDate,
+  selectedDateId,
   setSelectedDateId,
 }) => {
   return (
     <Styled.DateBoxWrapper
-      selected={selected}
+      selected={selectedDateId === calDate.dateId}
       onClick={() => setSelectedDateId(calDate.dateId)}
     >
       <span className="dateName">{calDate.dateName.toUpperCase()}</span>
