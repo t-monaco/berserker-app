@@ -4,6 +4,7 @@ import { useState } from 'react';
 import * as Styled from './Block.styled';
 import BlockItem from './BlockItem';
 import BlockModal from './BlockModal';
+import SegmentedEquipment from '../SegmentedEquipment';
 
 type BlockWrapperProps = {
   blocks: Block[];
@@ -43,6 +44,7 @@ const BlockWrapper: React.FC<BlockWrapperProps> = ({ blocks }) => {
 
   return (
     <>
+      <SegmentedEquipment />
       <Styled.BlockWrapper>
         {blocks?.length ? (
           sortBlockByCategory(blocks).map((block) => (
