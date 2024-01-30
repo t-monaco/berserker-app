@@ -24,13 +24,20 @@ const DatePicker: React.FC<DatePickerProps> = ({ label, name, control }) => {
             size="large"
             className={drukFont.className}
             allowClear={false}
-            placeholder={customDayJS().format('YYYY-MM-DD')}
+            placeholder={customDayJS.utc().local().format('YYYY-MM-DD')}
             format="YYYY-MM-DD"
             // defaultValue={customDayJS().format('YYYY-MM-DD')}
             ref={field.ref}
             name={field.name}
             onBlur={field.onBlur}
-            value={field.value ? customDayJS.unix(field.value as number) : null}
+            value={
+              field.value
+                ? customDayJS
+                    .unix(field.value as number)
+                    .utc()
+                    .local()
+                : null
+            }
             onChange={(date) => {
               field.onChange(date ? date.unix() : null);
             }}
