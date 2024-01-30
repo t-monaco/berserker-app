@@ -9,8 +9,8 @@ dayjs.extend(weekOfYear);
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
-// dayjs.tz.setDefault('Europe/Berlin');
-
 const customDayJS = dayjs;
+
+customDayJS.tz.setDefault(customDayJS.tz.guess());
 
 export default customDayJS;
