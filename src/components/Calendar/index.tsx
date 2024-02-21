@@ -70,9 +70,9 @@ const Calendar: React.FC<CalendarProps> = ({
         {calDays.map((calDate, key) => (
           <DateBox
             key={key}
-            selectedDateId={selectedDateId}
             calDate={calDate}
             setSelectedDateId={setSelectedDateId}
+            selected={selectedDateId === calDate.dateId}
           />
         ))}
       </Styled.DatesWrapper>
