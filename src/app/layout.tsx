@@ -16,6 +16,7 @@ export const metadata: Metadata = {
     capable: true,
     title: 'Berserker Program',
     statusBarStyle: 'black-translucent',
+    startupImage: '/splashscreens/iphoneplus_splash.png',
   },
   manifest: '/manifest.json',
   icons: {
