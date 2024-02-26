@@ -39,7 +39,7 @@ next-env.d.ts
 *.local.md
 
 # pwa
-sw.*
+public/sw.*
 workbox-*
 swe-worker-*
 
