@@ -42,7 +42,7 @@ const Header: React.FC<HeaderProps> = ({ isAdmin, resetDates }) => {
     <Styled.HeaderWrapper>
       <div className="month-year">
         <p onClick={isAdmin ? () => resetDates() : undefined}>
-          {customDayJS().format('MMMM YYYY').toUpperCase()}
+          {customDayJS.tz().format('MMMM YYYY').toUpperCase()}
         </p>
         <div className="flex gap-4">
           {isAdmin && <Link href="/admin">ADMIN</Link>}

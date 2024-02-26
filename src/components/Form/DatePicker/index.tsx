@@ -24,7 +24,7 @@ const DatePicker: React.FC<DatePickerProps> = ({ label, name, control }) => {
             size="large"
             className={drukFont.className}
             allowClear={false}
-            placeholder={customDayJS().format('YYYY-MM-DD')}
+            placeholder={customDayJS.tz().format('YYYY-MM-DD')}
             format="YYYY-MM-DD"
             // defaultValue={customDayJS().format('YYYY-MM-DD')}
             ref={field.ref}
