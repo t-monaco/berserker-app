@@ -33,7 +33,7 @@ const HomeWrapper: React.FC<HomeWrapperProps> = ({
   const [referenceDay, setReferenceDay] = useState(customDayJS.tz());
 
   const [selectedDateId, setSelectedDateId] = useState(
-    `${customDayJS.tz().year()}-${customDayJS.tz().dayOfYear()}`,
+    getWorkoutDateIdentifier(customDayJS().unix())
   );
 
   const resetDates = () => {

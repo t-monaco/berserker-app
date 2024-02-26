@@ -11,9 +11,14 @@
   },
   "dependencies": {
     "@ant-design/cssinjs": "^1.18.0-alpha.0",
+    "@capacitor/core": "^5.7.0",
+    "@capacitor/ios": "^5.7.0",
     "@clerk/nextjs": "^4.29.3",
     "@clerk/themes": "^1.7.9",
     "@hookform/resolvers": "^3.3.2",
+    "@serwist/next": "^8.4.4",
+    "@serwist/precaching": "^8.4.4",
+    "@serwist/sw": "^8.4.4",
     "@tanstack/react-query": "^4.36.1",
     "@trpc/client": "^10.44.1",
     "@trpc/react-query": "^10.44.1",
@@ -38,6 +43,7 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@capacitor/cli": "^5.7.0",
     "@types/node": "^20.10.4",
     "@types/react": "^18",
     "@types/react-dom": "^18",
