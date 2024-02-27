@@ -30,15 +30,15 @@ const HomeWrapper: React.FC<HomeWrapperProps> = ({
   isAdmin,
   // initialBlocks,
 }) => {
-  const [referenceDay, setReferenceDay] = useState(customDayJS.tz());
+  const [referenceDay, setReferenceDay] = useState(customDayJS().local());
 
   const [selectedDateId, setSelectedDateId] = useState(
-    getWorkoutDateIdentifier(customDayJS().unix())
+    getWorkoutDateIdentifier(customDayJS().local().unix()),
   );
 
   const resetDates = () => {
-    setReferenceDay(customDayJS.tz());
-    setSelectedDateId(getWorkoutDateIdentifier(customDayJS.tz().unix()));
+    setReferenceDay(customDayJS().local());
+    setSelectedDateId(getWorkoutDateIdentifier(customDayJS().local().unix()));
   };
 
   const [selectedProgram, setSelectedProgram] = useState(programs[0]);
