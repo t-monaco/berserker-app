@@ -1,5 +1,7 @@
 import customDayJS from '@/src/lib/dayjs';
 import { Block } from '@/xata/xata';
+import { Dayjs } from 'dayjs';
+import { CalendarDate } from '../types/types';
 
 const categoryOrder = [
   'MOBILITY',
@@ -133,3 +135,24 @@ export const groupBlocksByDateAndProgram = (blocks: any[]) =>
 
     return acc;
   }, {});
+
+export const buildCalendarWeekDays = (refDay: Dayjs) => {
+  const startOfWeek = refDay.startOf('week');
+  const endOfWeek = refDay.endOf('week');
+
+  let day = startOfWeek;
+
+  let calendarDays: CalendarDate[] = [];
+
+  while (day <= endOfWeek) {
+    calendarDays.push({
+      dateName: day.format('ddd'),
+      dateNum: day.format('DD'),
+      dateOfYear: day.dayOfYear(),
+      dateId: `${day.year()}-${day.dayOfYear()}`,
+    });
+    day = day.clone().add(1, 'd');
+  }
+
+  return calendarDays;
+};

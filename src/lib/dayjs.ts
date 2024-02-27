@@ -9,4 +9,6 @@ dayjs.extend(utc);
 
 const customDayJS = dayjs;
 
+customDayJS.tz.setDefault(customDayJS.tz.guess());
+
 export default customDayJS;
