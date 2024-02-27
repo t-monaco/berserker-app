@@ -66,7 +66,7 @@ export const splitBlocks = <T extends { [key: string]: any }>(blocks: T[]) => {
 };
 
 export const getDatesIdentifierArr = (date?: number) => {
-  const referenceDay = date ? customDayJS.unix(date) : customDayJS();
+  const referenceDay = date ? customDayJS.unix(date) : customDayJS().local();
 
   const startOfWeek = referenceDay.startOf('week');
   const endOfWeek = referenceDay.endOf('week');
