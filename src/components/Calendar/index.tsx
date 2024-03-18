@@ -1,9 +1,11 @@
 'use client';
 
-import { getWorkoutDateIdentifier } from '@/src/utils/utils';
-import { CalendarDate } from '@/src/types/types';
+import {
+  buildCalendarWeekDays,
+  getWorkoutDateIdentifier,
+} from '@/src/utils/utils';
 import { Dayjs } from 'dayjs';
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useMemo } from 'react';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import * as Styled from './Calendar.styled';
 import DateBox from './DateBox';
@@ -23,21 +25,10 @@ const Calendar: React.FC<CalendarProps> = ({
   setReferenceDay,
   isAdmin,
 }) => {
-  const startOfWeek = referenceDay.startOf('week');
-  const endOfWeek = referenceDay.endOf('week');
-
-  let calDays: CalendarDate[] = [];
-  let day = startOfWeek;
-
-  while (day <= endOfWeek) {
-    calDays.push({
-      dateName: day.format('ddd'),
-      dateNum: day.format('DD'),
-      dateOfYear: day.dayOfYear(),
-      dateId: `${day.year()}-${day.dayOfYear()}`,
-    });
-    day = day.clone().add(1, 'd');
-  }
+  const calDays = useMemo(
+    () => buildCalendarWeekDays(referenceDay),
+    [referenceDay],
+  );
 
   const handleLeftClick = () => {
     setReferenceDay(referenceDay.subtract(1, 'week'));
@@ -70,9 +61,9 @@ const Calendar: React.FC<CalendarProps> = ({
         {calDays.map((calDate, key) => (
           <DateBox
             key={key}
-            selected={selectedDateId === calDate.dateId ? true : false}
             calDate={calDate}
             setSelectedDateId={setSelectedDateId}
+            selected={selectedDateId === calDate.dateId}
           />
         ))}
       </Styled.DatesWrapper>

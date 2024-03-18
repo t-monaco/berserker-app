@@ -24,7 +24,7 @@ const DatePicker: React.FC<DatePickerProps> = ({ label, name, control }) => {
             size="large"
             className={drukFont.className}
             allowClear={false}
-            placeholder={customDayJS().format('YYYY-MM-DD')}
+            placeholder={customDayJS().local().format('YYYY-MM-DD')}
             format="YYYY-MM-DD"
             // defaultValue={customDayJS().format('YYYY-MM-DD')}
             ref={field.ref}
@@ -32,7 +32,7 @@ const DatePicker: React.FC<DatePickerProps> = ({ label, name, control }) => {
             onBlur={field.onBlur}
             value={field.value ? customDayJS.unix(field.value as number) : null}
             onChange={(date) => {
-              field.onChange(date ? date.unix() : null);
+              field.onChange(date ? date.local().unix() : null);
             }}
           />
         </Styled.DatePickerWrapper>
